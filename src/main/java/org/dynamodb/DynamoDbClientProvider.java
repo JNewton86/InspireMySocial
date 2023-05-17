@@ -1,4 +1,4 @@
-package com.nashss.se.musicplaylistservice.dynamodb;
+package org.dynamodb;
 
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.regions.Regions;
