@@ -1,0 +1,167 @@
+startuml
+'https://plantuml.com/class-diagram
+
+package "Activities" #DDDDDD {
+
+    class SearchAvailableInventoryActivity{
+        handleRequest()
+    }
+
+    class GetInventoryActivity{
+        handleRequest()
+    }
+
+    class UpdateInventoryActivity{
+        -metricsPublisher
+        handleRequest()
+    }
+
+    class CreateOrderActivity{
+        handleRequest()
+    }
+
+    class UpdateOrderActivity{
+        -metricsPublisher
+        handleRequest()
+        //use cases 8, 9, 13 included in this activity
+    }
+
+    class GetOrderActivity{
+    handleRequest()
+    //use case 11 & 12
+    }
+}
+
+package "DAOs" #FFE633 {
+
+    class InventoryDao {
+        -dynamDBMapper
+        -metricsPublisher
+        +getAvailableInventory()
+        +saveAvailableInventory()
+    }
+
+
+    class OrderDao {
+        -dynamDBMapper
+        -metricsPublisher
+        +getOrders()
+        +saveOrders()
+    }
+}
+
+package "Models" #A2FF33 {
+
+    class Beer {
+        //dynamoDBModel
+        -String id
+        -Enum PACKAGINGTYPE
+        -String name
+        -Enum packaging
+        -BigDecimal unitPrice
+        -Intger availableUnits
+        -Intger reservedUnits
+        -Intger totalUnits
+    }
+
+    class Order {
+        //dynamoDBmodel
+        -String Id
+        -String ClientId
+        -List orderItems
+        -BigDecimal totalCost
+        -Boolean orderProcessed
+    }
+
+    class OrderItem {
+        //dynamoDBmodel
+        -String id
+        -String enum PackagingType
+        -Intger units
+        -BigDecimal lineItemPrice
+    }
+}
+
+package "Enums" #33FFF3 {
+
+    enum BeerType {
+        STOUT
+        PORTER
+        IPA
+        LAGER
+    }
+
+    enum PackagingType {
+        KEG
+        CASE
+    }
+}
+
+package "Lambda" #3399FF {
+
+    class GetInventoryLambda {
+    }
+
+    class UpdateInventoryLambda {
+    }
+
+    class CreateOrderLambda {
+    }
+
+    class UpdateOrderLambda {
+    }
+
+    class GetOrderLambda {
+    }
+
+    class SearchAvailableInventoryLambda {
+    }
+}
+package "Metrics" #C133FF {
+    class MetricConstants{
+    }
+    class MetricsPublisher{
+    }
+}
+
+
+    class LambdaActivityRunner{
+        }
+
+package "Lambda Request & Responses" #FF338A{
+    class LambdaRequest{
+    }
+
+    class LambdaResponse{
+    }
+    class AuthenticatedLambdaRequest{
+    }
+}
+LambdaActivityRunner <-- UpdateOrderLambda
+LambdaActivityRunner <-- GetOrderLambda
+LambdaActivityRunner <-- CreateOrderLambda
+LambdaActivityRunner <-- UpdateInventoryLambda
+LambdaActivityRunner <-- GetInventoryLambda
+LambdaActivityRunner <-- SearchAvailableInventoryLambda
+LambdaActivityRunner --> LambdaResponse
+LambdaRequest --> LambdaActivityRunner
+AuthenticatedLambdaRequest --> LambdaActivityRunner
+Beer  <-- BeerType
+Beer <-- PackagingType
+Order <-- OrderItem
+InventoryDao <-- Beer
+OrderDao <-- Order
+
+CreateOrderActivity <-- OrderDao
+GetOrderActivity <-- OrderDao
+UpdateOrderActivity <--OrderDao
+GetInventoryActivity <-- InventoryDao
+UpdateInventoryActivity <--InventoryDao
+SearchAvailableInventoryActivity <-- InventoryDao
+SearchAvailableInventoryLambda <-- SearchAvailableInventoryActivity
+UpdateInventoryLambda <-- UpdateInventoryActivity
+GetInventoryLambda <-- GetInventoryActivity
+GetOrderLambda <-- GetOrderActivity
+UpdateOrderLambda <-- UpdateOrderActivity
+CreateOrderLambda <-- CreateOrderActivity
+@enduml
