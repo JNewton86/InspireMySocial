@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23d11f96-8433-4ba6-b753-98468cc472df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/draftClassDiagram.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openai/call.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/design.md" beforeDir="false" afterPath="$PROJECT_DIR$/resources/design.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/draftClassDiagram.puml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/draftClassDiagram.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
