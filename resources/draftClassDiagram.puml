@@ -1,0 +1,164 @@
+@startuml
+
+package "Activities" #DDDDDD {
+
+    class SearchUserContentActivity{
+          -metricsPublisher
+          handleRequest()
+    }
+
+    class GetContentByUserActivity{
+          -metricsPublisher
+          handleRequest()
+    }
+
+    class GetCreditBalanceForUserActivity{
+        -metricsPublisher
+        handleRequest()
+        }
+
+   class CreateContentActivity{
+        -metricsPublisher
+        handleRequest()
+    }
+
+    class DeleteContentActivity{
+        -metricsPublisher
+        handleRequest()
+    }
+
+    class UpdateUserCreditBalanceActivity{
+        -metricsPublisher
+        handleRequest()
+    }
+}
+
+package "External Activity" #EC1F03 {
+    class OpenAIChatCompletionActivity {
+        -metricsPublisher
+        handleRequest()
+    }
+}
+
+package "DAOs" #FFE633 {
+
+    class UserDao {
+        -dynamDBMapper
+        -metricsPublisher
+        +getUser()
+        +saveUser()
+    }
+
+
+    class ContentDao {
+        -dynamDBMapper
+        -metricsPublisher
+        +getContent()
+        +saveContent()
+    }
+}
+
+package "Models" #A2FF33 {
+
+    class Content {
+        //dynamoDBModel
+        -String userId
+        -String contentId
+        -String contentType
+        -String topic
+        -String tone
+        -String audience
+        -Integer wordCount
+        -Boolean isDeleted
+    }
+
+    class User {
+        //dynamoDBmodel
+        -String userId
+        -String firstName
+        -String lastName
+        -String email
+        -Integer creditBalance
+    }
+
+}
+
+package "Enums" #33FFF3 {
+
+    enum ContentType {
+        FB-POST
+        LINKEDIN
+        TWEET
+        YT-SHORT
+        YT-LONG
+    }
+}
+
+package "Lambda" #3399FF {
+
+    class SearchUserContentLambda {
+    }
+
+    class GetContentByUserLambda {
+    }
+
+    class GetCreditBalanceForUserLambda {
+    }
+
+    class CreateContentLambda {
+    }
+
+    class DeleteContentLambda {
+    }
+
+    class UpdateUserCreditBalanceLambda {
+    }
+}
+
+package "Metrics" #C133FF {
+    class MetricConstants{
+    }
+    class MetricsPublisher{
+    }
+}
+
+
+    class LambdaActivityRunner{
+        }
+
+package "Lambda Request & Responses" #FF338A{
+    class LambdaRequest{
+    }
+
+    class LambdaResponse{
+    }
+    class AuthenticatedLambdaRequest{
+    }
+}
+LambdaActivityRunner <-- SearchUserContentLambda
+LambdaActivityRunner <-- GetContentByUserLambda
+LambdaActivityRunner <-- GetCreditBalanceForUserLambda
+LambdaActivityRunner <-- CreateContentLambda
+LambdaActivityRunner <-- DeleteContentLambda
+LambdaActivityRunner --> UpdateUserCreditBalanceLambda
+LambdaRequest --> LambdaActivityRunner
+AuthenticatedLambdaRequest --> LambdaActivityRunner
+Content  <-- ContentType
+UserDao <-- User
+ContentDao <-- Content
+SearchUserContentActivity <-- ContentDao
+GetContentByUserActivity <-- ContentDao
+GetCreditBalanceForUserActivity <-- UserDao
+CreateContentActivity <--> ContentDao
+DeleteContentActivity <-- ContentDao
+UpdateUserCreditBalanceActivity <-- UserDao
+SearchUserContentLambda <-- SearchUserContentActivity
+GetContentByUserLambda <-- GetContentByUserActivity
+GetCreditBalanceForUserLambda <-- GetCreditBalanceForUserActivity
+CreateContentLambda <-- CreateContentActivity
+DeleteContentLambda <-- DeleteContentActivity
+UpdateUserCreditBalanceLambda --> UpdateUserCreditBalanceActivity
+LambdaResponse <-- LambdaActivityRunner
+CreateContentActivity <--> OpenAIChatCompletionActivity
+
+@enduml
