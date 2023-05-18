@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+alt cognito verificaiton
+Client -> Cognito: Authentication Request
+Cognito -> Client: Verified user
+end
+alt Get user Credit Balance
+Client -> LambdaActivityRunner : tokenUserEmail
+LambdaActivityRunner -> GetCreditBalanceLambda: tokenUserEmail
+GetCreditBalanceLambda -> GetCreditBalanceActivity: tokenUserEmail
+alt UserEmail exists in table
+    GetCreditBalanceActivity -> UserDao
+    UserDao -> DynamoMapper : (retrieve user balance)
+    DynamoMapper -> UserDao : userbalance
+    UserDao -> GetCreditBalanceActivity : userbalance
+
+else UserEmail does not exist in table
+    GetCreditBalanceActivity -> UserDao
+    UserDao -> DynamoMapper : (create user and set bal = 5)
+    DynamoMapper -> UserDao : userbalance
+    UserDao -> GetCreditBalanceActivity : userbalance
+    end
+GetCreditBalanceActivity ->GetCreditBalanceLambda : userbalance
+GetCreditBalanceLambda ->LambdaActivityRunner: userbalance
+LambdaActivityRunner -> Client: userbalance
+end
+alt create content
+Client -> LambdaActivityRunner :  topic, tone, audience, contentType
+LambdaActivityRunner -> CreateContentLambda: userEMail, topic, tone, audience, contentType
+CreateContentLambda -> CreateContentActivity : CreateContentRequest
+CreateContentActivity -> OpenAIActivity : openAIAPIrequest
+OpenAIActivity -> CreateContentActivity : openAIAPIresponse
+CreateContentActivity -> ContentDao : CreateActivityResponse
+CreateContentActivity -> CreateContentLambda :CreateActivityResponse
+CreateContentLambda -> LambdaActivityRunner: CreateActivityResponse
+LambdaActivityRunner -> Client : CreateActivityResponse
+end
+
+@enduml
