@@ -113,6 +113,8 @@ Integer creditBalance;
     * If the given user ID is not found, will throw a
       `UserIdNotFoundException`
 
+    ![img.png](./images/img.png)
+
 ### 6.4. Create Content Endpoint
 
 * Accepts `POST` requests to `/content/`
@@ -121,7 +123,9 @@ Integer creditBalance;
   contain any invalid characters: `" ' \` and are not null
     * If the playlist name contains any of the invalid characters, will throw an
       `InvalidAttributeValueException`.
-
+  
+    ![img_1.png](./images/img_1.png)
+  
 ### 6.5. Delete Content Endpoint
 
 * Accepts `Delete` requests to `/content/contentId`
