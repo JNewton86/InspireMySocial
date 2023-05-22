@@ -4,8 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23d11f96-8433-4ba6-b753-98468cc472df" name="Changes" comment="">
+    <list default="true" id="66d30e4c-bbe2-4ec1-a2bb-2ac9df63ca82" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/activity/OpenAiAPIActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/AuthenticationInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/OpenAiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/ResponseBodyCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/SSE.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/SSEFormatException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/SecretHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/activity/OpenAiAPIActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openai/call.java" beforeDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +30,8 @@
       <ProjectState />
     </projectState>
   </component>
+
+
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -48,11 +63,12 @@
       </state>
     </system>
   </component>
+
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="UML Sequence" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -63,11 +79,19 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2PvPyuBdHKIAsr57RWa6xjC73jB" />
+  <component name="ProjectId" id="2Q1ZuLqPgJAgwwWG1JyXJpUGEOO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": ""
+
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Sequence&quot;,
@@ -79,19 +103,19 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+
   }
 }</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/images" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="org.dynamodb" />
+      <recent name="org.activity" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="OpenAiAPIActivityTest.getContent_valid_success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
   <component name="RunManager" selected="Gradle.InspireMySocial [assemble]">
     <configuration name="call" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.openai.call" />
@@ -119,7 +143,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.dynamodb.DynamoDbClientProviderTest.test&quot;" />
+            <option value="&quot;org.activity.OpenAiAPIActivityTest.getContent_valid_success&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -152,6 +176,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OpenAiAPIActivityTest.getContent_valid_success" />
         <item itemvalue="Gradle.InspireMySocial [assemble]" />
         <item itemvalue="Application.call" />
         <item itemvalue="Gradle.DynamoDbClientProviderTest.test" />
@@ -161,11 +186,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="23d11f96-8433-4ba6-b753-98468cc472df" name="Changes" comment="" />
-      <created>1684334839398</created>
+      <changelist id="66d30e4c-bbe2-4ec1-a2bb-2ac9df63ca82" name="Changes" comment="" />
+      <created>1684523269747</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1684334839398</updated>
+      <updated>1684523269747</updated>
     </task>
     <servers />
   </component>
