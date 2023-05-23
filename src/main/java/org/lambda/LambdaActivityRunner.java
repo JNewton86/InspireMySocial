@@ -3,7 +3,7 @@ package org.lambda;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dependency.DaggerServiceComponent;
+//import org.dependency.DaggerServiceComponent;
 import org.dependency.ServiceComponent;
 
 import java.util.function.BiFunction;
@@ -36,7 +36,8 @@ import java.util.function.Supplier;
         private ServiceComponent getService() {
             log.info("getService");
             if (service == null) {
-                service = DaggerServiceComponent.create();
+                service = null;
+//            DaggerServiceComponent.create();
             }
             return service;
         }

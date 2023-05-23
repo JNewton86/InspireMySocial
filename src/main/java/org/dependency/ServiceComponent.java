@@ -2,7 +2,7 @@ package org.dependency;
 
 import dagger.Component;
 import org.activity.CreateContentActivity;
-import org.activity.OpenAiAPIActivity;
+
 
 import javax.inject.Singleton;
 
@@ -23,5 +23,5 @@ public interface ServiceComponent {
      * Provides the relevant activity.
      * @return CreatePlaylistActivity
      */
-    OpenAiAPIActivity provideOpenAiAPIActivity();
+
 }

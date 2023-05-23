@@ -5,30 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea71355-79cf-45ef-a93e-1cb854fb8648" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/activity/CreateContentActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/activity/request/CreateContentRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/activity/request/OpenAiChatRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/activity/result/CreateContentResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/activity/result/OpenAiChatResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/dependency/DaoModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/dependency/MetricsModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/dependency/OpenAiDaoModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/dependency/ServiceComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/dynamodb/ContentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/exception/ContentNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lambda/AuthenticatedLambdaRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lambda/CreateContentLambda.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lambda/LambdaActivityRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lambda/LambdaRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lambda/LambdaResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/metrics/MetricsConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/metrics/MetricsPublisher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/OpenAiDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/utils/NullUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old-template.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/model/ChatCompletion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/model/Choice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/model/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/model/Usage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/activity/OpenAiAPIActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/activity/OpenAiAPIActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/OpenAiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/OpenAiService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/activity/CreateContentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/activity/CreateContentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/activity/OpenAiAPIActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/activity/request/OpenAiChatRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/activity/result/OpenAiChatResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/dependency/ServiceComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dependency/ServiceComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lambda/LambdaActivityRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lambda/LambdaActivityRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/OpenAiDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/OpenAiDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/SecretHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openaiservice/SecretHolder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/activity/OpenAiAPIActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/activity/OpenAiAPIActivityTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/template.yaml" afterDir="false" />
@@ -49,12 +39,28 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QCls2oCytykRjC2a9tHMhPBLDN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/jnewton86/workspace/7unit/InspireMySocial",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.OpenAiAPIActivityTest">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.OpenAiAPIActivityTest.getContent_valid_success">
     <configuration name="OpenAiAPIActivityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -69,6 +75,29 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;org.activity.OpenAiAPIActivityTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="OpenAiAPIActivityTest.getContent_valid_success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.activity.OpenAiAPIActivityTest.getContent_valid_success&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -101,12 +130,21 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OpenAiAPIActivityTest.getContent_valid_success" />
         <item itemvalue="Gradle.OpenAiAPIActivityTest" />
         <item itemvalue="Gradle.Tests in 'InspireMySocial.test'" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bea71355-79cf-45ef-a93e-1cb854fb8648" name="Changes" comment="" />
+      <created>1684865650086</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684865650086</updated>
+    </task>
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
