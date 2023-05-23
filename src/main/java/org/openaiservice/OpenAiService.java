@@ -57,7 +57,7 @@ public class OpenAiService {
     private final ExecutorService executorService;
 
     /**
-     * Creates a new OpenAiService that wraps OpenAiApi
+     * Creates a new OpenAiService that wraps OpenAiApi.
      *
      * @param token OpenAi token string "sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
      */

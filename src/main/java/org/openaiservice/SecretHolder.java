@@ -4,7 +4,7 @@ public class SecretHolder {
 
     private static String openAiApiKey = "token";
 
-    private static String fbSystemPrompt = "prompt";
+    private static String fbSystemPrompt = "system-prompt";
 
     public static String getOpenAiApiKey() {
         return openAiApiKey;
