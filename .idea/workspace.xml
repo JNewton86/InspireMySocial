@@ -4,52 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7b64979a-a11a-4a79-95e4-a2baa3c5d699" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/Converter/ModelConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/result/CreateContentResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/model/ContentModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/Converter/ModelConverterTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/activity/OpenAiAPIActivityTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/dynamodb/ContentDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/openaiservice/OpenAiDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old-template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/old-template.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/activity/CreateContentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/activity/request/CreateContentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/request/CreateContentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/activity/result/CreateContentResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dependency/DaoModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/DaoModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dependency/MetricsModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/MetricsModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dependency/OpenAiDaoModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/OpenAiDaoModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dependency/ServiceComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/ServiceComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dynamodb/ContentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dynamodb/ContentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dynamodb/DynamoDbClientProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dynamodb/DynamoDbClientProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dynamodb/models/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dynamodb/models/Content.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dynamodb/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dynamodb/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/exception/ContentNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/exception/ContentNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lambda/AuthenticatedLambdaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/AuthenticatedLambdaRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lambda/CreateContentLambda.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lambda/LambdaActivityRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaActivityRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lambda/LambdaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lambda/LambdaResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/metrics/MetricsConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/metrics/MetricsConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/metrics/MetricsPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/metrics/MetricsPublisher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/ChatCompletion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Choice.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Message.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/model/Usage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/AuthenticationInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/AuthenticationInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/OpenAiDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/OpenAiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/ResponseBodyCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/ResponseBodyCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/SSE.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SSE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/SSEFormatException.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SSEFormatException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openaiservice/SecretHolder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/utils/NullUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/utils/NullUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/activity/OpenAiAPIActivityTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/dynamodb/DynamoDbClientProviderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/activity/CreateContentActivityTest.java" afterDir="false" />
+    <list default="true" id="f65dc989-0521-4a07-9fce-772de5ea8848" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/data/CurlCommands.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/request/CreateContentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/request/CreateContentRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/OpenAiDaoModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/OpenAiDaoModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/AuthenticatedLambdaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/AuthenticatedLambdaRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/activity/OpenAiAPIActivityTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/openaiservice/OpenAiDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/openaiservice/OpenAiDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/old-template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/oldv1_template.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/template.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,20 +34,13 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JUnit5 Test Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2QFjrWeNp2hXnMOQgcSZKGYJUNx" />
+  <component name="ProjectId" id="2QImXJdAEZ7BWXXB3DJkh9zwCEu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -83,106 +48,17 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": ""
+    "RunOnceActivity.ShowReadmeOnStart": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="org.openaiservice" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Gradle.Tests in 'InspireMySocial.InspireMySocialServiceLambda.test'">
-    <configuration name="OpenAiAPIActivityTest.getContent_valid_success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":InspireMySocialServiceLambda:test" />
-            <option value="--tests" />
-            <option value="&quot;org.activity.OpenAiAPIActivityTest.getContent_valid_success&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="OpenAiDaoTest.getContent_valid_success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":InspireMySocialServiceLambda:test" />
-            <option value="--tests" />
-            <option value="&quot;org.openaiservice.OpenAiDaoTest.getContent_valid_success&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'InspireMySocial.InspireMySocialServiceLambda.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":InspireMySocialServiceLambda:test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.Tests in 'InspireMySocial.InspireMySocialServiceLambda.test'" />
-        <item itemvalue="Gradle.OpenAiAPIActivityTest.getContent_valid_success" />
-        <item itemvalue="Gradle.OpenAiDaoTest.getContent_valid_success" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7b64979a-a11a-4a79-95e4-a2baa3c5d699" name="Changes" comment="" />
-      <created>1684956425354</created>
+      <changelist id="f65dc989-0521-4a07-9fce-772de5ea8848" name="Changes" comment="" />
+      <created>1685049510280</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1684956425354</updated>
+      <updated>1685049510280</updated>
     </task>
     <servers />
   </component>

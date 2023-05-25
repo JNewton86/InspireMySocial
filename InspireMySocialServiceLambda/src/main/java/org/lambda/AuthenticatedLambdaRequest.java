@@ -24,6 +24,7 @@ public class AuthenticatedLambdaRequest<T> extends LambdaRequest<T> {
         try {
             return converter.apply(getClaims());
         } catch (Exception e) {
+            log.error(e);
             throw new RuntimeException("Unable to get user information from request.", e);
         }
     }

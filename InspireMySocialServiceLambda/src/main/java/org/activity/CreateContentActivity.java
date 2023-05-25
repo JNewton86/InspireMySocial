@@ -41,24 +41,27 @@ public class CreateContentActivity {
      */
     public CreateContentResult handleRequest(final CreateContentRequest createContentRequest) {
         log.info("Receieved CreateContent Request {}", createContentRequest);
+        System.out.println("request recieved in Create Content Activity");
         ChatCompletionResult post = openAiDao.createContent(createContentRequest);
+        //Create and instantiate the Dynamo Object
         Content newContent = new Content();
         newContent.setUserID(createContentRequest.getUserId());
         newContent.setContentType(createContentRequest.getContentType());
-        newContent.setContentId("to do");
+        newContent.setContentId(post.getId());
         newContent.setTone(createContentRequest.getTone());
         newContent.setAudience(createContentRequest.getAudience());
         newContent.setTopic(createContentRequest.getTopic());
         newContent.setWordCount(createContentRequest.getWordCount());
         newContent.setDeleted(false);
-        newContent.setAiMessage(post.getChoices().get(0).toString());
+        newContent.setAiMessage(post.getChoices().get(0).getMessage().getContent());
         long promptUsage = post.getUsage().getPromptTokens();
         Integer promptTokensInt = (int) promptUsage;
         newContent.setPromptTokens(promptTokensInt);
         long completionUsage = post.getUsage().getCompletionTokens();
-        Integer completionUsageInt = (int) promptUsage;
+        Integer completionUsageInt = (int) completionUsage;
         newContent.setCompletionTokens(completionUsageInt);
         newContent.setTotalTokens(completionUsageInt + promptTokensInt);
+        //Save the Content Object
         contentDao.saveContent(newContent);
         ContentModel contentModel = new ModelConverter().toContentModel(newContent);
         return CreateContentResult.builder()
