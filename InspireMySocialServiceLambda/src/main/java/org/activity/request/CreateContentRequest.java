@@ -1,15 +1,17 @@
 package org.activity.request;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
+@JsonDeserialize(builder = CreateContentRequest.Builder.class)
 public class CreateContentRequest {
 
-    private final String userId;
-    private final String contentType;
-    private final String tone;
-    private final String audience;
-    private final String topic;
-    private final Integer wordCount;
+    private String userId;
+    private String contentType;
+    private String tone;
+    private String audience;
+    private String topic;
+    private Integer wordCount;
 
     public CreateContentRequest(String userId, String contentType, String tone,
                                 String audience, String topic, Integer wordCount) {
@@ -21,6 +23,7 @@ public class CreateContentRequest {
         this.wordCount = wordCount;
     }
 
+    public CreateContentRequest(){};
     public String getUserId() {
         return userId;
     }
@@ -63,7 +66,7 @@ public class CreateContentRequest {
             return this;
         }
 
-        public Builder withConentType(String contentType){
+        public Builder withContentType(String contentType){
             this.contentType = contentType;
             return this;
         }

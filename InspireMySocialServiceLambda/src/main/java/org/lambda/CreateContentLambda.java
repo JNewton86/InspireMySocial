@@ -13,13 +13,14 @@ public class CreateContentLambda
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateContentRequest> input, Context context) {
         return super.runActivity(
             () -> {
+                System.out.println("creating Content Request object in Lambda");
                 CreateContentRequest unauthenticatedRequest = input.fromBody(CreateContentRequest.class);
                 return input.fromUserClaims(claims ->
                         CreateContentRequest.builder()
                                 .withUserId(claims.get("email"))
-                                .withConentType(unauthenticatedRequest.getContentType())
-                                .withAudience(unauthenticatedRequest.getAudience())
+                                .withContentType(unauthenticatedRequest.getContentType())
                                 .withTone(unauthenticatedRequest.getTone())
+                                .withAudience(unauthenticatedRequest.getAudience())
                                 .withTopic(unauthenticatedRequest.getTopic())
                                 .withWordCount(unauthenticatedRequest.getWordCount())
                                 .build());

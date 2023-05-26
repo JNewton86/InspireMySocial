@@ -26,7 +26,8 @@ public class OpenAiDaoModule {
     @Singleton
     @Provides
     public OpenAiService provideOpenAiService() {
-        return new OpenAiService(SecretHolder.getOpenAiApiKey(), Duration.ofSeconds(240));
+//        Duration.ofSeconds(240)
+        return new OpenAiService(SecretHolder.getOpenAiApiKey(), Duration.ZERO);
     }
 }
 

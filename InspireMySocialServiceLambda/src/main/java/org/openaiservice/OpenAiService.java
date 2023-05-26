@@ -338,6 +338,8 @@ public class OpenAiService {
                 .addInterceptor(new AuthenticationInterceptor(token))
                 .connectionPool(new ConnectionPool(5, 1, TimeUnit.SECONDS))
                 .readTimeout(timeout.toMillis(), TimeUnit.MILLISECONDS)
+                .connectTimeout(timeout.toMillis(), TimeUnit.MILLISECONDS)
+                .writeTimeout(timeout.toMillis(), TimeUnit.MILLISECONDS)
                 .build();
     }
 
