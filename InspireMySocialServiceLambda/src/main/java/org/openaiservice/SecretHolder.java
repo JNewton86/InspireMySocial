@@ -1,13 +1,17 @@
 package org.openaiservice;
 
+import org.utils.UtilsOpenAiAPI;
+
 public class SecretHolder {
 
-    private static String openAiApiKey = "token";
+    static String InspireMySocialServiceLambdaSecret;
+
+    private static String openAiApiKey = UtilsOpenAiAPI.getSecret(InspireMySocialServiceLambdaSecret).;
 
     private static String fbSystemPrompt = "system_prompt";
 
     public static String getOpenAiApiKey() {
-        return openAiApiKey;
+        return InspireMySocialServiceLambdaSecret.openAiApiKey;
     }
 
     public static String getFbSystemPrompt() {
