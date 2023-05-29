@@ -27,6 +27,7 @@ class ModelConverterTest {
         content.setTotalTokens(350);
 
         ContentModel contentModel = modelConverter.toContentModel(content);
+        System.out.println("Content Model was created as : " +contentModel.toString());
         assertEquals(content.getUserID(),contentModel.getUserId());
         assertEquals(content.getContentId(), contentModel.getContentId());
         assertEquals(content.getContentType(), contentModel.getContentType());

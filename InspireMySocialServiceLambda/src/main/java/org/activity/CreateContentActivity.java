@@ -40,10 +40,18 @@ public class CreateContentActivity {
      * @return returns a result object built from the content object in the below method
      */
     public CreateContentResult handleRequest(final CreateContentRequest createContentRequest) {
+        // Print lines for bug hunt
+        System.out.println("*** congrats, you made it to the handleRequest method in CreateContentActivity ***");
+        System.out.println("The CreateContentActivity request was : " + createContentRequest.toString());
+        System.out.println("request received in Create Content Activity");
+
+        // log.
         log.info("Receieved CreateContent Request {}", createContentRequest);
-        System.out.println("request recieved in Create Content Activity");
+
+        // Call to openAiDao to create content.
         ChatCompletionResult post = openAiDao.createContent(createContentRequest);
-        //Create and instantiate the Dynamo Object
+
+        // Create and instantiate the Dynamo Object
         Content newContent = new Content();
         newContent.setUserID(createContentRequest.getUserId());
         newContent.setContentType(createContentRequest.getContentType());
@@ -61,9 +69,15 @@ public class CreateContentActivity {
         Integer completionUsageInt = (int) completionUsage;
         newContent.setCompletionTokens(completionUsageInt);
         newContent.setTotalTokens(completionUsageInt + promptTokensInt);
-        //Save the Content Object
+
+        // Save the Content Object
         contentDao.saveContent(newContent);
+
+        // Dynamo to API Model convertion call
         ContentModel contentModel = new ModelConverter().toContentModel(newContent);
+
+        // Sample contnet from bug hunt.
+        // ContentModel contentModel = new ContentModel("Test","TestId", "FaceBook", "bug hunts", "Are fun", false);
         return CreateContentResult.builder()
                 .withContentModel(contentModel)
                 .build();
