@@ -5,16 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f65dc989-0521-4a07-9fce-772de5ea8848" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/request/CreateContentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/request/CreateContentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/result/CreateContentResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/result/CreateContentResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dynamodb/models/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dynamodb/models/Content.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/model/ContentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/model/ContentModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaActivityRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaActivityRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/Converter/ModelConverterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/Converter/ModelConverterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/activity/CreateContentActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/activity/CreateContentActivityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/openaiservice/OpenAiDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/openaiservice/OpenAiDaoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/template.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/pages/searchPlaylists.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/pages/searchPlaylists.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,12 +67,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.CreateContentActivityTest.handleRequest_validRequest_results">
+  <component name="RunManager" selected="Gradle.OpenAiDaoTest.getContent_valid_success">
     <configuration name="CreateContentActivityTest.handleRequest_validRequest_results" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -187,9 +189,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.OpenAiDaoTest.getContent_valid_success" />
         <item itemvalue="Gradle.CreateContentActivityTest.handleRequest_validRequest_results" />
         <item itemvalue="Gradle.Tests in 'InspireMySocial.InspireMySocialServiceLambda.test'" />
-        <item itemvalue="Gradle.OpenAiDaoTest.getContent_valid_success" />
         <item itemvalue="Gradle.ModelConverterTest.toContentModel_withValidContent_convertsContent" />
         <item itemvalue="Gradle.ModelConverterTest" />
       </list>

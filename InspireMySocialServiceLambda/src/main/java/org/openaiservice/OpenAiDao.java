@@ -23,7 +23,7 @@ public class OpenAiDao {
      * @param metricsPublisher MetricsPublisher also from Dagger
      */
     @Inject
-    public OpenAiDao(org.openaiservice.OpenAiService openAiService, MetricsPublisher metricsPublisher) {
+    public OpenAiDao(OpenAiService openAiService, MetricsPublisher metricsPublisher) {
         this.openAiService = openAiService;
         this.metricsPublisher = metricsPublisher;
     }

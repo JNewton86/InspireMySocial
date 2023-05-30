@@ -39,7 +39,7 @@ public class CreateContentLambda
             (request, serviceComponent) -> {
                 try {
                     System.out.println("you are hitting the request for the activity");
-
+                    System.out.println("this is the service component " + serviceComponent);
                     CreateContentActivity provideCreateContentActivity = serviceComponent.provideCreateContentActivity();
                     System.out.println("provideCreateContent activity line passed" + provideCreateContentActivity.toString());
                     CreateContentResult result = provideCreateContentActivity.handleRequest(request);

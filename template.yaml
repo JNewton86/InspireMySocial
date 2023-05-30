@@ -8,7 +8,7 @@ Parameters:
   CognitoDomain:
     Type: String
     Description: A name for the cognito Domain
-    Default: "change-this-inspire-my-social-service-change-this"
+    Default: "inspire-my-social-service-cd"
 
   S3Bucket:
     Type: String
@@ -29,7 +29,7 @@ Conditions:
 
 Globals:
   Function:
-    Timeout: 20
+    Timeout: 240
 
   Api:
     Cors:
@@ -265,7 +265,7 @@ Resources:
         - AttributeName: "userEmail"
           AttributeType: "S"
         - AttributeName: "contentId"
-          AttributeType: "N"
+          AttributeType: "S"
       KeySchema:
         - AttributeName: "userEmail"
           KeyType: "HASH"

@@ -2,7 +2,7 @@ package org.openaiservice;
 
 public class SecretHolder {
 
-    private static String openAiApiKey = "token";
+    private static String openAiApiKey = "key";
 
     private static String fbSystemPrompt = "prompt";
 
