@@ -1,15 +1,16 @@
 package org.utils;
 
+import org.Converter.SecretConverter;
+import org.openaiservice.SecretHolder;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
-import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
-import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
-import software.amazon.awssdk.services.secretsmanager.model.InvalidParameterException;
-import software.amazon.awssdk.services.secretsmanager.model.InvalidRequestException;
-import software.amazon.awssdk.services.secretsmanager.model.ResourceNotFoundException;
+import software.amazon.awssdk.services.secretsmanager.model.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UtilsOpenAiAPI {
 
+    private static SecretHolder secretHolder;
     /**
      * @param secretName
      * @return
@@ -17,9 +18,10 @@ public class UtilsOpenAiAPI {
      * @throws InvalidParameterException
      * @throws InvalidRequestException
      */
-    public static String getSecret(String secretName)
+    public static String getSecret()
             throws ResourceNotFoundException, InvalidParameterException, InvalidRequestException{
 
+        String secretName = "openAPiSecrets";
         Region region = Region.of("us-east-2");
 
         // Create a Secrets Manager client
@@ -35,6 +37,15 @@ public class UtilsOpenAiAPI {
         getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
 
         return getSecretValueResponse.secretString();
+    }
+
+    public static SecretHolder sortSecret() throws JsonProcessingException {
+        if (secretHolder == null) {
+            String results = UtilsOpenAiAPI.getSecret();
+            ObjectMapper MAPPER = new ObjectMapper();
+            secretHolder = MAPPER.readValue(results, SecretHolder.class);
+        }
+        return secretHolder;
     }
 }
 

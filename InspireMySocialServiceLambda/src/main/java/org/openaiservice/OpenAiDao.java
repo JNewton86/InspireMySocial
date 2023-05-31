@@ -1,9 +1,11 @@
 package org.openaiservice;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.theokanning.openai.Usage;
 import com.theokanning.openai.completion.chat.*;
 import org.activity.request.CreateContentRequest;
 import org.metrics.MetricsPublisher;
+import org.utils.UtilsOpenAiAPI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +15,8 @@ import javax.inject.Inject;
 public class OpenAiDao {
 
     private final OpenAiService openAiService;
-    private final String token = SecretHolder.getOpenAiApiKey();
+
+    private String secrets;
     private final MetricsPublisher metricsPublisher;
 
     /**
@@ -26,6 +29,8 @@ public class OpenAiDao {
     public OpenAiDao(org.openaiservice.OpenAiService openAiService, MetricsPublisher metricsPublisher) {
         this.openAiService = openAiService;
         this.metricsPublisher = metricsPublisher;
+        this.secrets = UtilsOpenAiAPI.getSecret();
+
     }
 
     /**
@@ -117,9 +122,16 @@ public class OpenAiDao {
 
     public ChatCompletionResult createContent(CreateContentRequest createContentRequest) {
         System.out.println("Streaming chat completion...");
+        SecretHolder secretHolder = null;
+        try {
+            secretHolder = UtilsOpenAiAPI.sortSecret();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
         final List<ChatMessage> messages = new ArrayList<>();
         final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
-                SecretHolder.getFbSystemPrompt());
+                secretHolder.getFbSystemPrompt());
         messages.add(systemMessage);
         final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
                 createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +

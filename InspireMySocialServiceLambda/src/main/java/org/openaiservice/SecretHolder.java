@@ -1,20 +1,29 @@
 package org.openaiservice;
 
-import org.utils.UtilsOpenAiAPI;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 public class SecretHolder {
+    @JsonProperty("openAPIkey")
+    private String openAiApiKey;
 
-    static String InspireMySocialServiceLambdaSecret;
+    @JsonProperty("fbSystemPrompt")
+    private String fbSystemPrompt;
 
-    private static String openAiApiKey = UtilsOpenAiAPI.getSecret(InspireMySocialServiceLambdaSecret).;
-
-    private static String fbSystemPrompt = "system_prompt";
-
-    public static String getOpenAiApiKey() {
-        return InspireMySocialServiceLambdaSecret.openAiApiKey;
+    public String getOpenAiApiKey() {
+        return openAiApiKey;
     }
 
-    public static String getFbSystemPrompt() {
+    public String getFbSystemPrompt() {
         return fbSystemPrompt;
+    }
+
+    public void setOpenAiApiKey(String openAiApiKey) {
+        this.openAiApiKey = openAiApiKey;
+    }
+
+    public void setFbSystemPrompt(String fbSystemPrompt) {
+        this.fbSystemPrompt = fbSystemPrompt;
     }
 }
