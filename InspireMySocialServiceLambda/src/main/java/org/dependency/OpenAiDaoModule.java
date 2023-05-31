@@ -27,7 +27,7 @@ public class OpenAiDaoModule {
     @Provides
     public OpenAiService provideOpenAiService() {
 //        Duration.ofSeconds(240)
-        return new OpenAiService(SecretHolder.getOpenAiApiKey(), Duration.ZERO);
+        return new OpenAiService(secretHolder.getOpenAiApiKey(), Duration.ZERO);
     }
 }
 
