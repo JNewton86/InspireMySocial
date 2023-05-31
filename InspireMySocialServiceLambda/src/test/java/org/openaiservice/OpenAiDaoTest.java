@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.metrics.MetricsPublisher;
 import org.mockito.Mock;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,11 @@ class OpenAiDaoTest {
     //TODO Integration Test that makes live call to OpenAi Disabled for time constraints when building
 //    @Test
 //    public void getContent_valid_success(){
-
+//
 //        OpenAiService openAiService = new OpenAiService(SecretHolder.getOpenAiApiKey(), Duration.ofSeconds(240));
 //        OpenAiDao openAiDao = new OpenAiDao(openAiService,null );
 //        CreateContentRequest createContentRequest = new CreateContentRequest("Jeff", "Face Book Post",
-//                "condescending", "software engineers", "hire me please, I'm cool", 200 );
+//                "Aggressively Happy", "hiring managers", "hire nss grads, we are great developers", 300 );
 //        ChatCompletionResult result = openAiDao.createContent(createContentRequest);
 //        System.out.println("-".repeat(140));
 //        System.out.println("ContentID: " + result.getId());

@@ -134,6 +134,7 @@ class SearchPlaylists extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
+     console.log("DOMContentLoaded event triggered");
     const searchPlaylists = new SearchPlaylists();
     searchPlaylists.mount();
 };

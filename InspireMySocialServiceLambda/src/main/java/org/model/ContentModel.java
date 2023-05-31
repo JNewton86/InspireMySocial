@@ -104,4 +104,16 @@ public class ContentModel {
 
         public ContentModel build(){return  new ContentModel(userId, contentId,  contentType, topic, aiMessage, isDeleted);}
     }
+
+    @Override
+    public String toString() {
+        return "ContentModel{" +
+                "userId='" + userId + '\'' +
+                ", contentId='" + contentId + '\'' +
+                ", contentType='" + contentType + '\'' +
+                ", topic='" + topic + '\'' +
+                ", aiMessage='" + aiMessage + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

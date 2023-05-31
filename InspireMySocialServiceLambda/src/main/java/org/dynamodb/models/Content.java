@@ -11,7 +11,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTyped;
 /**
  * Represents a social media content returned by OpenAI in the ims_socialmediacontent dynamo table.
  */
-@DynamoDBTable(tableName = "ims_socialmediacontent")
+@DynamoDBTable(tableName = "ims_socialMediaContent")
 public class Content {
 
     private String userID;
@@ -27,7 +27,7 @@ public class Content {
     private Integer completionTokens;
     private Integer totalTokens;
 
-    @DynamoDBHashKey(attributeName = "userID")
+    @DynamoDBHashKey(attributeName = "userEmail")
     public String getUserID() {
         return userID;
     }
@@ -61,7 +61,7 @@ public class Content {
     public void setContentId(String contentId) {
         this.contentId = contentId;
     }
-    @DynamoDBAttribute(attributeName = "contentId")
+    @DynamoDBAttribute(attributeName = "topic")
     public String getTopic() {
         return topic;
     }
@@ -69,7 +69,7 @@ public class Content {
     public void setTopic(String topic) {
         this.topic = topic;
     }
-    @DynamoDBAttribute(attributeName = "contentId")
+    @DynamoDBAttribute(attributeName = "audience")
     public String getAudience() {
         return audience;
     }
@@ -77,7 +77,7 @@ public class Content {
     public void setAudience(String audience) {
         this.audience = audience;
     }
-    @DynamoDBAttribute(attributeName = "contentId")
+    @DynamoDBAttribute(attributeName = "wordCount")
     public Integer getWordCount() {
         return wordCount;
     }
@@ -125,5 +125,23 @@ public class Content {
 
     public void setTotalTokens(Integer totalTokens) {
         this.totalTokens = totalTokens;
+    }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "userID='" + userID + '\'' +
+                ", contentId='" + contentId + '\'' +
+                ", contentType='" + contentType + '\'' +
+                ", tone='" + tone + '\'' +
+                ", topic='" + topic + '\'' +
+                ", audience='" + audience + '\'' +
+                ", wordCount=" + wordCount +
+                ", isDeleted=" + isDeleted +
+                ", aiMessage='" + aiMessage + '\'' +
+                ", promptTokens=" + promptTokens +
+                ", completionTokens=" + completionTokens +
+                ", totalTokens=" + totalTokens +
+                '}';
     }
 }

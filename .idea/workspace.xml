@@ -5,24 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f65dc989-0521-4a07-9fce-772de5ea8848" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/CurlCommands.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/request/CreateContentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/request/CreateContentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/OpenAiDaoModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/OpenAiDaoModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/AuthenticatedLambdaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/AuthenticatedLambdaRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dynamodb/models/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dynamodb/models/Content.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaActivityRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/LambdaActivityRunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/activity/OpenAiAPIActivityTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/openaiservice/OpenAiDaoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/openaiservice/OpenAiDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/old-template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/oldv1_template.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/template.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/pages/searchPlaylists.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/pages/searchPlaylists.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +26,31 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="InspireMySocial" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="InspireMySocial" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,9 +66,137 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
+  <component name="RunManager" selected="Gradle.OpenAiDaoTest.getContent_valid_success">
+    <configuration name="CreateContentActivityTest.handleRequest_validRequest_results" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":InspireMySocialServiceLambda:test" />
+            <option value="--tests" />
+            <option value="&quot;org.activity.CreateContentActivityTest.handleRequest_validRequest_results&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ModelConverterTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":InspireMySocialServiceLambda:test" />
+            <option value="--tests" />
+            <option value="&quot;org.Converter.ModelConverterTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ModelConverterTest.toContentModel_withValidContent_convertsContent" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":InspireMySocialServiceLambda:test" />
+            <option value="--tests" />
+            <option value="&quot;org.Converter.ModelConverterTest.toContentModel_withValidContent_convertsContent&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="OpenAiDaoTest.getContent_valid_success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":InspireMySocialServiceLambda:test" />
+            <option value="--tests" />
+            <option value="&quot;org.openaiservice.OpenAiDaoTest.getContent_valid_success&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'InspireMySocial.InspireMySocialServiceLambda.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":InspireMySocialServiceLambda:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.OpenAiDaoTest.getContent_valid_success" />
+        <item itemvalue="Gradle.CreateContentActivityTest.handleRequest_validRequest_results" />
+        <item itemvalue="Gradle.Tests in 'InspireMySocial.InspireMySocialServiceLambda.test'" />
+        <item itemvalue="Gradle.ModelConverterTest.toContentModel_withValidContent_convertsContent" />
+        <item itemvalue="Gradle.ModelConverterTest" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
