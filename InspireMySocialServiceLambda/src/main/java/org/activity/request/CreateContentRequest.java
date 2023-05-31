@@ -93,5 +93,17 @@ public class CreateContentRequest {
                 tone, topic, wordCount); }
 
     }
+
+    @Override
+    public String toString() {
+        return "CreateContentRequest{" +
+                "userId='" + userId + '\'' +
+                ", contentType='" + contentType + '\'' +
+                ", tone='" + tone + '\'' +
+                ", audience='" + audience + '\'' +
+                ", topic='" + topic + '\'' +
+                ", wordCount=" + wordCount +
+                '}';
+    }
 }
 

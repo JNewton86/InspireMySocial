@@ -3,6 +3,7 @@ package org.openaiservice;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 import java.io.IOException;
 public class SecretHolder {
     @JsonProperty("openAPIkey")
@@ -10,6 +11,8 @@ public class SecretHolder {
 
     @JsonProperty("fbSystemPrompt")
     private String fbSystemPrompt;
+
+
 
     public String getOpenAiApiKey() {
         return openAiApiKey;

@@ -42,6 +42,7 @@
                 <item name="InspireMySocial" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
+
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="InspireMySocial" type="f1a62948:ProjectNode" />
@@ -92,6 +93,7 @@
   </component>
   <component name="RunManager" selected="Gradle.UtilsOpenAiAPITest.testMethod">
     <configuration name="UtilsOpenAiAPITest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
