@@ -16,7 +16,6 @@ public class OpenAiDao {
 
     private final OpenAiService openAiService;
 
-    private String secrets;
     private final MetricsPublisher metricsPublisher;
 
     /**
@@ -29,7 +28,7 @@ public class OpenAiDao {
     public OpenAiDao(OpenAiService openAiService, MetricsPublisher metricsPublisher) {
         this.openAiService = openAiService;
         this.metricsPublisher = metricsPublisher;
-        this.secrets = UtilsOpenAiAPI.getSecret();
+
 
     }
 
@@ -40,6 +39,38 @@ public class OpenAiDao {
      * @param createContentRequest request from API call
      * @return currently returns a string after a chatstream is complete, need to refactor this to returnChatCompletion
      */
+
+    public ChatCompletionResult createContent(CreateContentRequest createContentRequest) {
+        System.out.println("Streaming chat completion...");
+        SecretHolder secretHolder = null;
+        try {
+            secretHolder = UtilsOpenAiAPI.sortSecret();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        final List<ChatMessage> messages = new ArrayList<>();
+        final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
+                secretHolder.getFbSystemPrompt());
+        messages.add(systemMessage);
+        final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
+                createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
+                ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
+                createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
+                "he post length should be no more than " + createContentRequest.getWordCount() + " words.");
+        messages.add(userMessage);
+        ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                .builder()
+                .model("gpt-4-0314")
+                .messages(messages)
+                .n(1)
+                .maxTokens(500)
+                .temperature(0.9)
+                .logitBias(new HashMap<>())
+                .build();
+        ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
+        return chatCompletionResult;
+    }
 
     //TODO Add logic to check for userId in table already, else add.
     //TODO The below method is commented out for the time being as it's being replcaed by a different call. Leaving here
@@ -78,7 +109,7 @@ public class OpenAiDao {
 //                .logitBias(new HashMap<>())
 //                .build();
 
-        //The below steamChatCompletion Method streams a series of response chunks
+    //The below steamChatCompletion Method streams a series of response chunks
 //        ChatCompletionResult chatCompletionResult = new ChatCompletionResult();
 //        openAiService.streamChatCompletion(chatCompletionRequest)
 //                .doOnError(Throwable::printStackTrace)
@@ -119,36 +150,4 @@ public class OpenAiDao {
 //        openAiService.shutdownExecutor();
 //        return chatCompletionResult;
 //    }
-
-    public ChatCompletionResult createContent(CreateContentRequest createContentRequest) {
-        System.out.println("Streaming chat completion...");
-        SecretHolder secretHolder = null;
-        try {
-            secretHolder = UtilsOpenAiAPI.sortSecret();
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-        final List<ChatMessage> messages = new ArrayList<>();
-        final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
-                secretHolder.getFbSystemPrompt());
-        messages.add(systemMessage);
-        final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
-                createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
-                ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
-                createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
-                "he post length should be no more than " + createContentRequest.getWordCount() + " words.");
-        messages.add(userMessage);
-        ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
-                .builder()
-                .model("gpt-4-0314")
-                .messages(messages)
-                .n(1)
-                .maxTokens(500)
-                .temperature(0.9)
-                .logitBias(new HashMap<>())
-                .build();
-        ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
-        return chatCompletionResult;
-    }
 }
