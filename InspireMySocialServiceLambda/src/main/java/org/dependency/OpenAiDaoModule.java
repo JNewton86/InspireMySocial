@@ -1,9 +1,11 @@
 package org.dependency;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import dagger.Module;
 import dagger.Provides;
 import org.openaiservice.OpenAiService;
 import org.openaiservice.SecretHolder;
+import org.utils.UtilsOpenAiAPI;
 
 import java.time.Duration;
 import javax.inject.Singleton;
@@ -21,13 +23,20 @@ public class OpenAiDaoModule {
      * @return OpenAiService object
      */
 
-    private SecretHolder secretHolder;
+    private String getAPItoken()  {
+        try {
+            return UtilsOpenAiAPI.sortSecret().getOpenAiApiKey();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @Singleton
     @Provides
     public OpenAiService provideOpenAiService() {
 //        Duration.ofSeconds(240)
-        return new OpenAiService(secretHolder.getOpenAiApiKey(), Duration.ZERO);
+        return new OpenAiService(this.getAPItoken(), Duration.ZERO);
     }
 }
 

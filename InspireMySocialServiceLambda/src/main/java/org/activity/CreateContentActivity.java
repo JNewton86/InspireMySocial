@@ -72,7 +72,7 @@ public class CreateContentActivity {
             Integer completionUsageInt = (int) completionUsage;
             newContent.setCompletionTokens(completionUsageInt);
             newContent.setTotalTokens(completionUsageInt + promptTokensInt);
-            System.out.println(newContent.toString());
+            System.out.println("Content object to save to Dynamo: " + newContent.toString());
             // Save the Content Object
             contentDao.saveContent(newContent);
 
