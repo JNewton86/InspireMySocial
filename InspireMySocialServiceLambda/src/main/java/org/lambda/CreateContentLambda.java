@@ -8,6 +8,7 @@ import org.activity.result.CreateContentResult;
 
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.logging.Logger;
 
 public class CreateContentLambda
         extends LambdaActivityRunner<CreateContentRequest, CreateContentResult>
@@ -19,22 +20,15 @@ public class CreateContentLambda
         System.out.println(unauthenticatedRequest1.toString());
         return super.runActivity(
             () -> {
-                System.out.println("*** creating Content Request object in CreateLambda ***");
                 CreateContentRequest unauthenticatedRequest = input.fromBody(CreateContentRequest.class);
-
-                return input.fromUserClaims(claims -> {
-                    String email = claims.get("email");
-                    System.out.println("Email is : " + email);
-
-                    return CreateContentRequest.builder()
-                            .withUserId(email)
-                            .withContentType(unauthenticatedRequest.getContentType())
-                            .withTone(unauthenticatedRequest.getTone())
-                            .withAudience(unauthenticatedRequest.getAudience())
-                            .withTopic(unauthenticatedRequest.getTopic())
-                            .withWordCount(unauthenticatedRequest.getWordCount())
-                            .build();
-                });
+                return input.fromUserClaims(claims -> CreateContentRequest.builder()
+                        .withUserId(claims.get("email"))
+                        .withContentType(unauthenticatedRequest.getContentType())
+                        .withTone(unauthenticatedRequest.getTone())
+                        .withAudience(unauthenticatedRequest.getAudience())
+                        .withTopic(unauthenticatedRequest.getTopic())
+                        .withWordCount(unauthenticatedRequest.getWordCount())
+                        .build());
             },
             (request, serviceComponent) -> {
                 try {
@@ -46,8 +40,7 @@ public class CreateContentLambda
                     System.out.println("handlerequest requested, result: " + request.toString());
                     return result;
                 } catch (Exception e){
-                    System.out.println(e);
-                    return null;
+                    throw e;
                 }
             }
         );

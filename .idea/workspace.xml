@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f65dc989-0521-4a07-9fce-772de5ea8848" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/Converter/SecretConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/test/java/org/utils/UtilsOpenAiAPITest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/OpenAiDaoModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/dependency/OpenAiDaoModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/OpenAiDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/openaiservice/SecretHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/utils/UtilsOpenAiAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/utils/UtilsOpenAiAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/activity/CreateContentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" beforeDir="false" afterPath="$PROJECT_DIR$/InspireMySocialServiceLambda/src/main/java/org/lambda/CreateContentLambda.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +37,6 @@
                 <item name="InspireMySocial" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
-
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="InspireMySocial" type="f1a62948:ProjectNode" />
@@ -75,14 +69,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": ""
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -93,7 +87,6 @@
   </component>
   <component name="RunManager" selected="Gradle.UtilsOpenAiAPITest.testMethod">
     <configuration name="UtilsOpenAiAPITest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
