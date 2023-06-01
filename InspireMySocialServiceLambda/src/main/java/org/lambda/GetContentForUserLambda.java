@@ -17,11 +17,11 @@ public class GetContentForUserLambda extends LambdaActivityRunner<GetContentForU
     public LambdaResponse handleRequest(LambdaRequest<GetContentForUserRequest> input, Context context) {
         log.info("GetContentForUserLambda reached");
         return super.runActivity(
-                    () -> input.fromPath(claims ->
-                            GetContentForUserRequest.builder()
-                                    .withUserEmail(claims.get("userEmail"))
-                                    .build()),
-                    (request, serviceComponent) -> serviceComponent.provideGetContentForUserActivity().handleRequest(request)
+            () -> input.fromPath(claims ->
+                    GetContentForUserRequest.builder()
+                            .withUserEmail(claims.get("userEmail"))
+                            .build()),
+            (request, serviceComponent) -> serviceComponent.provideGetContentForUserActivity().handleRequest(request)
         );
     }
 }

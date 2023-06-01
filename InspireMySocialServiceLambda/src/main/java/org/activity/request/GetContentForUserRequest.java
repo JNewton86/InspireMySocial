@@ -7,7 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class GetContentForUserRequest {
    private final String userEmail;
 
-    public GetContentForUserRequest(String userEmail) {this.userEmail = userEmail; }
+    public GetContentForUserRequest(String userEmail) {
+        this.userEmail = userEmail;
+    }
 
     public String getUserEmail() {
         return userEmail;
@@ -19,7 +21,7 @@ public class GetContentForUserRequest {
                 "userEmail='" + userEmail + '\'' +
                 '}';
     }
-
+    //CHECKSTYLE:OFF:Builder
     public static Builder builder(){
         return new Builder();
     }

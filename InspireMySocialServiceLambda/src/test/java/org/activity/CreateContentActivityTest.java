@@ -26,8 +26,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 class CreateContentActivityTest {
-    @Mock
-    private MetricsPublisher metricsPublisher;
+
     @Mock
     private ContentDao contentDao;
     @Mock

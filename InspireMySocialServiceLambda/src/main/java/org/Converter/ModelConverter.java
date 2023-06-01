@@ -27,6 +27,12 @@ public class ModelConverter {
                 .build();
     }
 
+    /**
+     * This is a method to convert a list of data from a DynamoDB table for storing Content to a List of Models for the
+     * content.
+     * @param contentList an List of the dynamo object content
+     * @return List<ContentModel> which is List of the API model for the GetContent
+     */
     public List<ContentModel> toContentModelList(List<Content> contentList) {
         List<ContentModel> contentModels = new ArrayList<>();
 

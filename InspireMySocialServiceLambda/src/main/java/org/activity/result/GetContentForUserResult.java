@@ -4,6 +4,7 @@ import org.model.ContentModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GetContentForUserResult {
 
@@ -26,6 +27,7 @@ public class GetContentForUserResult {
         return new ArrayList<>(contentModelList);
     }
 
+    //CHECKSTYLE:OFF:Builder
     public static class Builder{
         private List<ContentModel>  contentModelList;
 
@@ -36,6 +38,19 @@ public class GetContentForUserResult {
         public GetContentForUserResult build(){
             return new GetContentForUserResult(contentModelList);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GetContentForUserResult that = (GetContentForUserResult) o;
+        return Objects.equals(contentModelList, that.contentModelList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(contentModelList);
     }
 }
 

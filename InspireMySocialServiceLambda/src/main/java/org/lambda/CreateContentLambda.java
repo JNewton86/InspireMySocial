@@ -2,13 +2,8 @@ package org.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import org.activity.CreateContentActivity;
 import org.activity.request.CreateContentRequest;
 import org.activity.result.CreateContentResult;
-
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.logging.Logger;
 
 public class CreateContentLambda extends LambdaActivityRunner<CreateContentRequest, CreateContentResult>
         implements RequestHandler<AuthenticatedLambdaRequest<CreateContentRequest>, LambdaResponse> {
@@ -19,13 +14,13 @@ public class CreateContentLambda extends LambdaActivityRunner<CreateContentReque
                         () -> {
                 CreateContentRequest unauthenticatedRequest = input.fromBody(CreateContentRequest.class);
                 return input.fromUserClaims(claims -> CreateContentRequest.builder()
-                        .withUserId(claims.get("email"))
-                        .withContentType(unauthenticatedRequest.getContentType())
-                        .withTone(unauthenticatedRequest.getTone())
-                        .withAudience(unauthenticatedRequest.getAudience())
-                        .withTopic(unauthenticatedRequest.getTopic())
-                        .withWordCount(unauthenticatedRequest.getWordCount())
-                        .build());
+                    .withUserId(claims.get("email"))
+                    .withContentType(unauthenticatedRequest.getContentType())
+                    .withTone(unauthenticatedRequest.getTone())
+                    .withAudience(unauthenticatedRequest.getAudience())
+                    .withTopic(unauthenticatedRequest.getTopic())
+                    .withWordCount(unauthenticatedRequest.getWordCount())
+                    .build());
             },
             (request, serviceComponent) -> serviceComponent.provideCreateContentActivity().handleRequest(request)
     );
