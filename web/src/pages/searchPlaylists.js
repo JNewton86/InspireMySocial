@@ -52,7 +52,7 @@ class SearchPlaylists extends BindingClass {
     }
 
     /**
-     * Uses the client to perform the search, 
+     * Uses the client to perform the search,
      * then updates the datastore with the criteria and results.
      * @param evt The "event" object representing the user-initiated event that triggered this method.
      */
@@ -134,7 +134,6 @@ class SearchPlaylists extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-     console.log("DOMContentLoaded event triggered");
     const searchPlaylists = new SearchPlaylists();
     searchPlaylists.mount();
 };

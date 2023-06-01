@@ -2,6 +2,7 @@ package org.dependency;
 
 import dagger.Component;
 import org.activity.CreateContentActivity;
+import org.activity.GetContentForUserActivity;
 
 import javax.inject.Singleton;
 
@@ -14,13 +15,13 @@ public interface ServiceComponent {
 
     /**
      * Provides the relevant activity.
-     * @return CreatePlaylistActivity
+     * @return CreateContentActivity
      */
     CreateContentActivity provideCreateContentActivity();
 
     /**
      * Provides the relevant activity.
-     * @return CreatePlaylistActivity
+     * @return GetContentByUserActivity
      */
-
+    GetContentForUserActivity provideGetContentForUserActivity();
 }

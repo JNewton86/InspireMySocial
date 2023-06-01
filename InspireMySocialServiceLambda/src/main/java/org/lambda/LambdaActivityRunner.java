@@ -2,8 +2,7 @@ package org.lambda;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dependency.DaggerServiceComponent;
-import org.dependency.ServiceComponent;
+import org.dependency.*;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;

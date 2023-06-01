@@ -13,6 +13,15 @@ public class CreateContentRequest {
     private String topic;
     private Integer wordCount;
 
+    /**
+     * Constructor for the CreateContentRequest, provided for testing.
+     * @param userId is the user's email from the Cognito Claim
+     * @param contentType is a string referencing the type of social media
+     * @param tone is a string referencing the tone for the AI to use
+     * @param audience is a string referencing the audience for the AI to address
+     * @param topic is a string referencing the topic of the request
+     * @param wordCount is a limit on message size
+     */
     public CreateContentRequest(String userId, String contentType, String tone,
                                 String audience, String topic, Integer wordCount) {
         this.userId = userId;

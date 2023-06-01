@@ -1,10 +1,7 @@
 package org.openaiservice;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-import java.io.IOException;
 public class SecretHolder {
     @JsonProperty("openAPIkey")
     private String openAiApiKey;

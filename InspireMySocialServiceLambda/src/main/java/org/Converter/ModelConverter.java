@@ -3,6 +3,9 @@ package org.Converter;
 import org.dynamodb.models.Content;
 import org.model.ContentModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Converts between Data and API models.
  */
@@ -22,5 +25,21 @@ public class ModelConverter {
                 .withAiMessage(content.getAiMessage())
                 .withIsDeleted(content.getDeleted())
                 .build();
+    }
+
+    /**
+     * This is a method to convert a list of data from a DynamoDB table for storing Content to a List of Models for the
+     * content.
+     * @param contentList an List of the dynamo object content
+     * @return List<ContentModel> which is List of the API model for the GetContent
+     */
+    public List<ContentModel> toContentModelList(List<Content> contentList) {
+        List<ContentModel> contentModels = new ArrayList<>();
+
+        for (Content coolContent : contentList) {
+            contentModels.add(toContentModel(coolContent));
+        }
+
+        return contentModels;
     }
 }

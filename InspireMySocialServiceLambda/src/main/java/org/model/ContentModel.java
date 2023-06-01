@@ -11,6 +11,15 @@ public class ContentModel {
     private final String aiMessage;
     private final Boolean isDeleted;
 
+    /**
+     * A constructor for the Content Model, mainly for testing.
+     * @param userId a string of the user's email
+     * @param contentId a string from the AI response
+     * @param contentType a string representing the type
+     * @param topic a string representing the topic requested
+     * @param aiMessage a string representing the actual AI response
+     * @param isDeleted a boolean to indicate if the item has been deleted.
+     */
     public ContentModel(String userId, String contentId, String contentType, String topic,
                         String aiMessage, Boolean isDeleted) {
         this.userId = userId;

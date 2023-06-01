@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import dagger.Module;
 import dagger.Provides;
 import org.openaiservice.OpenAiService;
-import org.openaiservice.SecretHolder;
 import org.utils.UtilsOpenAiAPI;
 
 import java.time.Duration;
@@ -35,7 +34,6 @@ public class OpenAiDaoModule {
     @Singleton
     @Provides
     public OpenAiService provideOpenAiService() {
-//        Duration.ofSeconds(240)
         return new OpenAiService(this.getAPItoken(), Duration.ZERO);
     }
 }

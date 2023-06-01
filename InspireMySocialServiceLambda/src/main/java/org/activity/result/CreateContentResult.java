@@ -22,7 +22,7 @@ public class CreateContentResult {
                 "contentModel=" + contentModel +
                 '}';
     }
-
+    //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
         return new Builder();
     }

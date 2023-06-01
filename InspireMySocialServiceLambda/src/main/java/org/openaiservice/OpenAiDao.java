@@ -1,7 +1,6 @@
 package org.openaiservice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.theokanning.openai.Usage;
 import com.theokanning.openai.completion.chat.*;
 import org.activity.request.CreateContentRequest;
 import org.metrics.MetricsPublisher;
