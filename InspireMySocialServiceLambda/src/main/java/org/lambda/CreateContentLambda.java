@@ -10,16 +10,13 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.logging.Logger;
 
-public class CreateContentLambda
-        extends LambdaActivityRunner<CreateContentRequest, CreateContentResult>
+public class CreateContentLambda extends LambdaActivityRunner<CreateContentRequest, CreateContentResult>
         implements RequestHandler<AuthenticatedLambdaRequest<CreateContentRequest>, LambdaResponse> {
 
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateContentRequest> input, Context context) {
-        CreateContentRequest unauthenticatedRequest1 = input.fromBody(CreateContentRequest.class);
-        System.out.println(unauthenticatedRequest1.toString());
-        return super.runActivity(
-            () -> {
+           return super.runActivity(
+                        () -> {
                 CreateContentRequest unauthenticatedRequest = input.fromBody(CreateContentRequest.class);
                 return input.fromUserClaims(claims -> CreateContentRequest.builder()
                         .withUserId(claims.get("email"))
@@ -30,20 +27,8 @@ public class CreateContentLambda
                         .withWordCount(unauthenticatedRequest.getWordCount())
                         .build());
             },
-            (request, serviceComponent) -> {
-                try {
-                    System.out.println("you are hitting the request for the activity");
-                    System.out.println("this is the service component " + serviceComponent);
-                    CreateContentActivity provideCreateContentActivity = serviceComponent.provideCreateContentActivity();
-                    System.out.println("provideCreateContent activity line passed" + provideCreateContentActivity.toString());
-                    CreateContentResult result = provideCreateContentActivity.handleRequest(request);
-                    System.out.println("handlerequest requested, result: " + request.toString());
-                    return result;
-                } catch (Exception e){
-                    throw e;
-                }
-            }
-        );
+            (request, serviceComponent) -> serviceComponent.provideCreateContentActivity().handleRequest(request)
+    );
     }
 }
 

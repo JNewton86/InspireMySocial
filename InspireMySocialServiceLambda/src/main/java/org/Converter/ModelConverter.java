@@ -3,6 +3,9 @@ package org.Converter;
 import org.dynamodb.models.Content;
 import org.model.ContentModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Converts between Data and API models.
  */
@@ -22,5 +25,15 @@ public class ModelConverter {
                 .withAiMessage(content.getAiMessage())
                 .withIsDeleted(content.getDeleted())
                 .build();
+    }
+
+    public List<ContentModel> toContentModelList(List<Content> contentList) {
+        List<ContentModel> contentModels = new ArrayList<>();
+
+        for (Content coolContent : contentList) {
+            contentModels.add(toContentModel(coolContent));
+        }
+
+        return contentModels;
     }
 }
