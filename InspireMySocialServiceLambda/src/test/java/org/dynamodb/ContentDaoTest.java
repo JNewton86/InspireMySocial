@@ -48,25 +48,27 @@ class ContentDaoTest {
     public void getContent_validCall_callsMapperAndMetricsPublisher(){
         // GIVEN
         String contentId = "1234";
-        when(dynamoDBMapper.load(Content.class, contentId)).thenReturn(new Content());
+        String userEmail = "test@test";
+        when(dynamoDBMapper.load(Content.class, userEmail, contentId)).thenReturn(new Content());
 
         // WHEN
-        Content content = contentDao.getContent(contentId);
+        Content content = contentDao.getContent(userEmail, contentId);
 
         // THEN
         assertNotNull(content);
-        verify(dynamoDBMapper).load(Content.class, contentId);
+        verify(dynamoDBMapper).load(Content.class, userEmail, contentId);
         verify(metricsPublisher).addCount(eq(MetricsConstants.GETCONTENT_CONTENTNOTFOUND_COUNT), anyDouble());
     }
 
     @Test
     public void getContent_contentIdNotFound_throwsContentNotFoundException() {
         // GIVEN
+        String userEmail = "test@test";
         String nonexistentContentId = "NotReal";
-        when(dynamoDBMapper.load(Content.class, nonexistentContentId)).thenReturn(null);
+        when(dynamoDBMapper.load(Content.class, userEmail, nonexistentContentId)).thenReturn(null);
 
         // WHEN + THEN
-        assertThrows(ContentNotFoundException.class, () -> contentDao.getContent(nonexistentContentId));
+        assertThrows(ContentNotFoundException.class, () -> contentDao.getContent(userEmail, nonexistentContentId));
         verify(metricsPublisher).addCount(eq(MetricsConstants.GETCONTENT_CONTENTNOTFOUND_COUNT), anyDouble());
     }
 }

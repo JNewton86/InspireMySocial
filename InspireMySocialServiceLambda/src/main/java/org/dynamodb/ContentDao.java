@@ -40,8 +40,8 @@ public class ContentDao {
         return content;
     }
 
-    public Content getContent(String id) {
-        Content playlist = this.dynamoDbMapper.load(Content.class, id);
+    public Content getContent(String id, String contentId) {
+        Content playlist = this.dynamoDbMapper.load(Content.class, id, contentId);
 
         if (playlist == null) {
             metricsPublisher.addCount(MetricsConstants.GETCONTENT_CONTENTNOTFOUND_COUNT, 1);

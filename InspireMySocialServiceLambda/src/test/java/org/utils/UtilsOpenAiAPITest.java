@@ -10,11 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class UtilsOpenAiAPITest {
 
     String secret = "openAPiSecrets";
-    @Test
-    void testMethod() throws JsonProcessingException {
-        SecretHolder secretHolder = UtilsOpenAiAPI.sortSecret();
-        System.out.println("API Key: " + secretHolder.getOpenAiApiKey());
-        System.out.println("FB Prompt: " + secretHolder.getFbSystemPrompt());
-    }
+
+    //Integration Test, commented out as requires aws sso to use.
+//    @Test
+//    void testMethod() throws JsonProcessingException {
+//        SecretHolder secretHolder = UtilsOpenAiAPI.sortSecret();
+//        System.out.println("API Key: " + secretHolder.getOpenAiApiKey());
+//        System.out.println("FB Prompt: " + secretHolder.getFbSystemPrompt());
+//    }
 
 }
