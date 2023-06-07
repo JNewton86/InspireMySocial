@@ -7,6 +7,7 @@ import org.exception.ContentNotFoundException;
 import org.metrics.MetricsConstants;
 import org.metrics.MetricsPublisher;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,11 +56,18 @@ public class ContentDao {
         DynamoDBMapper mapper = new DynamoDBMapper(DynamoDbClientProvider.getDynamoDBClient());
         Map<String, AttributeValue> valueMap = new HashMap<>();
         valueMap.put(":userEmail", new AttributeValue().withS(String.valueOf(userId)));
-        DynamoDBQueryExpression<Content> queryExpression = new DynamoDBQueryExpression<Content>()
+          DynamoDBQueryExpression<Content> queryExpression = new DynamoDBQueryExpression<Content>()
                 .withConsistentRead(false)
                 .withKeyConditionExpression("userEmail = :userEmail")
                 .withExpressionAttributeValues(valueMap);
 
-        return mapper.query(Content.class, queryExpression);
+          List<Content> allResults = mapper.query(Content.class, queryExpression);
+          List<Content> filteredResults = new ArrayList<>();
+          for(Content c : allResults){
+              if (!c.getDeleted()){
+                  filteredResults.add(c);
+              }
+          }
+          return filteredResults;
     }
 }

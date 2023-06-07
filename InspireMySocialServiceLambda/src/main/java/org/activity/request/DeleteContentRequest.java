@@ -3,19 +3,19 @@ package org.activity.request;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-@JsonDeserialize(builder = org.activity.request.DeleteContentRequest.Builder.class)
+@JsonDeserialize(builder = DeleteContentRequest.Builder.class)
 public class DeleteContentRequest {
 
-        private final String userEmail;
-        private final String contentId;
+        private String userId;
+        private String contentId;
 
         public DeleteContentRequest(String userEmail, String contentId) {
-            this.userEmail = userEmail;
+            this.userId = userEmail;
             this.contentId = contentId;
         }
 
-        public String getUserEmail() {
-            return userEmail;
+        public String getUserId() {
+            return userId;
         }
 
     public String getContentId() {
@@ -25,7 +25,7 @@ public class DeleteContentRequest {
     @Override
     public String toString() {
         return "DeleteContentRequest{" +
-                "userEmail='" + userEmail + '\'' +
+                "userEmail='" + userId + '\'' +
                 ", contentId='" + contentId + '\'' +
                 '}';
     }
@@ -37,11 +37,11 @@ public class DeleteContentRequest {
 
         @JsonPOJOBuilder
         public static class Builder{
-            private String userEmail;
+            private String userId;
             private String contentId;
 
-            public DeleteContentRequest.Builder withUserEmail(String userEmail){
-                this.userEmail = userEmail;
+            public DeleteContentRequest.Builder withUserId(String userId){
+                this.userId = userId;
                 return this;
             }
 
@@ -51,7 +51,7 @@ public class DeleteContentRequest {
             }
 
             public org.activity.request.DeleteContentRequest build(){
-                return new org.activity.request.DeleteContentRequest(userEmail,contentId);
+                return new org.activity.request.DeleteContentRequest(userId,contentId);
             }
         }
 

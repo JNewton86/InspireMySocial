@@ -14,7 +14,7 @@ public class DeleteContentLambda extends LambdaActivityRunner<DeleteContentReque
                         () -> {
                         DeleteContentRequest unauthenticatedRequest = input.fromBody(DeleteContentRequest.class);
                         return input.fromUserClaims(claims -> DeleteContentRequest.builder()
-                            .withUserEmail(claims.get("userEmail"))
+                            .withUserId(claims.get("email"))
                             .withContentId(unauthenticatedRequest.getContentId())
                             .build());
                         },

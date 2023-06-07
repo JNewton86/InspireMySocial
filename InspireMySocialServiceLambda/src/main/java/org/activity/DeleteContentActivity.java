@@ -27,11 +27,13 @@ public class DeleteContentActivity {
 
     public DeleteContentResult handleRequest(final DeleteContentRequest deleteContentRequest) {
         log.info("Recieved GetContentRequest{}", deleteContentRequest);
-        String userEmail = deleteContentRequest.getUserEmail();
-        if (userEmail == null || userEmail.isEmpty()) {
+        String userEmail = deleteContentRequest.getUserId();
+        System.out.println("client email is: " + userEmail);
+        System.out.println("ContentId is " +deleteContentRequest.getContentId());
+        if (userEmail == null) {
             throw new UserNotFoundException("Please provide a user's email!");
         }
-        Content oldContent = contentDao.getContent(deleteContentRequest.getUserEmail(),
+        Content oldContent = contentDao.getContent(deleteContentRequest.getUserId(),
                 deleteContentRequest.getContentId());
         oldContent.setDeleted(true);
         contentDao.saveContent(oldContent);

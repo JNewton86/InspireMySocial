@@ -278,7 +278,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /content/{userEmail}
+            Path: /content/{userEmail}/{contentId}
             Method: delete
 
   #-----------------------------------------------------
