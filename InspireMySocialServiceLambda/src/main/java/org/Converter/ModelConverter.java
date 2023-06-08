@@ -1,7 +1,9 @@
 package org.Converter;
 
 import org.dynamodb.models.Content;
+import org.dynamodb.models.User;
 import org.model.ContentModel;
+import org.model.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +43,14 @@ public class ModelConverter {
         }
 
         return contentModels;
+    }
+
+    public UserModel toUserModel(User user){
+        return UserModel.builder()
+                .withUserId(user.getUserEmail())
+                .withFirstName(user.getFirstName())
+                .withLastName(user.getLastName())
+                .withCreditBalance(user.getCreditBalance())
+                .build();
     }
 }
