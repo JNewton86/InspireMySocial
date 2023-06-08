@@ -1,9 +1,7 @@
 package org.dependency;
 
 import dagger.Component;
-import org.activity.CreateContentActivity;
-import org.activity.DeleteContentActivity;
-import org.activity.GetContentForUserActivity;
+import org.activity.*;
 
 import javax.inject.Singleton;
 
@@ -27,4 +25,8 @@ public interface ServiceComponent {
     GetContentForUserActivity provideGetContentForUserActivity();
 
     DeleteContentActivity provideDeleteContentActivity();
+
+    GetCreditsByUserActivity provideGetCreditsByUserActivity();
+
+    UpdateUserCreditBalanceActivity provideUpdateUserCreditBalanceActivity();
 }
