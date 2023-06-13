@@ -139,11 +139,21 @@ export default class InspireMySocialClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.content;
+            return response.content;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
     }
+
+    async getContentForUser(userEmail) {
+        try {
+            const response = await this.axiosClient.get(`content/${userEmail}`);
+            return response.data.contentList;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+}
+
     /**
      * Add a song to a playlist.
      * @param id The id of the playlist to add a song to.

@@ -7,10 +7,7 @@ import org.exception.ContentNotFoundException;
 import org.metrics.MetricsConstants;
 import org.metrics.MetricsPublisher;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -68,6 +65,7 @@ public class ContentDao {
                   filteredResults.add(c);
               }
           }
+          Collections.reverse(filteredResults);
           return filteredResults;
     }
 }
