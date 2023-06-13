@@ -10,12 +10,12 @@ import Authenticator from "./authenticator";
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Mix-ins
  * https://javascript.info/mixins
   */
-export default class MusicPlaylistClient extends BindingClass {
+export default class InspireMySocialClient extends BindingClass {
 
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist', 'createContent'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -125,6 +125,25 @@ export default class MusicPlaylistClient extends BindingClass {
         }
     }
 
+    async createContent(contentType, tone, audience, topic, wordCount, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
+            const response = await this.axiosClient.post(`content`, {
+                contentType: contentType,
+                tone: tone,
+                audience: audience,
+                topic: topic,
+                wordCount: wordCount
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.content;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
     /**
      * Add a song to a playlist.
      * @param id The id of the playlist to add a song to.

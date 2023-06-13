@@ -1,5 +1,6 @@
-import MusicPlaylistClient from '../api/musicPlaylistClient';
+import InspireMySocialClient from '../api/inspireMySocialClient';
 import BindingClass from "../util/bindingClass";
+
 
 /**
  * The header component for the website.
@@ -14,7 +15,7 @@ export default class Header extends BindingClass {
         ];
         this.bindClassMethods(methodsToBind, this);
 
-        this.client = new MusicPlaylistClient();
+        this.client = new InspireMySocialClient();
     }
 
     /**
@@ -26,7 +27,7 @@ export default class Header extends BindingClass {
         const siteTitle = this.createSiteTitle();
         const userInfo = this.createUserInfoForHeader(currentUser);
 
-        const header = document.getElementById('header');
+        const header = document.getElementById('header-menu');
         header.appendChild(siteTitle);
         header.appendChild(userInfo);
     }
@@ -35,7 +36,7 @@ export default class Header extends BindingClass {
         const homeButton = document.createElement('a');
         homeButton.classList.add('header_home');
         homeButton.href = 'index.html';
-        homeButton.innerText = 'Playlists';
+
 
         const siteTitle = document.createElement('div');
         siteTitle.classList.add('site-title');
@@ -44,21 +45,47 @@ export default class Header extends BindingClass {
         return siteTitle;
     }
 
+    // createUserInfoForHeader(currentUser) {
+    //     const userInfo = document.createElement('div');
+    //     userInfo.classList.add('user');
+
+    //     const childContent = currentUser
+    //         ? this.createLogoutButton(currentUser)
+    //         : this.createLoginButton() 
+    //         : this.createSignUpButton();
+
+    //     userInfo.appendChild(childContent);
+
+    //     return userInfo;
+    // }
+
     createUserInfoForHeader(currentUser) {
         const userInfo = document.createElement('div');
         userInfo.classList.add('user');
 
-        const childContent = currentUser
-            ? this.createLogoutButton(currentUser)
-            : this.createLoginButton();
+        if (currentUser) {
+            // If the user is logged in, append the logout button
+            const logoutButton = this.createLogoutButton(currentUser);
+            userInfo.appendChild(logoutButton);
+        } else {
+            // If the user is not logged in, append both the login and sign-up buttons
+            const loginButton = this.createLoginButton();
+            const signUpButton = this.createSignUpButton();
 
-        userInfo.appendChild(childContent);
+            userInfo.appendChild(loginButton);
+            userInfo.appendChild(signUpButton);
+        }
 
         return userInfo;
     }
 
+
     createLoginButton() {
         return this.createButton('Login', this.client.login);
+    }
+
+    createSignUpButton() {
+        return this.createButton('Create Account', this.client.signup);
     }
 
     createLogoutButton(currentUser) {
@@ -67,7 +94,7 @@ export default class Header extends BindingClass {
 
     createButton(text, clickHandler) {
         const button = document.createElement('a');
-        button.classList.add('button');
+        button.classList.add('button', 'btn', 'btn-primary', 'rounded-pill', 'border-2', 'ms-2');
         button.href = '#';
         button.innerText = text;
 
@@ -77,4 +104,5 @@ export default class Header extends BindingClass {
 
         return button;
     }
+
 }
