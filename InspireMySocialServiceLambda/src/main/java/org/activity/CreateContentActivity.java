@@ -54,6 +54,7 @@ public class CreateContentActivity {
         try {
             ChatCompletionResult post = openAiDao.createContent(createContentRequest);
             // Create and instantiate the Dynamo Object
+            System.out.println("*** the open ai call returned: " + post.toString() + " ***");
             Content newContent = new Content();
             newContent.setUserID(createContentRequest.getUserId());
             newContent.setContentType(createContentRequest.getContentType());
