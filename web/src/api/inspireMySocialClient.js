@@ -15,7 +15,7 @@ export default class InspireMySocialClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist', 'createContent'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist','createContent'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -152,7 +152,9 @@ export default class InspireMySocialClient extends BindingClass {
         } catch (error) {
             this.handleError(error, errorCallback)
         }
-}
+    }
+
+
 
     /**
      * Add a song to a playlist.

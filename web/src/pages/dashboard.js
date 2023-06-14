@@ -25,54 +25,98 @@ class Dashboard extends BindingClass {
         document.getElementById('fbFormSubmit').addEventListener('click', this.fbSubmit);
         this.header.addHeaderToPage();
         this.client = new InspireMySocialClient();
-        const socialPosts = await this.client.getContentForUser('jeff+1@jnewton.pro');
+        const userObject = await this.client.getIdentity();
+        console.log(userObject);
+        const socialPosts = await this.client.getContentForUser(userObject.email);
+        console.log(socialPosts);
         console.log(socialPosts)
-        socialPosts.forEach((post, index) => postContainer.innerHTML += this.generatePost(post.topic, post.aiMessage, index))
+        socialPosts.forEach((post, index) => postContainer.innerHTML += this.generatePost(post.topic, post.aiMessage, index, post.contentType, post.contentId))
     }
 
     /**
      * Method to run when the create FaceBook Post submit button is pressed. Call the InspireMySocialClient to create the
      * content.
      */
+    // async fbSubmit(evt) {
+    //     evt.preventDefault();
+
+    //     const errorMessageDisplay = document.getElementById('error-message-fb');
+    //     errorMessageDisplay.innerText = ``;
+    //     errorMessageDisplay.classList.add('hidden');
+
+    //     const createButton = document.getElementById('fbFormSubmit');
+    //     const origButtonText = createButton.innerText;
+    //     createButton.innerText = 'Loading...';
+
+    //     const contentType = 'Face Book Post';
+    //     const tone = document.getElementById('fb-tone').value;
+    //     const audience = document.getElementById('fb-audience').value;
+    //     const topic = document.getElementById('fb-topic').value;
+    //     const wordcount = document.getElementById('fb-wordcount').value;
+
+
+    //     const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
+    //         createButton.innerText = origButtonText;
+    //         errorMessageDisplay.innerText = `Error: ${error.message}`;
+    //         errorMessageDisplay.classList.remove('hidden');
+    //     });
+    //     this.dataStore.set('content', content);
+    //     location.reload()
+    // }
+
     async fbSubmit(evt) {
         evt.preventDefault();
-
+    
         const errorMessageDisplay = document.getElementById('error-message-fb');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
-
+    
         const createButton = document.getElementById('fbFormSubmit');
         const origButtonText = createButton.innerText;
         createButton.innerText = 'Loading...';
-
-        const contentType = 'FB Post';
+    
+        const contentType = 'Face Book Post';
         const tone = document.getElementById('fb-tone').value;
         const audience = document.getElementById('fb-audience').value;
         const topic = document.getElementById('fb-topic').value;
         const wordcount = document.getElementById('fb-wordcount').value;
-
-
-        const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
-            createButton.innerText = origButtonText;
-            errorMessageDisplay.innerText = `Error: ${error.message}`;
-            errorMessageDisplay.classList.remove('hidden');
-        });
-        this.dataStore.set('content', content);
-        location.reload()
+    
+        try {
+            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
+                createButton.innerText = origButtonText;
+                errorMessageDisplay.innerText = `Error: ${error.message}`;
+                errorMessageDisplay.classList.remove('hidden');
+            });
+    
+            this.dataStore.set('content', content);
+    
+            // Make sure that reload is called after content is set
+            location.reload();
+        } catch (error) {
+            // Handle any error that might occur during the await
+            console.error('Error creating content:', error);
+        } finally {
+            // Optionally, you can put the reload here, to make sure it reloads whether or not the content creation was successful.
+            location.reload();
+        }
     }
+    
 
-    generatePost(title, content, index) {
+    generatePost(title, content, index, contentType, contentId) {
         return `<div class="accordion-item">
         <h2 class="accordion-header" id="heading${index}">
-            <button class=${index === 0 ? "accordion-button" : "accordion-button collapsed"} type="button" data-bs-toggle="collapse"
+            <button class="accordion-button accordion-button-collapse" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapse${index}" aria-expanded="${index === 0 ? true : false}" aria-controls="collapse${index}", data-bs-parent="#accordionExample">
-                ${title}
+                ${contentType} : ${title}
             </button>
         </h2>
-        <div id="collapse${index}" class="accordion-collapse collapse show" aria-labelledby="heading${index}"
+        <div id="collapse${index}" class="${index === 0 ? "accordion-collapse collapse show" : "accordion-collapse collapse"}" aria-labelledby="heading${index}"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 ${content}
+                <div>
+                <button type="button" id="deletebutton${contentId}" class="btn btn-outline-danger btn-sm">Delete this Post</button>
+                </div>
             </div>
         </div>
     </div>`;
