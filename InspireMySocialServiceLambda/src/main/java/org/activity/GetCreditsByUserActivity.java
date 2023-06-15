@@ -25,6 +25,7 @@ public class GetCreditsByUserActivity {
     public GetCreditsByUserResult handleRequest(final GetCreditsByUserRequest getCreditsByUserRequest) {
         log.info("Recieved GetCreditRequest{}", getCreditsByUserRequest);
         System.out.println("userEmail: " +getCreditsByUserRequest.getUserEmail());
+        System.out.println("name: " +getCreditsByUserRequest.getName());
         String userEmail = getCreditsByUserRequest.getUserEmail();
         if (userEmail == null || userEmail.isEmpty()) {
             throw new UserNotFoundException("Please provide a user's email!");
@@ -50,7 +51,7 @@ public class GetCreditsByUserActivity {
                     .build();
         }
 //        User user = userDao.getUser(userEmail);
-//        // If user not in table then prepopulate with 20 credits, and reset user from network call to newUser value.
+        // If user not in table then prepopulate with 20 credits, and reset user from network call to newUser value.
 //        if (user == null){
 //            User newUser = new User();
 //            newUser.setUserEmail(getCreditsByUserRequest.getUserEmail());

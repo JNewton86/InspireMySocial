@@ -166,16 +166,17 @@ export default class InspireMySocialClient extends BindingClass {
         }
     }
 
-    async softDeleteContent(contentId) {
+    async softDeleteContent(contentId, userEmail, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
-            const response = await this.axiosClient.delete(content/{userEmail}/{contentId}, {
+            const response = await this.axiosClient.delete(`content/${userEmail}/${contentId}`, {data:{
                 contentId: contentId,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+                userId: userEmail,
+            }, headers: {
+                Authorization: `Bearer ${token}`
+            }}, 
+                
+            );
             return response.content;
         } catch (error) {
             this.handleError(error, errorCallback)
