@@ -34,7 +34,7 @@ class Dashboard extends BindingClass {
         document.getElementById('instaFormSubmit').addEventListener('click', this.instaSubmit);
         document.getElementById('linkedInFormSubmit').addEventListener('click', this.linkedInSubmit);
         document.getElementById('twitterFormSubmit').addEventListener('click', this.twitterSubmit);
-        // document.getElementById('ytShortFormSubmit').addEventListener('click', this.ytShortSubmit);
+        document.getElementById('ytShortFormSubmit').addEventListener('click', this.ytShortSubmit);
         document.getElementById('ytLongFormSubmit').addEventListener('click', this.ytLongSubmit);
     }
 
@@ -91,9 +91,10 @@ class Dashboard extends BindingClass {
         const audience = document.getElementById('insta-audience').value;
         const topic = document.getElementById('insta-topic').value;
         const wordcount = document.getElementById('insta-wordcount').value;
+        const creditCost = "-1";
     
         try {
-            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
+            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, creditCost, (error) => {
                 createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
                 errorMessageDisplay.classList.remove('hidden');
@@ -162,9 +163,10 @@ class Dashboard extends BindingClass {
         const audience = document.getElementById('Twitter-audience').value;
         const topic = document.getElementById('Twitter-topic').value;
         const wordcount = document.getElementById('Twitter-wordcount').value;
+        const creditCost = "-1";
     
         try {
-            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
+            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount,creditCost, (error) => {
                 createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
                 errorMessageDisplay.classList.remove('hidden');
@@ -196,10 +198,11 @@ class Dashboard extends BindingClass {
         const tone = document.getElementById('YTS-tone').value;
         const audience = document.getElementById('YTS-audience').value;
         const topic = document.getElementById('YTS-topic').value;
-        const wordcount = document.getElementById('YTS-wordcount').value;
+        const wordcount = "2";
+        const creditCost = "-1";
     
         try {
-            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
+            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, creditCost, (error) => {
                 createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
                 errorMessageDisplay.classList.remove('hidden');
@@ -232,9 +235,10 @@ class Dashboard extends BindingClass {
         const audience = document.getElementById('YTL-audience').value;
         const topic = document.getElementById('YTL-topic').value;
         const wordcount = document.getElementById('YTL-wordcount').value;
+        const creditCost = "-2";
     
         try {
-            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
+            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount,creditCost, (error) => {
                 createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
                 errorMessageDisplay.classList.remove('hidden');

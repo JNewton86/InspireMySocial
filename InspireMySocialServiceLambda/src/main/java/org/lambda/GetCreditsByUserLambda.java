@@ -23,6 +23,7 @@ public class GetCreditsByUserLambda extends LambdaActivityRunner<GetCreditsByUse
                         log.error(claims.get("email"));
                         return GetCreditsByUserRequest.builder()
                                 .withUserEmail(claims.get("email"))
+                                .withName(claims.get("name"))
                                 .build(); }),
 
                 (request, serviceComponent) -> serviceComponent.provideGetCreditsByUserActivity().handleRequest(request)
