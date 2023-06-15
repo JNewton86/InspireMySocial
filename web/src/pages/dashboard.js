@@ -3,9 +3,12 @@ import BindingClass from "../util/bindingClass";
 import InspireMySocialClient from '../api/inspireMySocialClient';
 
 class Dashboard extends BindingClass {
+
+    
+
     constructor() {
         super();
-
+        this.userEmail=null;
         this.bindClassMethods(['mount', 'fbSubmit','instaSubmit','linkedInSubmit','twitterSubmit','ytShortSubmit', 'ytLongSubmit','generatePost','generateAvailableCredits', 'deleteContent'], this);
         this.header = new Header(this.dataStore);
         // Create a enw datastore with an initial "empty" state.
@@ -29,6 +32,8 @@ class Dashboard extends BindingClass {
         const deleteButtons = document.querySelectorAll('.delete-button');
         deleteButtons.forEach((btn => btn.addEventListener('click', this.deleteContent)));
         const userModel = await this.client.getCreditsByUser();
+        this.userEmail=userModel.data;
+        console.log("this is the user model from mount " + JSON.stringify(userModel));
         remainingCredits.innerHTML += this.generateAvailableCredits(userModel.data.userModel.creditBalance);
         document.getElementById('fbFormSubmit').addEventListener('click', this.fbSubmit);
         document.getElementById('instaFormSubmit').addEventListener('click', this.instaSubmit);
@@ -271,6 +276,7 @@ class Dashboard extends BindingClass {
                 </span>
                 <div>
                 <button type="button" id="delete${contentId}" data-content-id="${contentId}" class="delete-button btn btn-outline-danger btn-sm">Delete this Post</button>
+                <p class="hidden error" id="error-message-delete"> </p>
                 </div>
             </div>
         </div>
@@ -309,16 +315,17 @@ class Dashboard extends BindingClass {
     // }
 
     async deleteContent(event) {
+        event.preventDefault();
         const contentId= event.target.getAttribute('data-content-id');
         console.log("Hello from delete content" + contentId);
         const errorMessageDisplay = document.getElementById('error-message-delete');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');              
-        const origButtonText = deleteButton.innerText;
-        deleteButton.innerText = 'Deleteing...';
+        event.target.innerText = 'deleting...';
         const contendIdToDelete = contentId;
+        console.log("from the deletecontent method the email is: " + JSON.stringify(this.userEmail));
         try {
-            const content = await this.client.softDeleteContent(contendIdToDelete);         
+            const content = await this.client.softDeleteContent(contendIdToDelete, this.userEmail.userModel.userId, ()=> null);         
     
             // location.reload();
         } catch (error) {
