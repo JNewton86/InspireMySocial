@@ -48,8 +48,7 @@ public class ModelConverter {
     public UserModel toUserModel(User user){
         return UserModel.builder()
                 .withUserId(user.getUserEmail())
-                .withFirstName(user.getFirstName())
-                .withLastName(user.getLastName())
+                .withName(user.getName())
                 .withCreditBalance(user.getCreditBalance())
                 .build();
     }

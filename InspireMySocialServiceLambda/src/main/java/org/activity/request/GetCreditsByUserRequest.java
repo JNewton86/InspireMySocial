@@ -8,22 +8,30 @@ public class GetCreditsByUserRequest {
 
         private final String userEmail;
 
-        public GetCreditsByUserRequest(String userEmail) {
-            this.userEmail = userEmail;
+        private final String name;
 
+        public GetCreditsByUserRequest(String userEmail, String name) {
+            this.userEmail = userEmail;
+            this.name = name;
         }
 
         public String getUserEmail() {
             return userEmail;
         }
 
-        @Override
-        public String toString() {
-            return "GetContentForUserRequest{" +
-                    "userEmail='" + userEmail + '\'' +
-                    '}';
+        public String getName() {
+            return name;
         }
-        //CHECKSTYLE:OFF:Builder
+
+    @Override
+    public String toString() {
+        return "GetCreditsByUserRequest{" +
+                "userEmail='" + userEmail + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    //CHECKSTYLE:OFF:Builder
         public static Builder builder(){
             return new Builder();
         }
@@ -31,14 +39,20 @@ public class GetCreditsByUserRequest {
         @JsonPOJOBuilder
         public static class Builder{
             private String userEmail;
+            private String name;
 
             public Builder withUserEmail(String userEmail){
                 this.userEmail = userEmail;
                 return this;
             }
 
+            public Builder withName(String name){
+                this.name = name;
+                return this;
+            }
+
             public GetCreditsByUserRequest build(){
-                return new GetCreditsByUserRequest(userEmail);
+                return new GetCreditsByUserRequest(userEmail, name);
             }
         }
 }

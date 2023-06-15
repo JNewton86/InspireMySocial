@@ -10,8 +10,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 @DynamoDBTable(tableName = "ims_users")
 public class User {
     private String userEmail;
-    private String firstName;
-    private String lastName;
+    private String name;
     private Integer creditBalance;
 
     @DynamoDBHashKey(attributeName = "userEmail")
@@ -22,21 +21,13 @@ public class User {
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-    @DynamoDBAttribute(attributeName = "firstName")
-    public String getFirstName() {
-        return firstName;
+    @DynamoDBAttribute(attributeName = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    @DynamoDBAttribute(attributeName = "lastName")
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @DynamoDBAttribute(attributeName = "creditBalance")

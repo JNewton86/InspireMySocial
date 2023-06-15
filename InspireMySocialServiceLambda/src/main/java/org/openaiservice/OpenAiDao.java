@@ -9,6 +9,7 @@ import org.utils.UtilsOpenAiAPI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import javax.inject.Inject;
 
 public class OpenAiDao {
@@ -49,26 +50,145 @@ public class OpenAiDao {
         }
 
         final List<ChatMessage> messages = new ArrayList<>();
-        final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
-                secretHolder.getFbSystemPrompt());
-        messages.add(systemMessage);
-        final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
-                createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
-                ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
-                createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
-                "he post length should be no more than " + createContentRequest.getWordCount() + " words.");
-        messages.add(userMessage);
-        ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
-                .builder()
-                .model("gpt-4-0314")
-                .messages(messages)
-                .n(1)
-                .maxTokens(500)
-                .temperature(0.9)
-                .logitBias(new HashMap<>())
-                .build();
-        ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
-        return chatCompletionResult;
+        if(Objects.equals(createContentRequest.getContentType(), "Face Book Post")) {
+            System.out.println("Streaming FB chat completion...");
+            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
+                    secretHolder.getFbSystemPrompt());
+            messages.add(systemMessage);
+            final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
+                    createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
+                    ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
+                    createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
+                    "he post length should be no more than " + createContentRequest.getWordCount() + " words.");
+            messages.add(userMessage);
+            ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                    .builder()
+                    .model("gpt-4-0314")
+                    .messages(messages)
+                    .n(1)
+                    .maxTokens(500)
+                    .temperature(0.9)
+                    .logitBias(new HashMap<>())
+                    .build();
+            ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
+            return chatCompletionResult;
+       }
+        if(Objects.equals(createContentRequest.getContentType(), "Instagram Post")) {
+            System.out.println("Streaming Insta chat completion...");
+            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
+                    secretHolder.getInstaSystemPrompt());
+            messages.add(systemMessage);
+            final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
+                    createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
+                    ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
+                    createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
+                    "he post length should be no more than " + createContentRequest.getWordCount() + " characters long.");
+            messages.add(userMessage);
+            ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                    .builder()
+                    .model("gpt-4-0314")
+                    .messages(messages)
+                    .n(1)
+                    .maxTokens(500)
+                    .temperature(0.9)
+                    .logitBias(new HashMap<>())
+                    .build();
+            ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
+            return chatCompletionResult;
+        }
+        if(Objects.equals(createContentRequest.getContentType(), "Twitter Post")) {
+            System.out.println("Streaming Twitter chat completion...");
+            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
+                    secretHolder.getTwitterSystemPrompt());
+            messages.add(systemMessage);
+            final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
+                    createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
+                    ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
+                    createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
+                    "he post length should be no more than 280 characters long.");
+            messages.add(userMessage);
+            ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                    .builder()
+                    .model("gpt-4-0314")
+                    .messages(messages)
+                    .n(1)
+                    .maxTokens(250)
+                    .temperature(0.9)
+                    .logitBias(new HashMap<>())
+                    .build();
+            ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
+            return chatCompletionResult;
+        }
+        if(Objects.equals(createContentRequest.getContentType(), "YouTube Short Script")) {
+            System.out.println("Streaming YT Short chat completion...");
+            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
+                    secretHolder.getYtShortSystemPrompt());
+            messages.add(systemMessage);
+            final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
+                    createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
+                    ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
+                    createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
+                    "he post length should be no more than " + createContentRequest.getWordCount() + " words long.");
+            messages.add(userMessage);
+            ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                    .builder()
+                    .model("gpt-4-0314")
+                    .messages(messages)
+                    .n(1)
+                    .maxTokens(250)
+                    .temperature(0.9)
+                    .logitBias(new HashMap<>())
+                    .build();
+            ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
+            return chatCompletionResult;
+        }
+        if(Objects.equals(createContentRequest.getContentType(), "YouTube Long Script")) {
+            System.out.println("Streaming YT Long chat completion...");
+            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
+                    secretHolder.getYtLongSystemPrompt());
+            messages.add(systemMessage);
+            final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
+                    createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
+                    ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
+                    createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
+                    "he post length should be no more than " + createContentRequest.getWordCount() + " minutes long.");
+            messages.add(userMessage);
+            ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                    .builder()
+                    .model("gpt-4-0314")
+                    .messages(messages)
+                    .n(1)
+                    .maxTokens(2500)
+                    .temperature(0.9)
+                    .logitBias(new HashMap<>())
+                    .build();
+            ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
+            return chatCompletionResult;
+        }
+        if(Objects.equals(createContentRequest.getContentType(), "LinkedIn Post")) {
+            System.out.println("Streaming LinkedIn chat completion...");
+            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
+                    secretHolder.getLinkedInSystemPrompt());
+            messages.add(systemMessage);
+            final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
+                    createContentRequest.getContentType() + "about the" + createContentRequest.getTopic() +
+                    ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
+                    createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
+                    "he post length should be no more than " + createContentRequest.getWordCount() + " words long.");
+            messages.add(userMessage);
+            ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                    .builder()
+                    .model("gpt-4-0314")
+                    .messages(messages)
+                    .n(1)
+                    .maxTokens(1250)
+                    .temperature(0.9)
+                    .logitBias(new HashMap<>())
+                    .build();
+            ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
+            return chatCompletionResult;
+        }
+        return null;
     }
 
     //TODO Add logic to check for userId in table already, else add.

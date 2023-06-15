@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+
+<head>
+    <script type="text/javascript" src="assets/dashboard.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inspire My Social</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+    <style>
+        section {
+            padding: 60px 0;
+        }
+    </style>
+</head>
+
+<header class="header bg-secondary" id="header">
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-light pt-2 pb-2 navbar-dark bg-secondary">
+        <div class="container-xxl">
+            <!-- navbar brand / title -->
+            <a class="navbar-brand" href="index.html">
+                <img src="images/ims-header.png" class="img-fluid" alt="ims-header">
+            </a>
+            <!-- toggle button for mobile nav -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
+                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav" id="header-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#topics">Book a Tour</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reviews">Packages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+
+    <!-- Contents left half old searches, right half options to create new content -->
+
+    <section id="dashboard-contents">
+        <div class="container-lg">
+            <div class="display-4 fw-bold text-center text-primary m- pb-5">Your Inspire My Social Dashboard!</div>
+            <div class="row">
+                <div class="col-sm-4 col-lg-8 rounded border border-5">
+                    <div class="display-5 text-muted text-center">Your Previously Created Content</div>
+                    <div class="accordion" id="accordionExample">
+    
+
+                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                      </nav>
+                </div>
+                <div class="col-sm-4 col-lg-4 rounded border border-5 ">
+                    <div class="d-grid gap-2">
+                        <div class="display-5 text-center text-muted">Create Content</div>
+                        <div id="remainingCredits"></div>
+
+                        <!-- *********** FaceBook Post Button and data Entry Form *********** -->
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRightFaceBook" aria-controls="offcanvasRight">Create FaceBook
+                            Post (1 credit)</button>
+
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightFaceBook"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Create your FaceBook Post</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <form class="needs-validation" novalidate>
+                                    <p class="hidden error" id="error-message-fb"> </p>
+                                    <select class="form-select mb-4" id="fb-tone" aria-label="Default select example">
+                                        <option selected>Select Tone</option>
+                                        <option value="Autoritative">Autoritative</option>
+                                        <option value="Conversational">Conversational</option>
+                                        <option value="Descriptive">Descriptive</option>
+                                        <option value="Emotional">Emotional</option>
+                                        <option value="Enthusiatstic">Enthusiatstic</option>
+                                        <option value="Explanatory">Explanatory</option>
+                                        <option value="Formal">Formal</option>
+                                        <option value="Humerous">Humerous</option>
+                                        <option value="Informal">Informal</option>
+                                        <option value="Informative">Informative</option>
+                                        <option value="Inspirational">Inspirational</option>
+                                        <option value="Nostalgic">Nostalgic</option>
+                                        <option value="Objective">Objective</option>
+                                        <option value="Persuasive">Persuasive</option>
+                                        <option value="Satirical">Satirical</option>
+                                    </select>
+                                    <select class="form-select mb-4" id="fb-audience"
+                                        aria-label="Default select example">
+                                        <option selected>Select Audience</option>
+                                        <option value="Advanced Users">Advanced Users</option>
+                                        <option value="Buisniness Executives">Buisniness Executives</option>
+                                        <option value="Entraepeneurs">Entraepeneurs</option>
+                                        <option value="General Public">General Public</option>
+                                        <option value="Investors">Investors</option>
+                                        <option value="Mortgage Borrowers">Mortgage Borrowers</option>
+                                        <option value="Mortgage Professionals">Mortgage Professionals</option>
+                                        <option value="Novice Users">Novice Users</option>
+                                        <option value="Parents">Parents</option>
+                                        <option value="Professionals">Professionals</option>
+                                        <option value="Senior Citizens">Senior Citizens</option>
+                                    </select>
+                                    <div class="mb-3">
+                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your FaceBook
+                                            Post Topic</label>
+                                        <textarea class="form-control" id="fb-topic" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Word
+                                            Count</label>
+                                        <input type="number" class="form" id="fb-wordcount" />
+                                    </div>
+                                    <button class="btn btn-primary" type="submit" id="fbFormSubmit">Create Post</button>
+                            </div>
+                            </form>
+                        </div>
+
+                        <!-- *********** Insta Post Button and data Entry Form *********** -->
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRightInsta" aria-controls="offcanvasRight">Create Instagram
+                            Post (1 credit)</button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightInsta"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Create your Create Instagram
+                                    Post</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <form class="needs-validation" novalidate>
+                                    <p class="hidden error" id="error-message-insta"> </p>
+                                    <select class="form-select mb-4" id="insta-tone"
+                                        aria-label="Default select example">
+                                        <option selected>Select Tone</option>
+                                        <option value="Autoritative">Autoritative</option>
+                                        <option value="Conversational">Conversational</option>
+                                        <option value="Descriptive">Descriptive</option>
+                                        <option value="Emotional">Emotional</option>
+                                        <option value="Enthusiatstic">Enthusiatstic</option>
+                                        <option value="Explanatory">Explanatory</option>
+                                        <option value="Formal">Formal</option>
+                                        <option value="Humerous">Humerous</option>
+                                        <option value="Informal">Informal</option>
+                                        <option value="Informative">Informative</option>
+                                        <option value="Inspirational">Inspirational</option>
+                                        <option value="Nostalgic">Nostalgic</option>
+                                        <option value="Objective">Objective</option>
+                                        <option value="Persuasive">Persuasive</option>
+                                        <option value="Satirical">Satirical</option>
+                                    </select>
+                                    <select class="form-select mb-4" id="insta-audience"
+                                        aria-label="Default select example">
+                                        <option selected>Select Audience</option>
+                                        <option value="Advanced Users">Advanced Users</option>
+                                        <option value="Buisniness Executives">Buisniness Executives</option>
+                                        <option value="Entraepeneurs">Entraepeneurs</option>
+                                        <option value="General Public">General Public</option>
+                                        <option value="Investors">Investors</option>
+                                        <option value="Mortgage Borrowers">Mortgage Borrowers</option>
+                                        <option value="Mortgage Professionals">Mortgage Professionals</option>
+                                        <option value="Novice Users">Novice Users</option>
+                                        <option value="Parents">Parents</option>
+                                        <option value="Professionals">Professionals</option>
+                                        <option value="Senior Citizens">Senior Citizens</option>
+                                    </select>
+                                    <div class="mb-3">
+                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your Insta
+                                            Post
+                                            Topic</label>
+                                        <textarea class="form-control" id="insta-topic" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Character
+                                            Count</label>
+                                        <input type="number" class="form" id="insta-wordcount"/>
+                                    </div>
+                                    <button class="btn btn-primary" id="instaFormSubmit" type="submit">Create Post</button>
+                            </div>
+                            </form>
+                        </div>
+
+                        <!-- *********** LinkedIn Post Button and data Entry Form *********** -->
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRightLinkedIn" aria-controls="offcanvasRight">Create LinkedIn
+                            Post (1 credit)</button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightLinkedIn"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Create your Create LinkedIn
+                                    Post</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <form class="needs-validation" novalidate>
+                                    <p class="hidden error" id="error-message-linkedIn"> </p>
+                                    <select class="form-select mb-4" id="linkedin-tone"
+                                        aria-label="Default select example">
+                                        <option selected>Select Tone</option>
+                                        <option value="1">Autoritative</option>
+                                        <option value="2">Conversational</option>
+                                        <option value="3">Descriptive</option>
+                                        <option value="4">Emotional</option>
+                                        <option value="5">Enthusiatstic</option>
+                                        <option value="6">Explanatory</option>
+                                        <option value="7">Formal</option>
+                                        <option value="8">Humerous</option>
+                                        <option value="9">Informal</option>
+                                        <option value="10">Informative</option>
+                                        <option value="11">Inspirational</option>
+                                        <option value="12">Nostalgic</option>
+                                        <option value="13">Objective</option>
+                                        <option value="14">Persuasive</option>
+                                        <option value="15">Satirical</option>
+                                    </select>
+                                    <select class="form-select mb-4" id="linkedin-audience"
+                                        aria-label="Default select example">
+                                        <option selected>Select Audience</option>
+                                        <option value="1">Advanced Users</option>
+                                        <option value="2">Buisniness Executives</option>
+                                        <option value="3">Entraepeneurs</option>
+                                        <option value="4">General Public</option>
+                                        <option value="5">Investors</option>
+                                        <option value="6">Mortgage Borrowers</option>
+                                        <option value="7">Mortgage Professionals</option>
+                                        <option value="8">Novice Users</option>
+                                        <option value="9">Parents</option>
+                                        <option value="10">Professionals</option>
+                                        <option value="11">Senior Citizens</option>
+                                    </select>
+                                    <div class="mb-3">
+                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your LinkedIn
+                                            Post
+                                            Topic</label>
+                                        <textarea class="form-control" id="linkedin-topic" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Character
+                                            Count</label>
+                                        <input type="number" class="form" id="linkedin-wordcount"/>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit" id="linkedInFormSubmit">Create Post</button>
+                            </div>
+                            </form>
+                        </div>
+
+                        <!-- *********** Twitter Post Button and data Entry Form *********** -->
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRightTwitter" aria-controls="offcanvasRight">Create Twitter
+                            Tweet (1 credit)</button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightTwitter"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Create your Tweet</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <form class="needs-validation" novalidate>
+                                    <p class="hidden error" id="error-message-twitter"> </p>
+                                    <select class="form-select mb-4" id="Twitter-tone"
+                                        aria-label="Default select example">
+                                        <option selected>Select Tone</option>
+                                        <option value="1">Autoritative</option>
+                                        <option value="2">Conversational</option>
+                                        <option value="3">Descriptive</option>
+                                        <option value="4">Emotional</option>
+                                        <option value="5">Enthusiatstic</option>
+                                        <option value="6">Explanatory</option>
+                                        <option value="7">Formal</option>
+                                        <option value="8">Humerous</option>
+                                        <option value="9">Informal</option>
+                                        <option value="10">Informative</option>
+                                        <option value="11">Inspirational</option>
+                                        <option value="12">Nostalgic</option>
+                                        <option value="13">Objective</option>
+                                        <option value="14">Persuasive</option>
+                                        <option value="15">Satirical</option>
+                                    </select>
+                                    <select class="form-select mb-4" id="Twitter-audience"
+                                        aria-label="Default select example">
+                                        <option selected>Select Audience</option>
+                                        <option value="1">Advanced Users</option>
+                                        <option value="2">Buisniness Executives</option>
+                                        <option value="3">Entraepeneurs</option>
+                                        <option value="4">General Public</option>
+                                        <option value="5">Investors</option>
+                                        <option value="6">Mortgage Borrowers</option>
+                                        <option value="7">Mortgage Professionals</option>
+                                        <option value="8">Novice Users</option>
+                                        <option value="9">Parents</option>
+                                        <option value="10">Professionals</option>
+                                        <option value="11">Senior Citizens</option>
+                                    </select>
+                                    <div class="mb-3">
+                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your Tweet
+                                            Topic</label>
+                                        <textarea class="form-control" id="Twitter-topic" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Character
+                                            Count</label>
+                                        <input type="number" class="form" id="Twitter-wordcount"/>
+                                    </div>
+                                    <button class="btn btn-primary" id="twitterFormSubmit"type="submit">Create Post</button>
+                            </div>
+                            </form>
+                        </div>
+
+                        <!-- *********** YT Short Post Button and data Entry Form *********** -->
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRightYTS" aria-controls="offcanvasRight">Create YT Short
+                            Script (1 credit)</button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightYTS"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Create your Tweet</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <form class="needs-validation" novalidate>
+                                    <p class="hidden error" id="error-message-ytShortSubmit"> </p>
+                                    <select class="form-select mb-4" id="YTS-tone" aria-label="Default select example">
+                                        <option selected>Select Tone</option>
+                                        <option value="1">Autoritative</option>
+                                        <option value="2">Conversational</option>
+                                        <option value="3">Descriptive</option>
+                                        <option value="4">Emotional</option>
+                                        <option value="5">Enthusiatstic</option>
+                                        <option value="6">Explanatory</option>
+                                        <option value="7">Formal</option>
+                                        <option value="8">Humerous</option>
+                                        <option value="9">Informal</option>
+                                        <option value="10">Informative</option>
+                                        <option value="11">Inspirational</option>
+                                        <option value="12">Nostalgic</option>
+                                        <option value="13">Objective</option>
+                                        <option value="14">Persuasive</option>
+                                        <option value="15">Satirical</option>
+                                    </select>
+                                    <select class="form-select mb-4" id="YTS-audience"
+                                        aria-label="Default select example">
+                                        <option selected>Select Audience</option>
+                                        <option value="1">Advanced Users</option>
+                                        <option value="2">Buisniness Executives</option>
+                                        <option value="3">Entraepeneurs</option>
+                                        <option value="4">General Public</option>
+                                        <option value="5">Investors</option>
+                                        <option value="6">Mortgage Borrowers</option>
+                                        <option value="7">Mortgage Professionals</option>
+                                        <option value="8">Novice Users</option>
+                                        <option value="9">Parents</option>
+                                        <option value="10">Professionals</option>
+                                        <option value="11">Senior Citizens</option>
+                                    </select>
+                                    <div class="mb-3">
+                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your YouTube
+                                            Short Topic</label>
+                                        <textarea class="form-control" id="YTS-topic" rows="3"></textarea>
+                                    </div>
+                                    <!-- YouTube Short prompt limits length -->
+                                    <!-- <div class="mb-3">
+                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Character
+                                            Count</label>
+                                        <input type="number" class="form" id="YTS-wordcount"><input>
+                                    </div> -->
+                                    <button class="btn btn-primary" id="ytShortFormSubmit" type="submit">Create Post</button>
+                            </div>
+                            </form>
+                        </div>
+
+
+                        <!-- *********** YT Long Script Button and data Entry Form *********** -->
+                        <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRightYTL" aria-controls="offcanvasRight">Create YT Long
+                            Script (2 credit)</button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightYTL"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Create your YouTube Long Script</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <form class="needs-validation" novalidate>
+                                    <p class="hidden error" id="error-message-ytLongSubmit"> </p>
+                                    <select class="form-select mb-4" id="YTL-tone" aria-label="Default select example">
+                                        <option selected>Select Tone</option>
+                                        <option value="1">Autoritative</option>
+                                        <option value="2">Conversational</option>
+                                        <option value="3">Descriptive</option>
+                                        <option value="4">Emotional</option>
+                                        <option value="5">Enthusiatstic</option>
+                                        <option value="6">Explanatory</option>
+                                        <option value="7">Formal</option>
+                                        <option value="8">Humerous</option>
+                                        <option value="9">Informal</option>
+                                        <option value="10">Informative</option>
+                                        <option value="11">Inspirational</option>
+                                        <option value="12">Nostalgic</option>
+                                        <option value="13">Objective</option>
+                                        <option value="14">Persuasive</option>
+                                        <option value="15">Satirical</option>
+                                    </select>
+                                    <select class="form-select mb-4" id="YTL-audience"
+                                        aria-label="Default select example">
+                                        <option selected>Select Audience</option>
+                                        <option value="1">Advanced Users</option>
+                                        <option value="2">Buisniness Executives</option>
+                                        <option value="3">Entraepeneurs</option>
+                                        <option value="4">General Public</option>
+                                        <option value="5">Investors</option>
+                                        <option value="6">Mortgage Borrowers</option>
+                                        <option value="7">Mortgage Professionals</option>
+                                        <option value="8">Novice Users</option>
+                                        <option value="9">Parents</option>
+                                        <option value="10">Professionals</option>
+                                        <option value="11">Senior Citizens</option>
+                                    </select>
+                                    <div class="mb-3">
+                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your YouTube
+                                            Video Topic</label>
+                                        <textarea class="form-control" id="YTL-topic" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Video Length in
+                                            Minutes
+                                        </label>
+                                        <input type="number" class="form" id="YTL-wordcount"/>
+                                    </div>
+                                    <button class="btn btn-primary" id="ytLongFormSubmit" type="submit">Create Post</button>
+                            </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

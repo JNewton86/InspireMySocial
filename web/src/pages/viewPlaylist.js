@@ -1,4 +1,4 @@
-import MusicPlaylistClient from '../api/musicPlaylistClient';
+import InspireMySocialClient from '../api/inspireMySocialClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
@@ -108,7 +108,7 @@ class ViewPlaylist extends BindingClass {
 
         const songList = await this.client.addSongToPlaylist(playlistId, asin, trackNumber, (error) => {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
-            errorMessageDisplay.classList.remove('hidden');           
+            errorMessageDisplay.classList.remove('hidden');
         });
 
         this.dataStore.set('songs', songList);

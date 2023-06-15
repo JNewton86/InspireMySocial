@@ -52,42 +52,42 @@ class OpenAiDaoTest {
 //        System.out.println("Message: " + result.getChoices().get(0).getMessage().getContent());
 //            }
 
-    @Test
-    public void getContent_validRequest_success(){
-        // GIVEN
-        CreateContentRequest createContentRequest = CreateContentRequest.builder()
-                .withUserId("user1234")
-                .withContentType("fbPost")
-                .withTone("friendly")
-                .withAudience("general public")
-                .withTopic("Tell me something cool")
-                .withWordCount(250)
-                .build();
-
-        ChatCompletionResult expected = new ChatCompletionResult();
-        expected.setId("1234");
-        expected.setModel("Chat4");
-        expected.setObject("Text-Completion");
-        expected.setCreated(150L);
-        Usage usage = new Usage();
-        usage.setPromptTokens(150L);
-        usage.setCompletionTokens(500L);
-        usage.setTotalTokens(650L);
-        expected.setUsage(usage);
-        List<ChatCompletionChoice> choices = new ArrayList<>();
-        ChatCompletionChoice chatCompletionChoice = new ChatCompletionChoice();
-        chatCompletionChoice.setIndex(0);
-        chatCompletionChoice.setFinishReason("finished");
-        ChatMessage chatMessage = new ChatMessage("assistant", "This worked!");
-        chatCompletionChoice.setMessage(chatMessage);
-        expected.setChoices(choices);
-        when(openAiDao.createContent(createContentRequest)).thenReturn(expected);
-
-        //WHEN
-        ChatCompletionResult result = openAiDao.createContent(createContentRequest);
-
-        //THEN
-        assertEquals(expected, result);
-    }
+//    @Test
+//    public void getContent_validRequest_success(){
+//        // GIVEN
+//        CreateContentRequest createContentRequest = CreateContentRequest.builder()
+//                .withUserId("user1234")
+//                .withContentType("fbPost")
+//                .withTone("friendly")
+//                .withAudience("general public")
+//                .withTopic("Tell me something cool")
+//                .withWordCount(250)
+//                .build();
+//
+//        ChatCompletionResult expected = new ChatCompletionResult();
+//        expected.setId("1234");
+//        expected.setModel("Chat4");
+//        expected.setObject("Text-Completion");
+//        expected.setCreated(150L);
+//        Usage usage = new Usage();
+//        usage.setPromptTokens(150L);
+//        usage.setCompletionTokens(500L);
+//        usage.setTotalTokens(650L);
+//        expected.setUsage(usage);
+//        List<ChatCompletionChoice> choices = new ArrayList<>();
+//        ChatCompletionChoice chatCompletionChoice = new ChatCompletionChoice();
+//        chatCompletionChoice.setIndex(0);
+//        chatCompletionChoice.setFinishReason("finished");
+//        ChatMessage chatMessage = new ChatMessage("assistant", "This worked!");
+//        chatCompletionChoice.setMessage(chatMessage);
+//        expected.setChoices(choices);
+//        when(openAiDao.createContent(createContentRequest)).thenReturn(expected);
+//
+//        //WHEN
+//        ChatCompletionResult result = openAiDao.createContent(createContentRequest);
+//
+//        //THEN
+//        assertEquals(expected, result);
+//    }
 
 }

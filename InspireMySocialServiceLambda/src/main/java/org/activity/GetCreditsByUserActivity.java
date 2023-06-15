@@ -29,10 +29,43 @@ public class GetCreditsByUserActivity {
         if (userEmail == null || userEmail.isEmpty()) {
             throw new UserNotFoundException("Please provide a user's email!");
         }
-        User user = userDao.getUser(userEmail);
-        UserModel userModel = new ModelConverter().toUserModel(user);
-        return GetCreditsByUserResult.builder()
-                .withUserModel(userModel)
-                .build();
+        try {
+            User user = userDao.getUser(userEmail);
+            System.out.println("user from dao returned: " + user);
+            UserModel userModel = new ModelConverter().toUserModel(user);
+            return GetCreditsByUserResult.builder()
+                    .withUserModel(userModel)
+                    .build();
+        }
+        catch (UserNotFoundException e){
+            User newUser = new User();
+            newUser.setUserEmail(getCreditsByUserRequest.getUserEmail());
+            newUser.setCreditBalance(20);
+            newUser.setName(getCreditsByUserRequest.getName());
+            User user = userDao.saveUser(newUser);
+            System.out.println("new user created and saved: " + newUser);
+            UserModel userModel = new ModelConverter().toUserModel(user);
+            return GetCreditsByUserResult.builder()
+                    .withUserModel(userModel)
+                    .build();
+        }
+//        User user = userDao.getUser(userEmail);
+//        // If user not in table then prepopulate with 20 credits, and reset user from network call to newUser value.
+//        if (user == null){
+//            User newUser = new User();
+//            newUser.setUserEmail(getCreditsByUserRequest.getUserEmail());
+//            newUser.setCreditBalance(20);
+//            newUser.setName(getCreditsByUserRequest.getName());
+//            userDao.saveUser(newUser);
+//            System.out.println("new user created and saved: " + newUser);
+//            UserModel userModel = new ModelConverter().toUserModel(newUser);
+//            return GetCreditsByUserResult.builder()
+//                    .withUserModel(userModel)
+//                    .build();
+//        }
+//        UserModel userModel = new ModelConverter().toUserModel(user);
+//        return GetCreditsByUserResult.builder()
+//                .withUserModel(userModel)
+//                .build();
     }
 }

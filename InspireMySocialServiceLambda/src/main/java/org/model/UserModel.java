@@ -5,29 +5,25 @@ import java.util.Objects;
 public class UserModel {
 
     private final String userId;
-    private final String firstName;
-    private final String lastName;
+    private final String name;
+
     private final Integer creditBalance;
 
 
-    public UserModel(String userId, String firstName, String lastName, Integer creditBalance) {
+    public UserModel(String userId, String name, Integer creditBalance) {
         this.userId = userId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.creditBalance = creditBalance;
+        this.name = name;
+       this.creditBalance = creditBalance;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
 
     public Integer getCreditBalance() {
         return creditBalance;
@@ -38,12 +34,12 @@ public class UserModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserModel userModel = (UserModel) o;
-        return Objects.equals(userId, userModel.userId) && Objects.equals(firstName, userModel.firstName) && Objects.equals(lastName, userModel.lastName) && Objects.equals(creditBalance, userModel.creditBalance);
+        return Objects.equals(userId, userModel.userId) && Objects.equals(name, userModel.name) && Objects.equals(creditBalance, userModel.creditBalance);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, firstName, lastName, creditBalance);
+        return Objects.hash(userId, name, creditBalance);
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -53,29 +49,26 @@ public class UserModel {
 
     public static class Builder{
         private String userId;
-        private String firstName;
-        private String lastName;
+        private String name;
+
         private Integer creditBalance;
 
         public  Builder withUserId(String userId) {
             this.userId = userId;
             return this;
         }
-        public  Builder withFirstName(String firstName) {
-            this.firstName = firstName;
+        public  Builder withName(String name) {
+            this.name = name;
             return this;
         }
-        public  Builder withLastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
+
         public  Builder withCreditBalance(Integer creditBalance) {
             this.creditBalance = creditBalance;
             return this;
         }
 
         public UserModel build(){
-            return new UserModel(userId,firstName,lastName,creditBalance);
+            return new UserModel(userId,name,creditBalance);
         }
 
     }

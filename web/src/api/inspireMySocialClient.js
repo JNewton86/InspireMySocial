@@ -10,12 +10,13 @@ import Authenticator from "./authenticator";
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Mix-ins
  * https://javascript.info/mixins
   */
-export default class MusicPlaylistClient extends BindingClass {
+export default class InspireMySocialClient extends BindingClass {
 
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist',
+        'createContent', 'softDeleteContent', 'getCreditsByUser'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -86,6 +87,19 @@ export default class MusicPlaylistClient extends BindingClass {
         }
     }
 
+    async getCreditsByUser(errorCallback) {
+        try { 
+            const token = await this.getTokenOrThrow("Only authenticated users can access credit balance.");
+            const response = await this.axiosClient.get(`users`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
     /**
      * Get the songs on a given playlist by the playlist's identifier.
      * @param id Unique identifier for a playlist
@@ -124,6 +138,61 @@ export default class MusicPlaylistClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
+
+    async createContent(contentType, tone, audience, topic, wordCount, creditUsage, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
+            const response = await this.axiosClient.post(`content`, {
+                contentType: contentType,
+                tone: tone,
+                audience: audience,
+                topic: topic,
+                wordCount: wordCount
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const credtCost = await this.axiosClient.put('users/update',{
+                creditUsage: creditUsage
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                } 
+            });
+            return response.content;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async softDeleteContent(contentId) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
+            const response = await this.axiosClient.delete(content/{userEmail}/{contentId}, {
+                contentId: contentId,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.content;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+
+    async getContentForUser(userEmail) {
+        try {
+            const response = await this.axiosClient.get(`content/${userEmail}`);
+            return response.data.contentList;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+
 
     /**
      * Add a song to a playlist.
