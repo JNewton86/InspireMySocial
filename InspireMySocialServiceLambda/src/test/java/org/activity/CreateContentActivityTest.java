@@ -1,6 +1,5 @@
 package org.activity;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.theokanning.openai.Usage;
 import com.theokanning.openai.completion.chat.ChatCompletionChoice;
 import com.theokanning.openai.completion.chat.ChatCompletionResult;
@@ -12,11 +11,9 @@ import org.dynamodb.ContentDao;
 import org.dynamodb.models.Content;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.metrics.MetricsPublisher;
 import org.mockito.Mock;
 import org.model.ContentModel;
 import org.openaiservice.OpenAiDao;
-import org.openaiservice.OpenAiService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +32,7 @@ class CreateContentActivityTest {
     @BeforeEach
     public void setup(){
         initMocks(this);
-        createContentActivity = new CreateContentActivity(contentDao,openAiDao);
+        createContentActivity = new CreateContentActivity(contentDao,openAiDao, userDao);
     }
     @Test
     void handleRequest_validRequest_results() {

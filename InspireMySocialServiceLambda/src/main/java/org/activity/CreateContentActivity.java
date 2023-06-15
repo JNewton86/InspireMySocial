@@ -7,7 +7,10 @@ import org.activity.result.CreateContentResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dynamodb.ContentDao;
+import org.dynamodb.UserDao;
 import org.dynamodb.models.Content;
+import org.dynamodb.models.User;
+import org.exception.InsufficientCreditsException;
 import org.model.ContentModel;
 import org.openaiservice.OpenAiDao;
 
@@ -22,17 +25,20 @@ public class CreateContentActivity {
     private final Logger log = LogManager.getLogger();
     private final ContentDao contentDao;
     private final OpenAiDao openAiDao;
+    private final UserDao userDao;
 
     /**
      * Constructor for the CreateContentActivity Class.
      *
      * @param contentDao a data acccess only class that access DynamoDBTable storing content
      * @param openAiDao  a data access only class that leverages a community service for accessing OpenAI's API
+     * @param userDao
      */
     @Inject
-    public CreateContentActivity(ContentDao contentDao, OpenAiDao openAiDao) {
+    public CreateContentActivity(ContentDao contentDao, OpenAiDao openAiDao, UserDao userDao) {
         this.contentDao = contentDao;
         this.openAiDao = openAiDao;
+        this.userDao = userDao;
     }
 
     /**
@@ -49,7 +55,10 @@ public class CreateContentActivity {
 
         // log.
         log.info("Receieved CreateContent Request {}", createContentRequest);
-
+        User user = userDao.getUser(createContentRequest.getUserId());
+        if(user.getCreditBalance() == 0){
+            throw new InsufficientCreditsException("Insufficient Credits Remaining");
+        }
         // Call to openAiDao to create content.
         try {
             ChatCompletionResult post = openAiDao.createContent(createContentRequest);

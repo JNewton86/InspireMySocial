@@ -126,9 +126,10 @@ class Dashboard extends BindingClass {
         const audience = document.getElementById('linkedin-audience').value;
         const topic = document.getElementById('linkedin-topic').value;
         const wordcount = document.getElementById('linkedin-wordcount').value;
+        const creditCost = "-1";
     
         try {
-            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
+            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, creditCost, (error) => {
                 createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
                 errorMessageDisplay.classList.remove('hidden');
@@ -242,7 +243,7 @@ class Dashboard extends BindingClass {
             this.dataStore.set('content', content);
     
             // Make sure that reload is called after content is set
-            // location.reload();
+            location.reload();
         } catch (error) {
                        console.error('Error creating content:', error);
         } finally {

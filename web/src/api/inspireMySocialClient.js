@@ -139,7 +139,7 @@ export default class InspireMySocialClient extends BindingClass {
         }
     }
 
-    async createContent(contentType, tone, audience, topic, wordCount, errorCallback) {
+    async createContent(contentType, tone, audience, topic, wordCount, creditUsage, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
             const response = await this.axiosClient.post(`content`, {
@@ -152,6 +152,13 @@ export default class InspireMySocialClient extends BindingClass {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
+            });
+            const credtCost = await this.axiosClient.put('users/update',{
+                creditUsage: creditUsage
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                } 
             });
             return response.content;
         } catch (error) {
