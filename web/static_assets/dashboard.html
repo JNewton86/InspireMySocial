@@ -91,7 +91,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <form class="needs-validation" novalidate>
+                                <form class="needs-validation">
                                     <p class="hidden error" id="error-message-fb"> </p>
                                     <select class="form-select mb-4" id="fb-tone" required aria-label="Default select example">
                                         <option selected>Select Tone</option>
@@ -111,10 +111,7 @@
                                         <option value="Persuasive">Persuasive</option>
                                         <option value="Satirical">Satirical</option>
                                     </select>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please Pick a tone.</div>
-                                    <select class="form-select mb-4" id="fb-audience"
+                                    <select class="form-select mb-4" id="fb-audience" required
                                         aria-label="Default select example">
                                         <option selected>Select Audience</option>
                                         <option value="Advanced Users">Advanced Users</option>
@@ -132,13 +129,13 @@
                                     <div class="mb-3">
                                         <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your FaceBook
                                             Post Topic</label>
-                                        <textarea class="form-control" id="fb-topic" rows="3"></textarea>
+                                        <textarea class="form-control" id="fb-topic" required rows="3"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="mb-3 fb-wordcount" class="form-label">Approximate Word
                                             Count</label>
-                                        <input type="number" class="form" id="fb-wordcount" />
-                                    </div>
+                                        <input type="number" class="form"required id="fb-wordcount"/> 
+                                    </div>                                  
                                     <button class="btn btn-primary" type="submit" id="fbFormSubmit">Create Post</button>
                             </div>
                             </form>
@@ -227,36 +224,36 @@
                                     <select class="form-select mb-4" id="linkedin-tone"
                                         aria-label="Default select example">
                                         <option selected>Select Tone</option>
-                                        <option value="1">Autoritative</option>
-                                        <option value="2">Conversational</option>
-                                        <option value="3">Descriptive</option>
-                                        <option value="4">Emotional</option>
-                                        <option value="5">Enthusiatstic</option>
-                                        <option value="6">Explanatory</option>
-                                        <option value="7">Formal</option>
-                                        <option value="8">Humerous</option>
-                                        <option value="9">Informal</option>
-                                        <option value="10">Informative</option>
-                                        <option value="11">Inspirational</option>
-                                        <option value="12">Nostalgic</option>
-                                        <option value="13">Objective</option>
-                                        <option value="14">Persuasive</option>
-                                        <option value="15">Satirical</option>
+                                        <option value="Autoritative">Autoritative</option>
+                                        <option value="Conversational">Conversational</option>
+                                        <option value="Descriptive">Descriptive</option>
+                                        <option value="Emotional">Emotional</option>
+                                        <option value="Enthusiatstic">Enthusiatstic</option>
+                                        <option value="Explanatory">Explanatory</option>
+                                        <option value="Formal">Formal</option>
+                                        <option value="Humerous">Humerous</option>
+                                        <option value="Informal">Informal</option>
+                                        <option value="Informative">Informative</option>
+                                        <option value="Inspirational">Inspirational</option>
+                                        <option value="Nostalgic">Nostalgic</option>
+                                        <option value="Objective">Objective</option>
+                                        <option value="Persuasive">Persuasive</option>
+                                        <option value="Satirical">Satirical</option>
                                     </select>
                                     <select class="form-select mb-4" id="linkedin-audience"
                                         aria-label="Default select example">
                                         <option selected>Select Audience</option>
-                                        <option value="1">Advanced Users</option>
-                                        <option value="2">Buisniness Executives</option>
-                                        <option value="3">Entraepeneurs</option>
-                                        <option value="4">General Public</option>
-                                        <option value="5">Investors</option>
-                                        <option value="6">Mortgage Borrowers</option>
-                                        <option value="7">Mortgage Professionals</option>
-                                        <option value="8">Novice Users</option>
-                                        <option value="9">Parents</option>
-                                        <option value="10">Professionals</option>
-                                        <option value="11">Senior Citizens</option>
+                                        <option value="Advanced Users">Advanced Users</option>
+                                        <option value="Buisniness Executives">Buisniness Executives</option>
+                                        <option value="Entraepeneurs">Entraepeneurs</option>
+                                        <option value="General Public">General Public</option>
+                                        <option value="Investors">Investors</option>
+                                        <option value="Mortgage Borrowers">Mortgage Borrowers</option>
+                                        <option value="Mortgage Professionals">Mortgage Professionals</option>
+                                        <option value="Novice Users">Novice Users</option>
+                                        <option value="Parents">Parents</option>
+                                        <option value="Professionals">Professionals</option>
+                                        <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
                                     <div class="mb-3">
                                         <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your LinkedIn
@@ -291,36 +288,36 @@
                                     <select class="form-select mb-4" id="Twitter-tone"
                                         aria-label="Default select example">
                                         <option selected>Select Tone</option>
-                                        <option value="1">Autoritative</option>
-                                        <option value="2">Conversational</option>
-                                        <option value="3">Descriptive</option>
-                                        <option value="4">Emotional</option>
-                                        <option value="5">Enthusiatstic</option>
-                                        <option value="6">Explanatory</option>
-                                        <option value="7">Formal</option>
-                                        <option value="8">Humerous</option>
-                                        <option value="9">Informal</option>
-                                        <option value="10">Informative</option>
-                                        <option value="11">Inspirational</option>
-                                        <option value="12">Nostalgic</option>
-                                        <option value="13">Objective</option>
-                                        <option value="14">Persuasive</option>
-                                        <option value="15">Satirical</option>
+                                        <option value="Autoritative">Autoritative</option>
+                                        <option value="Conversational">Conversational</option>
+                                        <option value="Descriptive">Descriptive</option>
+                                        <option value="Emotional">Emotional</option>
+                                        <option value="Enthusiatstic">Enthusiatstic</option>
+                                        <option value="Explanatory">Explanatory</option>
+                                        <option value="Formal">Formal</option>
+                                        <option value="Humerous">Humerous</option>
+                                        <option value="Informal">Informal</option>
+                                        <option value="Informative">Informative</option>
+                                        <option value="Inspirational">Inspirational</option>
+                                        <option value="Nostalgic">Nostalgic</option>
+                                        <option value="Objective">Objective</option>
+                                        <option value="Persuasive">Persuasive</option>
+                                        <option value="Satirical">Satirical</option>
                                     </select>
                                     <select class="form-select mb-4" id="Twitter-audience"
                                         aria-label="Default select example">
                                         <option selected>Select Audience</option>
-                                        <option value="1">Advanced Users</option>
-                                        <option value="2">Buisniness Executives</option>
-                                        <option value="3">Entraepeneurs</option>
-                                        <option value="4">General Public</option>
-                                        <option value="5">Investors</option>
-                                        <option value="6">Mortgage Borrowers</option>
-                                        <option value="7">Mortgage Professionals</option>
-                                        <option value="8">Novice Users</option>
-                                        <option value="9">Parents</option>
-                                        <option value="10">Professionals</option>
-                                        <option value="11">Senior Citizens</option>
+                                        <option value="Advanced Users">Advanced Users</option>
+                                        <option value="Buisniness Executives">Buisniness Executives</option>
+                                        <option value="Entraepeneurs">Entraepeneurs</option>
+                                        <option value="General Public">General Public</option>
+                                        <option value="Investors">Investors</option>
+                                        <option value="Mortgage Borrowers">Mortgage Borrowers</option>
+                                        <option value="Mortgage Professionals">Mortgage Professionals</option>
+                                        <option value="Novice Users">Novice Users</option>
+                                        <option value="Parents">Parents</option>
+                                        <option value="Professionals">Professionals</option>
+                                        <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
                                     <div class="mb-3">
                                         <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your Tweet
@@ -353,36 +350,36 @@
                                     <p class="hidden error" id="error-message-ytShortSubmit"> </p>
                                     <select class="form-select mb-4" id="YTS-tone" aria-label="Default select example">
                                         <option selected>Select Tone</option>
-                                        <option value="1">Autoritative</option>
-                                        <option value="2">Conversational</option>
-                                        <option value="3">Descriptive</option>
-                                        <option value="4">Emotional</option>
-                                        <option value="5">Enthusiatstic</option>
-                                        <option value="6">Explanatory</option>
-                                        <option value="7">Formal</option>
-                                        <option value="8">Humerous</option>
-                                        <option value="9">Informal</option>
-                                        <option value="10">Informative</option>
-                                        <option value="11">Inspirational</option>
-                                        <option value="12">Nostalgic</option>
-                                        <option value="13">Objective</option>
-                                        <option value="14">Persuasive</option>
-                                        <option value="15">Satirical</option>
+                                        <option value="Autoritative">Autoritative</option>
+                                        <option value="Conversational">Conversational</option>
+                                        <option value="Descriptive">Descriptive</option>
+                                        <option value="Emotional">Emotional</option>
+                                        <option value="Enthusiatstic">Enthusiatstic</option>
+                                        <option value="Explanatory">Explanatory</option>
+                                        <option value="Formal">Formal</option>
+                                        <option value="Humerous">Humerous</option>
+                                        <option value="Informal">Informal</option>
+                                        <option value="Informative">Informative</option>
+                                        <option value="Inspirational">Inspirational</option>
+                                        <option value="Nostalgic">Nostalgic</option>
+                                        <option value="Objective">Objective</option>
+                                        <option value="Persuasive">Persuasive</option>
+                                        <option value="Satirical">Satirical</option>
                                     </select>
                                     <select class="form-select mb-4" id="YTS-audience"
                                         aria-label="Default select example">
                                         <option selected>Select Audience</option>
-                                        <option value="1">Advanced Users</option>
-                                        <option value="2">Buisniness Executives</option>
-                                        <option value="3">Entraepeneurs</option>
-                                        <option value="4">General Public</option>
-                                        <option value="5">Investors</option>
-                                        <option value="6">Mortgage Borrowers</option>
-                                        <option value="7">Mortgage Professionals</option>
-                                        <option value="8">Novice Users</option>
-                                        <option value="9">Parents</option>
-                                        <option value="10">Professionals</option>
-                                        <option value="11">Senior Citizens</option>
+                                        <option value="Advanced Users">Advanced Users</option>
+                                        <option value="Buisniness Executives">Buisniness Executives</option>
+                                        <option value="Entraepeneurs">Entraepeneurs</option>
+                                        <option value="General Public">General Public</option>
+                                        <option value="Investors">Investors</option>
+                                        <option value="Mortgage Borrowers">Mortgage Borrowers</option>
+                                        <option value="Mortgage Professionals">Mortgage Professionals</option>
+                                        <option value="Novice Users">Novice Users</option>
+                                        <option value="Parents">Parents</option>
+                                        <option value="Professionals">Professionals</option>
+                                        <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
                                     <div class="mb-3">
                                         <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your YouTube
@@ -417,36 +414,36 @@
                                     <p class="hidden error" id="error-message-ytLongSubmit"> </p>
                                     <select class="form-select mb-4" id="YTL-tone" aria-label="Default select example">
                                         <option selected>Select Tone</option>
-                                        <option value="1">Autoritative</option>
-                                        <option value="2">Conversational</option>
-                                        <option value="3">Descriptive</option>
-                                        <option value="4">Emotional</option>
-                                        <option value="5">Enthusiatstic</option>
-                                        <option value="6">Explanatory</option>
-                                        <option value="7">Formal</option>
-                                        <option value="8">Humerous</option>
-                                        <option value="9">Informal</option>
-                                        <option value="10">Informative</option>
-                                        <option value="11">Inspirational</option>
-                                        <option value="12">Nostalgic</option>
-                                        <option value="13">Objective</option>
-                                        <option value="14">Persuasive</option>
-                                        <option value="15">Satirical</option>
+                                        <option value="Autoritative">Autoritative</option>
+                                        <option value="Conversational">Conversational</option>
+                                        <option value="Descriptive">Descriptive</option>
+                                        <option value="Emotional">Emotional</option>
+                                        <option value="Enthusiatstic">Enthusiatstic</option>
+                                        <option value="Explanatory">Explanatory</option>
+                                        <option value="Formal">Formal</option>
+                                        <option value="Humerous">Humerous</option>
+                                        <option value="Informal">Informal</option>
+                                        <option value="Informative">Informative</option>
+                                        <option value="Inspirational">Inspirational</option>
+                                        <option value="Nostalgic">Nostalgic</option>
+                                        <option value="Objective">Objective</option>
+                                        <option value="Persuasive">Persuasive</option>
+                                        <option value="Satirical">Satirical</option>
                                     </select>
                                     <select class="form-select mb-4" id="YTL-audience"
                                         aria-label="Default select example">
                                         <option selected>Select Audience</option>
-                                        <option value="1">Advanced Users</option>
-                                        <option value="2">Buisniness Executives</option>
-                                        <option value="3">Entraepeneurs</option>
-                                        <option value="4">General Public</option>
-                                        <option value="5">Investors</option>
-                                        <option value="6">Mortgage Borrowers</option>
-                                        <option value="7">Mortgage Professionals</option>
-                                        <option value="8">Novice Users</option>
-                                        <option value="9">Parents</option>
-                                        <option value="10">Professionals</option>
-                                        <option value="11">Senior Citizens</option>
+                                        <option value="Advanced Users">Advanced Users</option>
+                                        <option value="Buisniness Executives">Buisniness Executives</option>
+                                        <option value="Entraepeneurs">Entraepeneurs</option>
+                                        <option value="General Public">General Public</option>
+                                        <option value="Investors">Investors</option>
+                                        <option value="Mortgage Borrowers">Mortgage Borrowers</option>
+                                        <option value="Mortgage Professionals">Mortgage Professionals</option>
+                                        <option value="Novice Users">Novice Users</option>
+                                        <option value="Parents">Parents</option>
+                                        <option value="Professionals">Professionals</option>
+                                        <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
                                     <div class="mb-3">
                                         <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your YouTube

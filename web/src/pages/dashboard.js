@@ -288,31 +288,6 @@ class Dashboard extends BindingClass {
         </div>`
     }
 
-    // async deletePostSubmit(evt) {
-    //     evt.preventDefault();
-    
-    //     const errorMessageDisplay = document.getElementById('error-message-delete');
-    //     errorMessageDisplay.innerText = ``;
-    //     errorMessageDisplay.classList.add('hidden');              
-    //     const origButtonText = deleteButton.innerText;
-    //     deleteButton.innerText = 'Deleteing...';
-    //     const contendIdToDelete = contentId;
-    //     try {
-    //         const content = await this.client.deletePostSubmit(contendIdToDelete,(error) => {
-    //             deleteButton.innerText = origButtonText;
-    //             errorMessageDisplay.innerText = `Error: ${error.message}`;
-    //             errorMessageDisplay.classList.remove('hidden');
-    //         });
-    
-    //         this.dataStore.remove('content', content);
-    
-    //         location.reload();
-    //     } catch (error) {
-    //         console.error('Error creating content:', error);
-    //     } finally {
-    //         location.reload();
-    //     }
-    // }
 
     async deleteContent(event) {
         event.preventDefault();
@@ -327,7 +302,7 @@ class Dashboard extends BindingClass {
         try {
             const content = await this.client.softDeleteContent(contendIdToDelete, this.userEmail.userModel.userId, ()=> null);         
     
-            // location.reload();
+            location.reload();
         } catch (error) {
             console.error('Error deleting content:', error);
         } finally {
