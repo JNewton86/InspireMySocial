@@ -30,6 +30,7 @@ public class GetCreditsByUserActivity {
         if (userEmail == null || userEmail.isEmpty()) {
             throw new UserNotFoundException("Please provide a user's email!");
         }
+//        User user = userDao.getUser(userEmail);
         try {
             User user = userDao.getUser(userEmail);
             System.out.println("user from dao returned: " + user);

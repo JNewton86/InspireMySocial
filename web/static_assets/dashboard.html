@@ -3,6 +3,8 @@
 
 <head>
     <script type="text/javascript" src="assets/dashboard.js"></script>
+    <!-- <script type="module" src="https://md-block.verou.me/md-block.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -60,7 +62,9 @@
                 <div class="col-sm-4 col-lg-8 rounded border border-5">
                     <div class="display-5 text-muted text-center">Your Previously Created Content</div>
                     <div class="accordion" id="accordionExample">
-    
+                        <md-block>
+
+                        </md-block>
 
                     </div>
                     <nav aria-label="Page navigation example">
@@ -91,11 +95,13 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <form class="needs-validation">
+                                <form class="needs-validation" id="fbForm" novalidate>
                                     <p class="hidden error" id="error-message-fb"> </p>
-                                    <select class="form-select mb-4" id="fb-tone" required aria-label="Default select example">
-                                        <option selected>Select Tone</option>
-                                        <option value="Autoritative">Autoritative</option>
+                                    <label for="fb-tone" class="form-label">Select a Tone</label>
+                                    <div>
+                                    <select class="form-select form-control" id="fb-tone" required aria-label="Default select example">
+                                        <option selected></option>
+                                        <option value="Authoritative">Authoritative</option>
                                         <option value="Conversational">Conversational</option>
                                         <option value="Descriptive">Descriptive</option>
                                         <option value="Emotional">Emotional</option>
@@ -111,9 +117,18 @@
                                         <option value="Persuasive">Persuasive</option>
                                         <option value="Satirical">Satirical</option>
                                     </select>
-                                    <select class="form-select mb-4" id="fb-audience" required
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please choose a Tone.
+                                        </div>
+                                    </div>
+                                    <label for="fb-audience" class="mt-4 form-label">Select an Audience</label>
+                                <div>
+                                    <select class="form-select form-control" id="fb-audience" required
                                         aria-label="Default select example">
-                                        <option selected>Select Audience</option>
+                                        <option selected=""></option>
                                         <option value="Advanced Users">Advanced Users</option>
                                         <option value="Buisniness Executives">Buisniness Executives</option>
                                         <option value="Entraepeneurs">Entraepeneurs</option>
@@ -126,18 +141,115 @@
                                         <option value="Professionals">Professionals</option>
                                         <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
-                                    <div class="mb-3">
-                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your FaceBook
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    <div class="invalid-feedback">
+                                    Please choose an Audience.
+                                    </div>
+                                </div>
+
+                                    <div class="mt-4">
+                                        <label for="fb-topic" class="form-label mt-4">Your FaceBook
                                             Post Topic</label>
                                         <textarea class="form-control" id="fb-topic" required rows="3"></textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please enter a Topic.
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Word
+                                    <div class="mt-4">
+                                        <label for="fb-wordcount" class="form-label">Approximate Word
                                             Count</label>
-                                        <input type="number" class="form"required id="fb-wordcount"/> 
+                                        <input type="number" class="form form-control" required min="50" max="250" id="fb-wordcount"/> 
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please choose a word count between 50 and 250.
+                                        </div>
                                     </div>                                  
-                                    <button class="btn btn-primary" type="submit" id="fbFormSubmit">Create Post</button>
+                                    <button class="btn mt-4 btn-primary" type="submit" id="fbFormSubmit">Create Post</button>
                             </div>
+                            <!-- <script>
+                                document.getElementById("fbForm").addEventListener("submit", function(event) {
+                                    var isValid = true;
+                            
+                                    var tone = document.getElementById("fb-tone");
+                                    var audience = document.getElementById("fb-audience");
+                                    var topic = document.getElementById("fb-topic");
+                                    var wordCount = document.getElementById("fb-wordcount");
+                            
+                                    // Validate tone
+                                    if (tone.value === "") {
+                                        tone.classList.add("is-invalid");
+                                        tone.classList.remove("is-valid");
+                                    } else {
+                                        tone.classList.remove("is-invalid");
+                                        tone.classList.add("is-valid");
+                                    }
+                            
+                                    // Validate audience
+                                    if (audience.value === "") {
+                                        audience.classList.add("is-invalid");
+                                        audience.classList.remove("is-valid");
+                                    } else {
+                                        audience.classList.remove("is-invalid");
+                                        audience.classList.add("is-valid");
+                                    }
+                            
+                                    // Validate topic
+                                    if (topic.value.trim() === "") {
+                                        topic.classList.add("is-invalid");
+                                        topic.classList.remove("is-valid");
+                                    } else {
+                                        topic.classList.remove("is-invalid");
+                                        topic.classList.add("is-valid");
+                                    }
+                            
+                                    // Validate word count
+                                    if (wordCount.value.trim() === "" || wordCount.value <= 0) {
+                                        wordCount.classList.add("is-invalid");
+                                        wordCount.classList.remove("is-valid");
+                                    } else {
+                                        wordCount.classList.remove("is-invalid");
+                                        wordCount.classList.add("is-valid");
+                                    }
+                            
+                                    // If any of the fields are invalid, prevent form from submitting
+                                    if (tone.classList.contains("is-invalid") ||
+                                        audience.classList.contains("is-invalid") ||
+                                        topic.classList.contains("is-invalid") ||
+                                        wordCount.classList.contains("is-invalid")) {
+                                        event.preventDefault();
+                                    }
+                                });
+                            
+                                // Handling the change event for input fields
+                                ["fb-tone", "fb-audience", "fb-topic", "fb-wordcount"].forEach(id => {
+                                    document.getElementById(id).addEventListener("change", function(event) {
+                                        var validFeedback = event.target.parentNode.querySelector('.valid-feedback');
+                                        var invalidFeedback = event.target.parentNode.querySelector('.invalid-feedback');
+                            
+                                        if (event.target.checkValidity()) {
+                                            event.target.classList.remove("is-invalid");
+                                            event.target.classList.add("is-valid");
+                                            validFeedback.style.display = "block";
+                                            invalidFeedback.style.display = "none";
+                                        } else {
+                                            event.target.classList.remove("is-valid");
+                                            event.target.classList.add("is-invalid");
+                                            validFeedback.style.display = "none";
+                                            invalidFeedback.style.display = "block";
+                                        }
+                                    });
+                                });
+                            </script> -->
+                            
+                            
+                            
                             </form>
                         </div>
 
@@ -154,12 +266,14 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <form class="needs-validation" novalidate>
+                                <form class="needs-validation" id="instaForm" novalidate>
                                     <p class="hidden error" id="error-message-insta"> </p>
-                                    <select class="form-select mb-4" id="insta-tone"
+                                    <label for="insta-tone" class="form-label">Select a Tone</label>
+                                    <div>
+                                    <select class="form-select form-control" required id="insta-tone"
                                         aria-label="Default select example">
-                                        <option selected>Select Tone</option>
-                                        <option value="Autoritative">Autoritative</option>
+                                        <option selected></option>
+                                        <option value="Authoritative">Authoritative</option>
                                         <option value="Conversational">Conversational</option>
                                         <option value="Descriptive">Descriptive</option>
                                         <option value="Emotional">Emotional</option>
@@ -175,9 +289,18 @@
                                         <option value="Persuasive">Persuasive</option>
                                         <option value="Satirical">Satirical</option>
                                     </select>
-                                    <select class="form-select mb-4" id="insta-audience"
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Tone.
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="insta-audience" class="mt-4 form-label">Select an Audience</label>
+                                    <select class="form-select form-control" id="insta-audience" required
                                         aria-label="Default select example">
-                                        <option selected>Select Audience</option>
+                                        <option selected></option>
                                         <option value="Advanced Users">Advanced Users</option>
                                         <option value="Buisniness Executives">Buisniness Executives</option>
                                         <option value="Entraepeneurs">Entraepeneurs</option>
@@ -190,21 +313,114 @@
                                         <option value="Professionals">Professionals</option>
                                         <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
-                                    <div class="mb-3">
-                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your Insta
-                                            Post
-                                            Topic</label>
-                                        <textarea class="form-control" id="insta-topic" rows="3"></textarea>
+                                    <div class="valid-feedback">
+                                        Looks good!
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Character
+                                    <div class="invalid-feedback">
+                                        Please choose a Tone.
+                                    </div>
+                                </div>
+                                    <div class="mt-4">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Your Insta
+                                            Post Topic</label>
+                                        <textarea class="form-control" id="insta-topic" required rows="3"></textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please enter a Topic.
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <label for=" fb-wordcount" class="form-label">Approximate Character
                                             Count</label>
-                                        <input type="number" class="form" id="insta-wordcount"/>
+                                        <input type="number" class="form-control" required min="50" max="350" id="insta-wordcount"/>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please choose a character count between 50 and 350.
+                                        </div>
                                     </div>
-                                    <button class="btn btn-primary" id="instaFormSubmit" type="submit">Create Post</button>
+                                    <button class="btn mt-4 btn-primary" id="instaFormSubmit" type="submit">Create Post</button>
                             </div>
                             </form>
                         </div>
+                        <!-- <script>
+                            document.getElementById("instaForm").addEventListener("submit", function(event) {
+                                var isValid = true;
+
+                                var tone = document.getElementById("insta-tone");
+                                var audience = document.getElementById("insta-audience");
+                                var topic = document.getElementById("insta-topic");
+                                var charCount = document.getElementById("insta-wordcount");
+
+                                // Validate tone
+                                if (tone.value === "") {
+                                    tone.classList.add("is-invalid");
+                                    tone.classList.remove("is-valid");
+                                } else {
+                                    tone.classList.remove("is-invalid");
+                                    tone.classList.add("is-valid");
+                                }
+
+                                // Validate audience
+                                if (audience.value === "") {
+                                    audience.classList.add("is-invalid");
+                                    audience.classList.remove("is-valid");
+                                } else {
+                                    audience.classList.remove("is-invalid");
+                                    audience.classList.add("is-valid");
+                                }
+
+                                // Validate topic
+                                if (topic.value.trim() === "") {
+                                    topic.classList.add("is-invalid");
+                                    topic.classList.remove("is-valid");
+                                } else {
+                                    topic.classList.remove("is-invalid");
+                                    topic.classList.add("is-valid");
+                                }
+
+                                // Validate character count
+                                if (charCount.value.trim() === "" || charCount.value < 50 || charCount.value > 350) {
+                                    charCount.classList.add("is-invalid");
+                                    charCount.classList.remove("is-valid");
+                                } else {
+                                    charCount.classList.remove("is-invalid");
+                                    charCount.classList.add("is-valid");
+                                }
+
+                                // If any of the fields are invalid, prevent form from submitting
+                                if (tone.classList.contains("is-invalid") ||
+                                    audience.classList.contains("is-invalid") ||
+                                    topic.classList.contains("is-invalid") ||
+                                    charCount.classList.contains("is-invalid")) {
+                                    event.preventDefault();
+                                }
+                            });
+
+                                // Handling the change event for input fields
+                                ["insta-tone", "insta-audience", "insta-topic", "insta-wordcount"].forEach(id => {
+                                    document.getElementById(id).addEventListener("change", function(event) {
+                                        var validFeedback = event.target.parentNode.querySelector('.valid-feedback');
+                                        var invalidFeedback = event.target.parentNode.querySelector('.invalid-feedback');
+
+                                        if (event.target.checkValidity()) {
+                                            event.target.classList.remove("is-invalid");
+                                            event.target.classList.add("is-valid");
+                                            validFeedback.style.display = "block";
+                                            invalidFeedback.style.display = "none";
+                                        } else {
+                                            event.target.classList.remove("is-valid");
+                                            event.target.classList.add("is-invalid");
+                                            validFeedback.style.display = "none";
+                                            invalidFeedback.style.display = "block";
+                                        }
+                                    });
+                                });
+                            </script> -->
+
 
                         <!-- *********** LinkedIn Post Button and data Entry Form *********** -->
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="offcanvas"
@@ -219,12 +435,14 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <form class="needs-validation" novalidate>
+                                <form class="needs-validation" id="linkedInForm" novalidate>
                                     <p class="hidden error" id="error-message-linkedIn"> </p>
-                                    <select class="form-select mb-4" id="linkedin-tone"
+                                    <div>
+                                    <label for="linkedin-tone" class="form-label">Select a Tone</label>
+                                    <select class="form-select form-control" required id="linkedin-tone"
                                         aria-label="Default select example">
-                                        <option selected>Select Tone</option>
-                                        <option value="Autoritative">Autoritative</option>
+                                        <option selected></option>
+                                        <option value="Authoritative">Authoritative</option>
                                         <option value="Conversational">Conversational</option>
                                         <option value="Descriptive">Descriptive</option>
                                         <option value="Emotional">Emotional</option>
@@ -240,9 +458,19 @@
                                         <option value="Persuasive">Persuasive</option>
                                         <option value="Satirical">Satirical</option>
                                     </select>
-                                    <select class="form-select mb-4" id="linkedin-audience"
+                                     <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Tone.
+                                    </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="linkedin-audience" class="mt-4 form-label">Select an Audience</label>
+                                        <select class="form-select form-control" required id="linkedin-audience"
                                         aria-label="Default select example">
-                                        <option selected>Select Audience</option>
+                                        <option selected></option>
                                         <option value="Advanced Users">Advanced Users</option>
                                         <option value="Buisniness Executives">Buisniness Executives</option>
                                         <option value="Entraepeneurs">Entraepeneurs</option>
@@ -255,18 +483,35 @@
                                         <option value="Professionals">Professionals</option>
                                         <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
-                                    <div class="mb-3">
-                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your LinkedIn
-                                            Post
-                                            Topic</label>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Audience.
+                                    </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Your LinkedIn Post Topic</label>
                                         <textarea class="form-control" id="linkedin-topic" rows="3"></textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please enter a Topic.
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Character
+                                    <div class="mt-4">
+                                        <label for="fb-wordcount" class="form-label">Approximate Character
                                             Count</label>
-                                        <input type="number" class="form" id="linkedin-wordcount"/>
+                                        <input type="number" class="form-control" required min="50" max="450" id="linkedin-wordcount"/>
+                                         <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please choose a character count between 50 and 450.
+                                        </div>
                                     </div>
-                                    <button class="btn btn-primary" type="submit" id="linkedInFormSubmit">Create Post</button>
+                                    <button class="btn mt-4 btn-primary" type="submit" id="linkedInFormSubmit">Create Post</button>
                             </div>
                             </form>
                         </div>
@@ -283,12 +528,14 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <form class="needs-validation" novalidate>
+                                <form class="needs-validation" id="twitterForm" novalidate>
                                     <p class="hidden error" id="error-message-twitter"> </p>
-                                    <select class="form-select mb-4" id="Twitter-tone"
+                                    <div>
+                                    <label for="Twitter-tone" class="form-label">Select a Tone</label>
+                                    <select class="form-select form-control" required id="Twitter-tone"
                                         aria-label="Default select example">
-                                        <option selected>Select Tone</option>
-                                        <option value="Autoritative">Autoritative</option>
+                                        <option selected></option>
+                                        <option value="Authoritative">Authoritative</option>
                                         <option value="Conversational">Conversational</option>
                                         <option value="Descriptive">Descriptive</option>
                                         <option value="Emotional">Emotional</option>
@@ -304,9 +551,18 @@
                                         <option value="Persuasive">Persuasive</option>
                                         <option value="Satirical">Satirical</option>
                                     </select>
-                                    <select class="form-select mb-4" id="Twitter-audience"
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Tone.
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="Twitter-audience" class="mt-4 form-label">Select an Audience</label>
+                                    <select class="form-select form-control" id="Twitter-audience"
                                         aria-label="Default select example">
-                                        <option selected>Select Audience</option>
+                                        <option selected></option>
                                         <option value="Advanced Users">Advanced Users</option>
                                         <option value="Buisniness Executives">Buisniness Executives</option>
                                         <option value="Entraepeneurs">Entraepeneurs</option>
@@ -319,20 +575,43 @@
                                         <option value="Professionals">Professionals</option>
                                         <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
-                                    <div class="mb-3">
-                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your Tweet
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Audience.
+                                    </div>
+                                </div>
+                                    <div class="mt-4">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Your Tweet
                                             Topic</label>
-                                        <textarea class="form-control" id="Twitter-topic" rows="3"></textarea>
+                                        <textarea class="form-control" required id="Twitter-topic" rows="3"></textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please enter a Topic.
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="mb-3 fb-wordcount" class="form-label">Approximate Character
+                                    <div class="mt-4">
+                                        <label for="fb-wordcount" class="form-label">Approximate Character
                                             Count</label>
-                                        <input type="number" class="form" id="Twitter-wordcount"/>
+                                        <input type="number" class="form-control" required min="25" max="280" id="Twitter-wordcount"/>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please choose a character count between 25 and 280.
+                                        </div>
                                     </div>
-                                    <button class="btn btn-primary" id="twitterFormSubmit"type="submit">Create Post</button>
+                                    <button class="btn mt-4 btn-primary" id="twitterFormSubmit"type="submit">Create Post</button>
                             </div>
                             </form>
                         </div>
+      
+            
+                        
+                        
 
                         <!-- *********** YT Short Post Button and data Entry Form *********** -->
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="offcanvas"
@@ -346,11 +625,13 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <form class="needs-validation" novalidate>
+                                <form class="needs-validation" id="ytShortForm" novalidate>
                                     <p class="hidden error" id="error-message-ytShortSubmit"> </p>
-                                    <select class="form-select mb-4" id="YTS-tone" aria-label="Default select example">
-                                        <option selected>Select Tone</option>
-                                        <option value="Autoritative">Autoritative</option>
+                                    <div>
+                                    <label for="YTS-tone" class="form-label">Select a Tone</label>
+                                    <select class="form-select form-control" id="YTS-tone" aria-label="Default select example">
+                                        <option selected></option>
+                                        <option value="Authoritative">Authoritative</option>
                                         <option value="Conversational">Conversational</option>
                                         <option value="Descriptive">Descriptive</option>
                                         <option value="Emotional">Emotional</option>
@@ -366,9 +647,18 @@
                                         <option value="Persuasive">Persuasive</option>
                                         <option value="Satirical">Satirical</option>
                                     </select>
-                                    <select class="form-select mb-4" id="YTS-audience"
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Tone.
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="YTS-audience" class="mt-4 form-label">Select an Audience</label>
+                                    <select class="form-select form-control" id="YTS-audience"
                                         aria-label="Default select example">
-                                        <option selected>Select Audience</option>
+                                        <option selected></option>
                                         <option value="Advanced Users">Advanced Users</option>
                                         <option value="Buisniness Executives">Buisniness Executives</option>
                                         <option value="Entraepeneurs">Entraepeneurs</option>
@@ -381,10 +671,23 @@
                                         <option value="Professionals">Professionals</option>
                                         <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
-                                    <div class="mb-3">
-                                        <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your YouTube
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please choose a Audience.
+                                    </div>
+                                </div>
+                                    <div class="mt-4">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Your YouTube
                                             Short Topic</label>
                                         <textarea class="form-control" id="YTS-topic" rows="3"></textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please enter a Topic.
+                                        </div>
                                     </div>
                                     <!-- YouTube Short prompt limits length -->
                                     <!-- <div class="mb-3">
@@ -392,7 +695,7 @@
                                             Count</label>
                                         <input type="number" class="form" id="YTS-wordcount"><input>
                                     </div> -->
-                                    <button class="btn btn-primary" id="ytShortFormSubmit" type="submit">Create Post</button>
+                                    <button class="btn mt-4 btn-primary" id="ytShortFormSubmit" type="submit">Create Post</button>
                             </div>
                             </form>
                         </div>
@@ -410,11 +713,13 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <form class="needs-validation" novalidate>
+                                <form class="needs-validation" id="ytLongForm" novalidate>
                                     <p class="hidden error" id="error-message-ytLongSubmit"> </p>
-                                    <select class="form-select mb-4" id="YTL-tone" aria-label="Default select example">
-                                        <option selected>Select Tone</option>
-                                        <option value="Autoritative">Autoritative</option>
+                                    <div>
+                                        <label for="YTL-tone" class="form-label">Select a Tone</label>
+                                    <select class="form-select form-control" required id="YTL-tone" aria-label="Default select example">
+                                        <option selected></option>
+                                        <option value="Authoritative">Authoritative</option>
                                         <option value="Conversational">Conversational</option>
                                         <option value="Descriptive">Descriptive</option>
                                         <option value="Emotional">Emotional</option>
@@ -430,9 +735,12 @@
                                         <option value="Persuasive">Persuasive</option>
                                         <option value="Satirical">Satirical</option>
                                     </select>
-                                    <select class="form-select mb-4" id="YTL-audience"
+                                </div>
+                                <div>
+                                    <label for="YTL-audience" class="mt-4 form-label">Select an Audience</label>
+                                    <select class="form-select form-control" required id="YTL-audience"
                                         aria-label="Default select example">
-                                        <option selected>Select Audience</option>
+                                        <option selected></option>
                                         <option value="Advanced Users">Advanced Users</option>
                                         <option value="Buisniness Executives">Buisniness Executives</option>
                                         <option value="Entraepeneurs">Entraepeneurs</option>
@@ -445,23 +753,94 @@
                                         <option value="Professionals">Professionals</option>
                                         <option value="Senior Citizens">Senior Citizens</option>
                                     </select>
+                                </div>
                                     <div class="mb-3">
                                         <label for="mb-3 exampleFormControlTextarea1" class="form-label">Your YouTube
                                             Video Topic</label>
-                                        <textarea class="form-control" id="YTL-topic" rows="3"></textarea>
+                                        <textarea class="form-control" required id="YTL-topic" rows="3"></textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please enter a Topic.
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="mb-3 fb-wordcount" class="form-label">Approximate Video Length in
                                             Minutes
                                         </label>
-                                        <input type="number" class="form" id="YTL-wordcount"/>
+                                        <input type="number" class="form-control" min="1" max="5" id="YTL-wordcount"/>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                          </div>
+                                        <div class="invalid-feedback">
+                                        Please choose a video length in minutes between 1 and 5.
+                                        </div>
                                     </div>
                                     <button class="btn btn-primary" id="ytLongFormSubmit" type="submit">Create Post</button>
                             </div>
                             </form>
                         </div>
 
+                        <script>
+                            function validateForm(formId, fields) {
+                                document.getElementById(formId).addEventListener("submit", function(event) {
+                                    var isValid = true;
+                        
+                                    fields.forEach(fieldId => {
+                                        var field = document.getElementById(fieldId);
+                        
+                                        if (field.value.trim() === "" || 
+                                           (field.type === "number" && (field.value < field.min || field.value > field.max))) {
+                                            field.classList.add("is-invalid");
+                                            field.classList.remove("is-valid");
+                                        } else {
+                                            field.classList.remove("is-invalid");
+                                            field.classList.add("is-valid");
+                                        }
+                                    });
+                        
+                                    event.preventDefault();
+                                });
+                        
+                                fields.forEach(fieldId => {
+                                    document.getElementById(fieldId).addEventListener("change", function(event) {
+                                        var validFeedback = event.target.parentNode.querySelector('.valid-feedback');
+                                        var invalidFeedback = event.target.parentNode.querySelector('.invalid-feedback');
+                        
+                                        if (event.target.checkValidity()) {
+                                            event.target.classList.remove("is-invalid");
+                                            event.target.classList.add("is-valid");
+                                            validFeedback.style.display = "block";
+                                            invalidFeedback.style.display = "none";
+                                        } else {
+                                            event.target.classList.remove("is-valid");
+                                            event.target.classList.add("is-invalid");
+                                            validFeedback.style.display = "none";
+                                            invalidFeedback.style.display = "block";
+                                        }
+                                    });
+                                });
+                            }
+                        
+                            // Call the validateForm function for the fb form
+                            validateForm("fbForm", ["fb-tone", "fb-audience", "fb-topic", "fb-wordcount"]);
 
+                            // Call the validateForm function for the Instagram form
+                            validateForm("instaForm", ["insta-tone", "insta-audience", "insta-topic", "insta-wordcount"]);
+                        
+                            // Call the validateForm function for the LinkedIn form
+                            validateForm("linkedInForm", ["linkedin-tone", "linkedin-audience", "linkedin-topic", "linkedin-wordcount"]);
+                        
+                            // Call the validateForm function for the Twitter form
+                            validateForm("twitterForm", ["Twitter-tone", "Twitter-audience", "Twitter-topic", "Twitter-wordcount"]);
+                        
+                            // Call the validateForm function for the YouTube Long form
+                            validateForm("ytLongForm", ["YTL-tone", "YTL-audience", "YTL-topic", "YTL-wordcount"]);
+
+                            // Call the validateForm function for the YouTube Short form
+                            validateForm("ytShortForm", ["YTS-tone", "YTS-audience", "YTS-topic"]);
+                        </script>
                     </div>
                 </div>
             </div>
