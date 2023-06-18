@@ -15,6 +15,10 @@
         section {
             padding: 60px 0;
         }
+        .custom-accordion-bg {
+            background-color: #e7f1ff;
+        }
+        
     </style>
 </head>
 
@@ -61,19 +65,14 @@
             <div class="row">
                 <div class="col-sm-4 col-lg-8 rounded border border-5">
                     <div class="display-5 text-muted text-center">Your Previously Created Content</div>
-                    <div class="accordion" id="accordionExample">
-                        <md-block>
-
-                        </md-block>
+                    <div class="accordion" id="list">
+                        <ul id="section1Items" class="list-group">
+                            <!-- Populate items dynamically -->
+                          </ul>
 
                     </div>
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        <ul class="pagination" id="pagination">
                         </ul>
                       </nav>
                 </div>
