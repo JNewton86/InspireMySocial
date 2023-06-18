@@ -24,12 +24,119 @@ class Dashboard extends BindingClass {
     */
     async mount() {
         // Wire up the form's 'submit' event and the button's 'click' event to the search method.
-        const postContainer = document.getElementById('accordionExample');
+        const postContainer = document.getElementById('list');
         this.header.addHeaderToPage();
         this.client = new InspireMySocialClient();            
         const userObject = await this.client.getIdentity();
         const socialPosts = await this.client.getContentForUser(userObject.email);
-        socialPosts.forEach((post, index) => postContainer.innerHTML += this.generatePost(post.topic, post.aiMessage, index, post.contentType, post.contentId))
+        //const list_items = socialPosts.forEach((post, index) => postContainer.innerHTML += this.generatePost(post.topic, post.aiMessage, index, post.contentType, post.contentId))
+        
+        //ATTEMPT AT PAGINATION
+
+        // Number of items per page
+        const itemsPerPage = 10;
+
+        // Array of items (example with 50 items)
+        const items = socialPosts.map((post, index) => this.generatePost(post.topic, post.aiMessage, index, post.contentType, post.contentId));;
+
+
+        // Function to display items for the given page
+        function displayItems(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const section1Items = items.slice(startIndex, endIndex);
+      
+            const section1ItemsHtml = section1Items
+              .map(item => `<li class="list-group-item">${item}</li>`)
+              .join('');
+      
+            document.getElementById('section1Items').innerHTML = section1ItemsHtml;
+          }
+
+        // Function to generate pagination links
+        function generatePaginationLinks(totalPages) {
+        const paginationElement = document.getElementById('pagination');
+        paginationElement.innerHTML = '';
+        
+         // Add "Previous" button
+        const liPrev = document.createElement('li');
+        liPrev.classList.add('page-item');
+        liPrev.innerHTML = `<a class='page-link' href='#' id='previous'>Previous</a>`;
+        paginationElement.appendChild(liPrev);
+        
+        for (let i = 1; i <= totalPages; i++) {
+            const li = document.createElement('li');
+            li.classList.add('page-item');
+            const link = document.createElement('a');
+            link.classList.add('page-link');
+            link.href = '#';
+            link.textContent = i;
+
+            link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const selectedPage = parseInt(event.target.textContent);
+            displayItems(selectedPage);
+            updatePagination(selectedPage);
+            });
+
+            li.appendChild(link);
+            paginationElement.appendChild(li);
+            }
+
+            // Add "Next" button
+            const liNext = document.createElement('li');
+            liNext.classList.add('page-item');
+            liNext.innerHTML = `<a class='btn btn-outlined page-link' href='#' id='next'>Next</a>`;
+            paginationElement.appendChild(liNext);
+            }
+
+            // Function to update active pagination link
+            function updatePagination(currentPage) {
+            const paginationLinks = document.querySelectorAll('#pagination li a');
+
+            paginationLinks.forEach(link => {
+                if (parseInt(link.textContent) === currentPage) {
+                link.classList.add('active');
+                } else {
+                link.classList.remove('active');
+                }
+            });
+            }
+
+            // Initial setup
+            function init() {
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+            generatePaginationLinks(totalPages);
+            displayItems(1);
+            updatePagination(1);
+             // Add event listeners for Next and Previous buttons
+            const nextBtn = document.getElementById('next');
+            const prevBtn = document.getElementById('previous');
+            let currentPage = 1;
+
+                nextBtn.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (currentPage < totalPages) {
+                        currentPage += 1;
+                        displayItems(currentPage);
+                        updatePagination(currentPage);
+                    }
+                });
+
+                prevBtn.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (currentPage > 1) {
+                        currentPage -= 1;
+                        displayItems(currentPage);
+                        updatePagination(currentPage);
+                    }
+            });
+
+            }
+
+            init();
+            // END PAGINATION ATTEMPT 
+
         const deleteButtons = document.querySelectorAll('.delete-button');
         deleteButtons.forEach((btn => btn.addEventListener('click', this.deleteContent)));
         const userModel = await this.client.getCreditsByUser();
@@ -37,7 +144,7 @@ class Dashboard extends BindingClass {
         console.log("this is the user model from mount " + JSON.stringify(userModel));
         remainingCredits.innerHTML += this.generateAvailableCredits(userModel.data.userModel.creditBalance);
         document.getElementById('fbForm').addEventListener('submit', this.fbSubmit);
-        // document.getElementById('fbFormSubmit').addEventListener('click', this.fbSubmit);
+        document.getElementById('fbFormSubmit').addEventListener('click', this.fbSubmit);
         document.getElementById('instaForm').addEventListener('submit', this.instaSubmit);
         document.getElementById('linkedInForm').addEventListener('submit', this.linkedInSubmit);
         document.getElementById('twitterForm').addEventListener('submit', this.twitterSubmit);
@@ -294,17 +401,18 @@ class Dashboard extends BindingClass {
             location.reload();
         }
     }
+  
 
     generatePost(title, content, index, contentType, contentId) {
         return `<div class="accordion-item">
         <h2 class="accordion-header" id="heading${index}">
-            <button class="accordion-button accordion-button-collapse" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapse${index}" aria-expanded="${index === 0 ? true : false}" aria-controls="collapse${index}", data-bs-parent="#accordionExample">
+            <button class="accordion-button accordion-button-collapse custom-accordion-bg" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse${index}" aria-expanded="${index === 0 ? true : false}" aria-controls="collapse${index}", data-bs-parent="#list">
                 ${contentType} : ${title}
             </button>
         </h2>
         <div id="collapse${index}" class="${index === 0 ? "accordion-collapse collapse show" : "accordion-collapse collapse"}" aria-labelledby="heading${index}"
-            data-bs-parent="#accordionExample">
+            data-bs-parent="#list">
             <div class="accordion-body markdown="1"">
             <span>
             
