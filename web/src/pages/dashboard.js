@@ -1,6 +1,7 @@
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import InspireMySocialClient from '../api/inspireMySocialClient';
+import { marked } from 'marked';
 
 class Dashboard extends BindingClass {
 
@@ -35,12 +36,13 @@ class Dashboard extends BindingClass {
         this.userEmail=userModel.data;
         console.log("this is the user model from mount " + JSON.stringify(userModel));
         remainingCredits.innerHTML += this.generateAvailableCredits(userModel.data.userModel.creditBalance);
-        document.getElementById('fbFormSubmit').addEventListener('click', this.fbSubmit);
-        document.getElementById('instaFormSubmit').addEventListener('click', this.instaSubmit);
-        document.getElementById('linkedInFormSubmit').addEventListener('click', this.linkedInSubmit);
-        document.getElementById('twitterFormSubmit').addEventListener('click', this.twitterSubmit);
-        document.getElementById('ytShortFormSubmit').addEventListener('click', this.ytShortSubmit);
-        document.getElementById('ytLongFormSubmit').addEventListener('click', this.ytLongSubmit);
+        document.getElementById('fbForm').addEventListener('submit', this.fbSubmit);
+        // document.getElementById('fbFormSubmit').addEventListener('click', this.fbSubmit);
+        document.getElementById('instaForm').addEventListener('submit', this.instaSubmit);
+        document.getElementById('linkedInForm').addEventListener('submit', this.linkedInSubmit);
+        document.getElementById('twitterForm').addEventListener('submit', this.twitterSubmit);
+        document.getElementById('ytShortForm').addEventListener('submit', this.ytShortSubmit);
+        document.getElementById('ytLongForm').addEventListener('submit', this.ytLongSubmit);
     }
 
      /**
@@ -49,6 +51,13 @@ class Dashboard extends BindingClass {
      */
     async fbSubmit(evt) {
         evt.preventDefault();
+        if (!evt.target.checkValidity()) {
+            submit.vpreventDefault()
+            submit.stopPropagation()
+            return false;
+          }
+        
+      
     
         const errorMessageDisplay = document.getElementById('error-message-fb');
         errorMessageDisplay.innerText = ``;
@@ -63,9 +72,10 @@ class Dashboard extends BindingClass {
         const audience = document.getElementById('fb-audience').value;
         const topic = document.getElementById('fb-topic').value;
         const wordcount = document.getElementById('fb-wordcount').value;
+        const creditCost = "-1";
     
         try {
-            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount, (error) => {
+            const content = await this.client.createContent(contentType, tone, audience, topic, wordcount,creditCost, (error) => {
                 createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
                 errorMessageDisplay.classList.remove('hidden');
@@ -82,6 +92,11 @@ class Dashboard extends BindingClass {
 
     async instaSubmit(evt) {
         evt.preventDefault();
+        if (!evt.target.checkValidity()) {
+            submit.vpreventDefault()
+            submit.stopPropagation()
+            return false;
+          }
         console.log("you hit the insta listener")
         const errorMessageDisplay = document.getElementById('error-message-insta');
         errorMessageDisplay.innerText = ``;
@@ -118,6 +133,11 @@ class Dashboard extends BindingClass {
     
     async linkedInSubmit(evt) {
         evt.preventDefault();
+        if (!evt.target.checkValidity()) {
+            submit.vpreventDefault()
+            submit.stopPropagation()
+            return false;
+          }
     
         const errorMessageDisplay = document.getElementById('error-message-linkedIn');
         errorMessageDisplay.innerText = ``;
@@ -154,6 +174,11 @@ class Dashboard extends BindingClass {
 
     async twitterSubmit(evt) {
         evt.preventDefault();
+        if (!evt.target.checkValidity()) {
+            submit.vpreventDefault()
+            submit.stopPropagation()
+            return false;
+          }
     
         const errorMessageDisplay = document.getElementById('error-message-twitter');
         errorMessageDisplay.innerText = ``;
@@ -190,6 +215,11 @@ class Dashboard extends BindingClass {
 
     async ytShortSubmit(evt) {
         evt.preventDefault();
+        if (!evt.target.checkValidity()) {
+            submit.vpreventDefault()
+            submit.stopPropagation()
+            return false;
+          }
     
         const errorMessageDisplay = document.getElementById('error-message-ytShortSubmit');
         errorMessageDisplay.innerText = ``;
@@ -226,6 +256,11 @@ class Dashboard extends BindingClass {
 
     async ytLongSubmit(evt) {
         evt.preventDefault();
+        if (!evt.target.checkValidity()) {
+            submit.vpreventDefault()
+            submit.stopPropagation()
+            return false;
+          }
     
         const errorMessageDisplay = document.getElementById('error-message-ytLongSubmit');
         errorMessageDisplay.innerText = ``;
@@ -270,9 +305,11 @@ class Dashboard extends BindingClass {
         </h2>
         <div id="collapse${index}" class="${index === 0 ? "accordion-collapse collapse show" : "accordion-collapse collapse"}" aria-labelledby="heading${index}"
             data-bs-parent="#accordionExample">
-            <div class="accordion-body">
+            <div class="accordion-body markdown="1"">
             <span>
-                ${content}
+            
+            ${marked.parse(content)}     
+            
                 </span>
                 <div>
                 <button type="button" id="delete${contentId}" data-content-id="${contentId}" class="delete-button btn btn-outline-danger btn-sm">Delete this Post</button>
@@ -288,31 +325,6 @@ class Dashboard extends BindingClass {
         </div>`
     }
 
-    // async deletePostSubmit(evt) {
-    //     evt.preventDefault();
-    
-    //     const errorMessageDisplay = document.getElementById('error-message-delete');
-    //     errorMessageDisplay.innerText = ``;
-    //     errorMessageDisplay.classList.add('hidden');              
-    //     const origButtonText = deleteButton.innerText;
-    //     deleteButton.innerText = 'Deleteing...';
-    //     const contendIdToDelete = contentId;
-    //     try {
-    //         const content = await this.client.deletePostSubmit(contendIdToDelete,(error) => {
-    //             deleteButton.innerText = origButtonText;
-    //             errorMessageDisplay.innerText = `Error: ${error.message}`;
-    //             errorMessageDisplay.classList.remove('hidden');
-    //         });
-    
-    //         this.dataStore.remove('content', content);
-    
-    //         location.reload();
-    //     } catch (error) {
-    //         console.error('Error creating content:', error);
-    //     } finally {
-    //         location.reload();
-    //     }
-    // }
 
     async deleteContent(event) {
         event.preventDefault();
@@ -327,7 +339,7 @@ class Dashboard extends BindingClass {
         try {
             const content = await this.client.softDeleteContent(contendIdToDelete, this.userEmail.userModel.userId, ()=> null);         
     
-            // location.reload();
+            location.reload();
         } catch (error) {
             console.error('Error deleting content:', error);
         } finally {

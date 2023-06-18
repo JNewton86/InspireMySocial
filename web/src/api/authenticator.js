@@ -34,7 +34,10 @@ export default class Authenticator extends BindingClass {
     async login() {
         await Auth.federatedSignIn();
     }
-
+    
+    async signUp() {
+        await Auth.signUp();
+    }
     async logout() {
         await Auth.signOut();
     }
