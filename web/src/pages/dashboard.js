@@ -447,7 +447,39 @@ class Dashboard extends BindingClass {
     }
   
 
-    generatePost(title, content, index, contentType, contentId) {
+    async generatePost(title, content, index, contentType, contentId, imageUrls) {
+        const carouselIndicators = imageUrls.map((url, i) => {
+            return `<button type="button" data-bs-target="#carousel${contentId}" data-bs-slide-to="${i}"
+                    class="${i === 0 ? "active" : ""}" aria-current="${i === 0 ? "true" : "false"}"
+                    aria-label="Slide ${i + 1}"></button>`;
+          }).join('');
+        
+          const carouselItems = imageUrls.map((url, i) => {
+            return `<div class="carousel-item ${i === 0 ? "active" : ""}">
+                  <img src="${url}" class="d-block w-100" alt="Image ${i + 1}">
+                </div>`;
+          }).join('');
+        
+          const carouselTemplate = `<div id="carousel${contentId}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              ${carouselIndicators}
+            </div>
+            <div class="carousel-inner">
+              ${carouselItems}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel${contentId}" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel${contentId}" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>;
+    </div>`;
+        
+        try{
+            const imageUrls = await this.client.getImagesForContent(contentId);
         return `<div class="accordion-item">
         <h2 class="accordion-header" id="heading${index}">
             <button class="accordion-button accordion-button-collapse custom-accordion-bg" type="button" data-bs-toggle="collapse"
@@ -470,7 +502,8 @@ class Dashboard extends BindingClass {
                 <p class="hidden error" id="error-message-delete"> </p>
                 <p class="hidden error" id="error-message-createImageForContent"> </p>
                 </div>
-                <!-- Image Creation Form -->
+                
+              
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightCreateImageForContent"
                 aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
@@ -508,12 +541,18 @@ class Dashboard extends BindingClass {
                           </div>
                         </div>                                  
                         <button class="btn mt-4 btn-primary" data-content-id="${contentId}" type="submit" id="createImageFormSubmit">Create Image</button>
-                </div>
+                </div>              
                 </form>
+           
             </div>
+            // <div>${carouselTemplate}<>
             </div>
-        </div>
-    </div>`;
+        </div>`
+    
+    }
+      catch (error) {
+        console.error('Error deleting content:', error);
+    }
     }
 
     generateAvailableCredits(creditBalance) {

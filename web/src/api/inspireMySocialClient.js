@@ -15,7 +15,7 @@ export default class InspireMySocialClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout','signUp','createContent', 'softDeleteContent', 'getCreditsByUser', 'createImageForContent'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout','signUp','createContent', 'getImagesForContent','softDeleteContent', 'getCreditsByUser', 'createImageForContent'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -85,6 +85,22 @@ export default class InspireMySocialClient extends BindingClass {
         try { 
             const token = await this.getTokenOrThrow("Only authenticated users can access credit balance.");
             const response = await this.axiosClient.get(`users`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getImagesForContent(contentId, errorCallback) {
+        try { 
+            const token = await this.getTokenOrThrow("Only authenticated users can access credit balance.");
+            const response = await this.axiosClient.get(`content/images`, {
+                contentId: contentId,
+            },{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

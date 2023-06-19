@@ -31,4 +31,6 @@ public interface ServiceComponent {
     UpdateUserCreditBalanceActivity provideUpdateUserCreditBalanceActivity();
 
     CreateImageForContentActivity provideCreateImageForContentActivity();
+
+    GetImagesForContentActivity provideGetImagesForContentActivity();
 }
