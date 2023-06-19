@@ -32,7 +32,7 @@ public class CreateContentActivity {
      *
      * @param contentDao a data acccess only class that access DynamoDBTable storing content
      * @param openAiDao  a data access only class that leverages a community service for accessing OpenAI's API
-     * @param userDao
+     * @param userDao a data access only class that access DynamoDBTable storing users
      */
     @Inject
     public CreateContentActivity(ContentDao contentDao, OpenAiDao openAiDao, UserDao userDao) {
@@ -56,7 +56,7 @@ public class CreateContentActivity {
         // log.
         log.info("Receieved CreateContent Request {}", createContentRequest);
         User user = userDao.getUser(createContentRequest.getUserId());
-        if(user.getCreditBalance() == 0){
+        if (user.getCreditBalance() == 0) {
             throw new InsufficientCreditsException("Insufficient Credits Remaining");
         }
         // Call to openAiDao to create content.

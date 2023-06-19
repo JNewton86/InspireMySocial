@@ -17,20 +17,28 @@ public class GetCreditsByUserActivity {
     private final Logger log = LogManager.getLogger();
     private final UserDao userDao;
 
+    /**
+     * constructor for dagger to inject userDao.
+     * @param userDao DAO class singleton to access DynamoDB table "Users"
+     */
     @Inject
-    public GetCreditsByUserActivity(UserDao userDao){
-        this.userDao=userDao;
+    public GetCreditsByUserActivity(UserDao userDao) {
+        this.userDao = userDao;
     }
 
+    /**
+     * Handle request method that is called by the lambda for this activity.
+     * @param getCreditsByUserRequest request object created by the lambda with items from API request
+     * @return user object with credit balance as an attribute
+     */
     public GetCreditsByUserResult handleRequest(final GetCreditsByUserRequest getCreditsByUserRequest) {
         log.info("Recieved GetCreditRequest{}", getCreditsByUserRequest);
-        System.out.println("userEmail: " +getCreditsByUserRequest.getUserEmail());
-        System.out.println("name: " +getCreditsByUserRequest.getName());
+        System.out.println("userEmail: " + getCreditsByUserRequest.getUserEmail());
+        System.out.println("name: " + getCreditsByUserRequest.getName());
         String userEmail = getCreditsByUserRequest.getUserEmail();
         if (userEmail == null || userEmail.isEmpty()) {
             throw new UserNotFoundException("Please provide a user's email!");
         }
-//        User user = userDao.getUser(userEmail);
         try {
             User user = userDao.getUser(userEmail);
             System.out.println("user from dao returned: " + user);
@@ -38,8 +46,7 @@ public class GetCreditsByUserActivity {
             return GetCreditsByUserResult.builder()
                     .withUserModel(userModel)
                     .build();
-        }
-        catch (UserNotFoundException e){
+        } catch (UserNotFoundException e) {
             User newUser = new User();
             newUser.setUserEmail(getCreditsByUserRequest.getUserEmail());
             newUser.setCreditBalance(20);
@@ -51,23 +58,5 @@ public class GetCreditsByUserActivity {
                     .withUserModel(userModel)
                     .build();
         }
-//        User user = userDao.getUser(userEmail);
-        // If user not in table then prepopulate with 20 credits, and reset user from network call to newUser value.
-//        if (user == null){
-//            User newUser = new User();
-//            newUser.setUserEmail(getCreditsByUserRequest.getUserEmail());
-//            newUser.setCreditBalance(20);
-//            newUser.setName(getCreditsByUserRequest.getName());
-//            userDao.saveUser(newUser);
-//            System.out.println("new user created and saved: " + newUser);
-//            UserModel userModel = new ModelConverter().toUserModel(newUser);
-//            return GetCreditsByUserResult.builder()
-//                    .withUserModel(userModel)
-//                    .build();
-//        }
-//        UserModel userModel = new ModelConverter().toUserModel(user);
-//        return GetCreditsByUserResult.builder()
-//                .withUserModel(userModel)
-//                .build();
     }
 }

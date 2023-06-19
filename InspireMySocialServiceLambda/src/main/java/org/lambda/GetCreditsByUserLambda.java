@@ -17,16 +17,15 @@ public class GetCreditsByUserLambda extends LambdaActivityRunner<GetCreditsByUse
         log.info("GetCreditByUserLambda reached");
         System.out.println("input is: " + input);
         return super.runActivity(
-                () -> input.fromUserClaims(claims ->
-                        {
-                        System.out.println("User email from claims is: "  + claims.get("email"));
-                        log.error(claims.get("email"));
-                        return GetCreditsByUserRequest.builder()
-                                .withUserEmail(claims.get("email"))
-                                .withName(claims.get("name"))
-                                .build(); }),
+            () -> input.fromUserClaims(claims -> {
+                System.out.println("User email from claims is: "  + claims.get("email"));
+                log.error(claims.get("email"));
+                return GetCreditsByUserRequest.builder()
+                        .withUserEmail(claims.get("email"))
+                        .withName(claims.get("name"))
+                        .build(); }),
 
-                (request, serviceComponent) -> serviceComponent.provideGetCreditsByUserActivity().handleRequest(request)
+            (request, serviceComponent) -> serviceComponent.provideGetCreditsByUserActivity().handleRequest(request)
         );
     }
 }

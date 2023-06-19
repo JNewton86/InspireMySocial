@@ -10,20 +10,20 @@ public class CreateContentLambda extends LambdaActivityRunner<CreateContentReque
 
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateContentRequest> input, Context context) {
-           return super.runActivity(
-                        () -> {
+        return super.runActivity(
+            () -> {
                 CreateContentRequest unauthenticatedRequest = input.fromBody(CreateContentRequest.class);
                 return input.fromUserClaims(claims -> CreateContentRequest.builder()
-                    .withUserId(claims.get("email"))
-                    .withContentType(unauthenticatedRequest.getContentType())
-                    .withTone(unauthenticatedRequest.getTone())
-                    .withAudience(unauthenticatedRequest.getAudience())
-                    .withTopic(unauthenticatedRequest.getTopic())
-                    .withWordCount(unauthenticatedRequest.getWordCount())
-                    .build());
+            .withUserId(claims.get("email"))
+            .withContentType(unauthenticatedRequest.getContentType())
+            .withTone(unauthenticatedRequest.getTone())
+            .withAudience(unauthenticatedRequest.getAudience())
+            .withTopic(unauthenticatedRequest.getTopic())
+            .withWordCount(unauthenticatedRequest.getWordCount())
+            .build());
             },
             (request, serviceComponent) -> serviceComponent.provideCreateContentActivity().handleRequest(request)
-    );
+     );
     }
 }
 

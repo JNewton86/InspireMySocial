@@ -5,8 +5,12 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 @JsonDeserialize(builder = GetContentForUserRequest.Builder.class)
 public class GetContentForUserRequest {
-   private final String userEmail;
+    private final String userEmail;
 
+    /**
+     * constructor for class.
+     * @param userEmail user email from cognition claim
+     */
     public GetContentForUserRequest(String userEmail) {
         this.userEmail = userEmail;
     }

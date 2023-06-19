@@ -18,15 +18,24 @@ public class UpdateUserCreditBalanceActivity {
 
     private final UserDao userDao;
 
+    /**
+     * constructor for dagger to inject the userDao.
+     * @param userDao a DAO Class that is provided by dagger to access the User DynamoDB table
+     */
     @Inject
     public UpdateUserCreditBalanceActivity(UserDao userDao) {
         this.userDao = userDao;
     }
 
+    /**
+     * Method used to process the request, called by lambda for this activity.
+     * @param updateUserCreditBalanceRequest a request object built by the lambda from the api request
+     * @return the updated user with the new balance
+     */
     public UpdateUserCreditBalanceResult handleRequest(final UpdateUserCreditBalanceRequest
                        updateUserCreditBalanceRequest) {
         log.info("Received GetCreditRequest{}", updateUserCreditBalanceRequest);
-        System.out.println("userEmail: " +updateUserCreditBalanceRequest.getUserEmail());
+        System.out.println("userEmail: " + updateUserCreditBalanceRequest.getUserEmail());
         String userEmail = updateUserCreditBalanceRequest.getUserEmail();
         if (userEmail == null || userEmail.isEmpty()) {
             throw new UserNotFoundException("Please provide a user's email!");

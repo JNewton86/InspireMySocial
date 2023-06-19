@@ -2,34 +2,42 @@ package org.activity.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import software.amazon.awssdk.services.sso.endpoints.internal.Value;
 
 import java.util.Objects;
 
 @JsonDeserialize(builder = org.activity.request.UpdateUserCreditBalanceRequest.Builder.class)
 public class UpdateUserCreditBalanceRequest {
 
-        private String userEmail;
-        private Integer creditUsage;
+    private String userEmail;
+    private Integer creditUsage;
 
-        public UpdateUserCreditBalanceRequest(String userEmail, Integer creditUsage) {
-            this.userEmail = userEmail;
-            this.creditUsage = creditUsage;
+    /**
+     * constructor.
+     * @param userEmail from cognito claim
+     * @param creditUsage from api body (json key/value)
+     */
+    public UpdateUserCreditBalanceRequest(String userEmail, Integer creditUsage) {
+        this.userEmail = userEmail;
+        this.creditUsage = creditUsage;
 
-        }
+    }
 
-        public String getUserEmail() {
-            return userEmail;
-        }
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-        public Integer getCreditUsage() {
-            return creditUsage;
-        }
+    public Integer getCreditUsage() {
+        return creditUsage;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UpdateUserCreditBalanceRequest that = (UpdateUserCreditBalanceRequest) o;
         return Objects.equals(userEmail, that.userEmail) && Objects.equals(creditUsage, that.creditUsage);
     }

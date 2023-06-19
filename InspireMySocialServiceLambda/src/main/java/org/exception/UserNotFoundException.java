@@ -1,6 +1,6 @@
 package org.exception;
 
-public class UserNotFoundException extends RuntimeException{
+public class UserNotFoundException extends RuntimeException {
 
     private static final long serialVersionUID = 1569301993789948158L;
 

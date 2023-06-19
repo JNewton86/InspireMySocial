@@ -1,12 +1,11 @@
 package org.utils;
 
-import org.openaiservice.SecretHolder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.openaiservice.SecretHolder;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 import software.amazon.awssdk.services.secretsmanager.model.*;
-
 
 public class UtilsOpenAiAPI {
 
@@ -26,12 +25,12 @@ public class UtilsOpenAiAPI {
 
         // Create a Secrets Manager client
         SecretsManagerClient client = SecretsManagerClient.builder()
-                .region(region)
-                .build();
+            .region(region)
+            .build();
 
         GetSecretValueRequest getSecretValueRequest = GetSecretValueRequest.builder()
-                .secretId(secretName)
-                .build();
+            .secretId(secretName)
+            .build();
 
         GetSecretValueResponse getSecretValueResponse;
         getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
