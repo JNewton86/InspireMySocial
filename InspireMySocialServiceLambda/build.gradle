@@ -45,6 +45,7 @@ dependencies {
     implementation 'software.amazon.awssdk:secretsmanager:'
     implementation 'software.amazon.awssdk:sso'
     implementation 'software.amazon.awssdk:ssooidc'
+    implementation 'software.amazon.awssdk:s3:1.12.490'
 
     implementation 'javax.measure:unit-api:2.1.3'
 

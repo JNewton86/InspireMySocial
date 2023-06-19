@@ -137,14 +137,15 @@ class Dashboard extends BindingClass {
             init();
             // END PAGINATION ATTEMPT 
 
+        const createImageForContentButtons = document.querySelectorAll('.createImageForContent-button')
         const deleteButtons = document.querySelectorAll('.delete-button');
         deleteButtons.forEach((btn => btn.addEventListener('click', this.deleteContent)));
         const userModel = await this.client.getCreditsByUser();
         this.userEmail=userModel.data;
         console.log("this is the user model from mount " + JSON.stringify(userModel));
         remainingCredits.innerHTML += this.generateAvailableCredits(userModel.data.userModel.creditBalance);
+        document.getElementById('createImageForm').addEventListener('submit', this.createImageForContent);
         document.getElementById('fbForm').addEventListener('submit', this.fbSubmit);
-        document.getElementById('fbFormSubmit').addEventListener('click', this.fbSubmit);
         document.getElementById('instaForm').addEventListener('submit', this.instaSubmit);
         document.getElementById('linkedInForm').addEventListener('submit', this.linkedInSubmit);
         document.getElementById('twitterForm').addEventListener('submit', this.twitterSubmit);
@@ -320,6 +321,49 @@ class Dashboard extends BindingClass {
         }
     }
 
+    async createImageForContent(evt){
+        evt.preventDefault();
+        if (!evt.target.checkValidity()) {
+            submit.vpreventDefault()
+            submit.stopPropagation()
+            return false;
+          }
+
+        const contentId= evt.target.getAttribute('data-content-id');
+        console.log("Hello from create Image for content " + contentId);
+        const errorMessageDisplay = document.getElementById('error-message-createImageForContent');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');              
+        evt.target.innerText = 'Creating Image...';
+        const contendIdToCreateImageFor = contentId;
+        console.log("contentId "+ contendIdToCreateImageFor);
+        const pictureSize = document.getElementById('image-size');
+        console.log("size: " +pictureSize);
+        const promptElement = document.getElementById('image-prompt');
+        const defaultPrompt = "make the picture awesome";
+
+        if (promptElement === null) {
+            const prompt = defaultPrompt;
+        } else {
+            const prompt = promptElement.textContent || defaultPrompt;
+        }
+        console.log("the prompt is: " + prompt);
+        console.log("from the createImage method the email is: " + JSON.stringify(this.userEmail));
+
+        try {
+            const content = await this.client.createImageForContent(contendIdToCreateImageFor, prompt, pictureSize, (error)=> {         
+            createButton.innerText = origButtonText;
+                errorMessageDisplay.innerText = `Error: ${error.message}`;
+                errorMessageDisplay.classList.remove('hidden');
+            location.reload();
+            });
+        } catch (error) {
+            console.error('Error creating image:', error);
+        } finally {
+            // location.reload();
+        }
+    }
+
     async ytShortSubmit(evt) {
         evt.preventDefault();
         if (!evt.target.checkValidity()) {
@@ -420,9 +464,53 @@ class Dashboard extends BindingClass {
             
                 </span>
                 <div>
+                <button type="button" id="createImage${contentId}" data-content-id="${contentId}" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRightCreateImageForContent" class="createImageForContent-button btn btn-outline-primary me-4 btn-sm">Create Image for this Post</button>
                 <button type="button" id="delete${contentId}" data-content-id="${contentId}" class="delete-button btn btn-outline-danger btn-sm">Delete this Post</button>
                 <p class="hidden error" id="error-message-delete"> </p>
+                <p class="hidden error" id="error-message-createImageForContent"> </p>
                 </div>
+                <!-- Image Creation Form -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightCreateImageForContent"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Create Image for your Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <form class="needs-validation" id="createImageForm" novalidate>
+                        <p class="hidden error" id="error-message-createImageForm"> </p>
+                      
+                        <div class="mt-4">
+                            <label for="image-prompt" class="form-label mt-4 text-center">**Optional** If you would like to over-ride your image prompt please enter it here</label>
+                            <textarea class="form-control" id="image-prompt" rows="3"></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            <div class="invalid-feedback">
+                            Please enter a Topic.
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label for="image-size" class="form-label">Image Size</label>
+                            <select class="form-select form-control" id="image-size" required aria-label="Default select example">
+                              <option selected></option>
+                              <option value="256x256">256x256</option>
+                              <option value="512x512">512x512</option>
+                              <option value="1024x1024">1024x1024</option>  
+                          </select>
+                          <div class="valid-feedback">
+                              Looks good!
+                            </div>
+                          <div class="invalid-feedback">
+                          Please select an Image Size.
+                          </div>
+                        </div>                                  
+                        <button class="btn mt-4 btn-primary" data-content-id="${contentId}" type="submit" id="createImageFormSubmit">Create Image</button>
+                </div>
+                </form>
+            </div>
             </div>
         </div>
     </div>`;
@@ -433,6 +521,8 @@ class Dashboard extends BindingClass {
         </div>`
     }
 
+
+    
 
     async deleteContent(event) {
         event.preventDefault();
@@ -451,7 +541,7 @@ class Dashboard extends BindingClass {
         } catch (error) {
             console.error('Error deleting content:', error);
         } finally {
-            location.reload();
+            // location.reload();
         }
     }
 //end of class    

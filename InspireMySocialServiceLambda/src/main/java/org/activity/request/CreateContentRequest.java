@@ -32,7 +32,6 @@ public class CreateContentRequest {
         this.wordCount = wordCount;
     }
 
-    public CreateContentRequest(){};
     public String getUserId() {
         return userId;
     }
