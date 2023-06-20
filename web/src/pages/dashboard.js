@@ -40,7 +40,8 @@ class Dashboard extends BindingClass {
         const userObject = await this.client.getIdentity();
         console.log("userEmail is: " + userObject.email);
         const socialPosts = await this.client.getContentForUser(userObject.email);
-        await makeImageMap.call(this);
+        // PAUSE ON IMAGES FOR NOW
+        // await makeImageMap.call(this);
 
         async function getImagesUrlMap(email, contentIds) {
             const urlMap = {};
@@ -550,8 +551,7 @@ class Dashboard extends BindingClass {
             
                 </span>
                 <div>
-                    <button type="button" id="createImage${contentId}" data-content-id="${contentId}"
-                        class="createImageForContent-button btn btn-outline-primary me-4 btn-sm">Create Image for this Post</button>
+
                         <button type="button" id="delete${contentId}" data-content-id="${contentId}" class="delete-button btn btn-outline-danger btn-sm">Delete this Post</button>
                         <p class="hidden error" id="error-message-delete"> </p>
                         <p class="hidden error" id="error-message-createImageForContent"> </p>
@@ -601,3 +601,6 @@ const main = async () => {
 };
 
 window.addEventListener('DOMContentLoaded', main);
+// stashing my button that I've disable here for now
+// <button type="button" id="createImage${contentId}" data-content-id="${contentId}"
+// class="createImageForContent-button btn btn-outline-primary me-4 btn-sm">Create Image for this Post</button>
