@@ -38,6 +38,7 @@ class Dashboard extends BindingClass {
         });
                     
         const userObject = await this.client.getIdentity();
+        console.log("userEmail is: " + userObject.email);
         const socialPosts = await this.client.getContentForUser(userObject.email);
         await makeImageMap.call(this);
 

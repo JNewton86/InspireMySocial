@@ -73,10 +73,11 @@ public class CreateImageForContentActivity {
         if (content.getImages() == null || content.getImages().isEmpty()) {
             imageStrings = new ArrayList<>();
         }
+        int imageStringsSize = imageStrings.size();
         for(int i = 0; i<imageResult.getData().size(); i++) {
             String base64JsonString = imageResult.getData().get(0).getB64Json();
             String bucketName = "ims-image-content";
-            String objectKey = "image"+i+createImageForContentRequest.getContentId()+".png";
+            String objectKey = "image"+(imageStringsSize+i)+createImageForContentRequest.getContentId()+".png";
             saveBase64JsonToS3(base64JsonString, bucketName, objectKey);
             imageStrings.add(objectKey);
         }

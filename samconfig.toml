@@ -7,3 +7,6 @@ region = "us-east-2"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1olx5wv0dllbh"
+s3_prefix = "inspire-my-social-service"
+parameter_overrides = "CognitoDomain=\"inspire-my-social-service-cd\" S3Bucket=\"nss-s3-c02-u7-project-jeff.newton\" FrontendDeployment=\"remote\""

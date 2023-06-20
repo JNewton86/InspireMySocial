@@ -85,7 +85,7 @@ public class GetImagesForContentActivity {
 
             }
             GetImagesForContentResult getImagesForContentResult = new GetImagesForContentResult(ImageModel.builder()
-                    .withData(base64Images).build());
+                    .withData(imageUrls).build());
 
             return getImagesForContentResult;
 
