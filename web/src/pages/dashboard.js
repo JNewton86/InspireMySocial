@@ -1,6 +1,7 @@
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import InspireMySocialClient from '../api/inspireMySocialClient';
+import DataStore from '../util/DataStore';
 import { marked } from 'marked';
 
 class Dashboard extends BindingClass {
@@ -11,11 +12,12 @@ class Dashboard extends BindingClass {
         super();
         this.userEmail=null;
         this.bindClassMethods(['mount','fbSubmit','instaSubmit','linkedInSubmit','twitterSubmit','ytShortSubmit', 'ytLongSubmit','generatePost','generateAvailableCredits', 'deleteContent'], this);
+        this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
+        this.client = new InspireMySocialClient(); 
         // Create a enw datastore with an initial "empty" state.
-        // this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
         console.log("home constructor");
-        // this.dataStore.addChangeListener(this.displaySearchResults);
+        this.dataStore.addChangeListener(this.displaySearchResults);
         // console.log("searchPlaylists constructor");
     }
 
@@ -23,49 +25,53 @@ class Dashboard extends BindingClass {
     * Add the header to the page and load the InspireMySocialClient.
     */
     async mount() {
+        this.header.addHeaderToPage();
         // Wire up the form's 'submit' event and the button's 'click' event to the search method.
         const postContainer = document.getElementById('list');
-        this.header.addHeaderToPage();
-        this.client = new InspireMySocialClient();            
+        // Add event delegation for delete buttons
+        postContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('delete-button')) {
+                this.deleteContent(event);
+            } else if (event.target.classList.contains('createImageForContent-button')) {
+                this.createImageForContent(event);
+            }
+        });
+                    
         const userObject = await this.client.getIdentity();
         const socialPosts = await this.client.getContentForUser(userObject.email);
-        //const list_items = socialPosts.forEach((post, index) => postContainer.innerHTML += this.generatePost(post.topic, post.aiMessage, index, post.contentType, post.contentId))
-        
+        await makeImageMap.call(this);
+
         async function getImagesUrlMap(email, contentIds) {
             const urlMap = {};
+            const promises = [];
         
             for (const contentId of contentIds) {
-                const imageUrls = await this.client.getImagesForContent(email, contentId);
-                Promise.all().then(function(values){
+                const promise = this.client.getImagesForContent(email, contentId).then(function(imageUrls) {
                     urlMap[contentId] = imageUrls;
                 });
-               
-
+                promises.push(promise);
             }
-            
+        
+            await Promise.all(promises);
+
             return urlMap;
-            
         }
         
         async function makeImageMap() {
-                    
             const contentIdList = socialPosts.map(post => post.contentId);
-            const imageUrlMap = await getImagesUrlMap(userObject.email, contentIdList);
+            const imageUrlMap = await getImagesUrlMap.call(this, userObject.email, contentIdList);
             console.log(imageUrlMap);
         }
-        
-
-
-        //ATTEMPT AT PAGINATION
-
+        //PAGINATION
         // Number of items per page
         const itemsPerPage = 10;
 
-        // Array of items (example with 50 items)
+        // Array of items
         const contentIdList = socialPosts.map(post => post.cont)
+        //const items = socialPosts.map((post, index) => this.generatePost(urlMap, post.topic, post.aiMessage, index, post.contentType, post.contentId));
         const items = socialPosts.map((post, index) => this.generatePost(userObject.email, post.topic, post.aiMessage, index, post.contentType, post.contentId));;
         console.log("items are:" + items)
-
+        
         // Function to display items for the given page
         function displayItems(page) {
             const startIndex = (page - 1) * itemsPerPage;
@@ -75,10 +81,11 @@ class Dashboard extends BindingClass {
             const section1ItemsHtml = section1Items
               .map(item => `<li class="list-group-item">${item}</li>`)
               .join('');
-      
+          
             document.getElementById('section1Items').innerHTML = section1ItemsHtml;
-                }
-
+            
+        }
+               
         // Function to generate pagination links
         function generatePaginationLinks(totalPages) {
         const paginationElement = document.getElementById('pagination');
@@ -159,18 +166,14 @@ class Dashboard extends BindingClass {
             });
 
             }
-
+            
             init();
             // END PAGINATION 
-
-        const createImageForContentButtons = document.querySelectorAll('.createImageForContent-button');
-        const deleteButtons = document.querySelectorAll('.delete-button');
-        deleteButtons.forEach((btn => btn.addEventListener('click', this.deleteContent)));
         const userModel = await this.client.getCreditsByUser();
         this.userEmail=userModel.data;
         console.log("this is the user model from mount " + JSON.stringify(userModel));
         remainingCredits.innerHTML += this.generateAvailableCredits(userModel.data.userModel.creditBalance);
-        document.getElementById('createImageForm').addEventListener('submit', this.createImageForContentSubmit);
+        // document.getElementById('createImageForm').addEventListener('submit', this.createImageForContent);
         document.getElementById('fbForm').addEventListener('submit', this.fbSubmit);
         document.getElementById('instaForm').addEventListener('submit', this.instaSubmit);
         document.getElementById('linkedInForm').addEventListener('submit', this.linkedInSubmit);
@@ -178,53 +181,14 @@ class Dashboard extends BindingClass {
         document.getElementById('ytShortForm').addEventListener('submit', this.ytShortSubmit);
         document.getElementById('ytLongForm').addEventListener('submit', this.ytLongSubmit);
     }
-
-    // validateForm(formId, fields) {
-    //     document.getElementById(formId).addEventListener("submit", function(evt) {
-    //         var isValid = true;
-
-    //         fields.forEach(fieldId => {
-    //             var field = document.getElementById(fieldId);
-
-    //             if (field.value.trim() === "" || 
-    //                 (field.type === "number" && (field.value < field.min || field.value > field.max))) {
-    //                 field.classList.add("is-invalid");
-    //                 field.classList.remove("is-valid");
-    //             } else {
-    //                 field.classList.remove("is-invalid");
-    //                 field.classList.add("is-valid");
-    //             }
-    //         });
-
-    //         evt.preventDefault();
-    //     });
-
-    //     fields.forEach(fieldId => {
-    //         document.getElementById(fieldId).addEventListener("change", function(event) {
-    //             var validFeedback = event.target.parentNode.querySelector('.valid-feedback');
-    //             var invalidFeedback = event.target.parentNode.querySelector('.invalid-feedback');
-
-    //             if (event.target.checkValidity()) {
-    //                 event.target.classList.remove("is-invalid");
-    //                 event.target.classList.add("is-valid");
-    //                 validFeedback.style.display = "block";
-    //                 invalidFeedback.style.display = "none";
-    //             } else {
-    //                 event.target.classList.remove("is-valid");
-    //                 event.target.classList.add("is-invalid");
-    //                 validFeedback.style.display = "none";
-    //                 invalidFeedback.style.display = "block";
-    //             }
-    //         });
-    //     });
-    // }
+ 
+    async populateDataStore(){
+        this.dataStore.get("contentIdList");
+    }
 
 
-    
-  
 
-
-     /**
+       /**
      * Method to run when the create FaceBook Post submit button is pressed. Call the InspireMySocialClient to create the
      * content. Refreshes page when complete.
      */
@@ -399,30 +363,27 @@ class Dashboard extends BindingClass {
 
     async createImageForContent(event){
         event.preventDefault();
+        // const contentId = this.dataStore.get("contentId");
+        const contentId = event.target.getAttribute('data-content-id');
+      
         if (!event.target.checkValidity()) {
             submit.vpreventDefault()
             submit.stopPropagation()
             return false;
           }
 
-        const contentId= event.target.getAttribute('data-content2-id');
+        
         console.log("Hello from create Image for content " + contentId);
         const errorMessageDisplay = document.getElementById('error-message-createImageForContent');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');              
-        evt.target.innerText = 'Creating Image...';
+        event.target.innerText = 'Creating Image...';
         const contendIdToCreateImageFor = contentId;
         console.log("contentId "+ contendIdToCreateImageFor);
-        const pictureSize = document.getElementById('image-size');
-        console.log("size: " +pictureSize);
-        const promptElement = document.getElementById('image-prompt');
-        const defaultPrompt = "make the picture awesome";
+        const pictureSize = "1024x1024"
+        // const prompt = "Please create an image related to the topic of this post that can be used as a thumbnail image if this is a script, or am image to include in the body of the post if this is a post."
+        const prompt = "Create an appealing and informative image for a Facebook post about the article '4 Reasons You Should Learn to Code'. The image should have clear visuals representing the benefits of coding, such as a person coding on a laptop, a light bulb for ideas, and a rising graph for career growth. Please avoid using any text on the image and ensure the visuals are easy to understand."
 
-        if (promptElement === null) {
-            const prompt = defaultPrompt;
-        } else {
-            const prompt = promptElement.textContent || defaultPrompt;
-        }
         console.log("the prompt is: " + prompt);
         console.log("from the createImage method the email is: " + JSON.stringify(this.userEmail));
 
@@ -431,12 +392,12 @@ class Dashboard extends BindingClass {
             createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
                 errorMessageDisplay.classList.remove('hidden');
-            // location.reload();
+            location.reload();
             });
         } catch (error) {
             console.error('Error creating image:', error);
         } finally {
-            // location.reload();
+            location.reload();
         }
     }
 
@@ -588,55 +549,12 @@ class Dashboard extends BindingClass {
             
                 </span>
                 <div>
-                <button type="button" id="createImage${contentId}" data-content2-id="${contentId}" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasRightCreateImageForContent" class="createImageForContent-button btn btn-outline-primary me-4 btn-sm">Create Image for this Post</button>
-                <button type="button" id="delete${contentId}" data-content-id="${contentId}" class="delete-button btn btn-outline-danger btn-sm">Delete this Post</button>
-                <p class="hidden error" id="error-message-delete"> </p>
-                <p class="hidden error" id="error-message-createImageForContent"> </p>
+                    <button type="button" id="createImage${contentId}" data-content-id="${contentId}"
+                        class="createImageForContent-button btn btn-outline-primary me-4 btn-sm">Create Image for this Post</button>
+                        <button type="button" id="delete${contentId}" data-content-id="${contentId}" class="delete-button btn btn-outline-danger btn-sm">Delete this Post</button>
+                        <p class="hidden error" id="error-message-delete"> </p>
+                        <p class="hidden error" id="error-message-createImageForContent"> </p>
                 </div>
-                
-              
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightCreateImageForContent"
-                aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Create Image for your Post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <form class="needs-validation" id="createImageForm" novalidate>
-                        <p class="hidden error" id="error-message-createImageForm"> </p>
-                      
-                        <div class="mt-4">
-                            <label for="image-prompt" class="form-label mt-4 text-center">**Optional** If you would like to over-ride your image prompt please enter it here</label>
-                            <textarea class="form-control" id="image-prompt" rows="3"></textarea>
-                            <div class="valid-feedback">
-                                Looks good!
-                              </div>
-                            <div class="invalid-feedback">
-                            Please enter a Topic.
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <label for="image-size" class="form-label">Image Size</label>
-                            <select class="form-select form-control" id="image-size" required aria-label="Default select example">
-                              <option selected></option>
-                              <option value="256x256">256x256</option>
-                              <option value="512x512">512x512</option>
-                              <option value="1024x1024">1024x1024</option>  
-                          </select>
-                          <div class="valid-feedback">
-                              Looks good!
-                            </div>
-                          <div class="invalid-feedback">
-                          Please select an Image Size.
-                          </div>
-                        </div>                                  
-                        <button class="btn mt-4 btn-primary" data-content-id="${contentId}" type="submit" id="createImageForContentSubmit">Create Image</button>
-                </div>              
-                </form>
-           
-            </div>
              <div>${carouselTemplate}</div>
             </div>
         </div>`
@@ -652,7 +570,7 @@ class Dashboard extends BindingClass {
 
     async deleteContent(event) {
         event.preventDefault();
-        const contentId= event.target.getAttribute('data-content-id');
+        const contentId = event.target.getAttribute('data-content-id');
         console.log("Hello from delete content" + contentId);
         const errorMessageDisplay = document.getElementById('error-message-delete');
         errorMessageDisplay.innerText = ``;

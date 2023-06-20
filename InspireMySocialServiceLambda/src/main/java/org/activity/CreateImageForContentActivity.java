@@ -66,12 +66,12 @@ public class CreateImageForContentActivity {
 
         //access openAiDao to generate the image
         ImageResult imageResult = openAiDao.createImageForContent(createImageRequest);
-
+        log.info("image created via openAiDao: " + imageResult.getCreated().toString());
         //convert the base64JSON "image" to png for each of the images created. save name to content object
 
         List<String> imageStrings = content.getImages();
-        if (content.getImages().isEmpty() || content.getImages() == null) {
-             imageStrings = new ArrayList<>();
+        if (content.getImages() == null || content.getImages().isEmpty()) {
+            imageStrings = new ArrayList<>();
         }
         for(int i = 0; i<imageResult.getData().size(); i++) {
             String base64JsonString = imageResult.getData().get(0).getB64Json();
