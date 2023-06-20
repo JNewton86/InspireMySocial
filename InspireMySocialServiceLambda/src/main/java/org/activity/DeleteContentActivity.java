@@ -34,8 +34,6 @@ public class DeleteContentActivity {
     public DeleteContentResult handleRequest(final DeleteContentRequest deleteContentRequest) {
         log.info("Recieved GetContentRequest{}", deleteContentRequest);
         String userEmail = deleteContentRequest.getUserId();
-        System.out.println("client email is: " + userEmail);
-        System.out.println("ContentId is " + deleteContentRequest.getContentId());
         if (userEmail == null) {
             throw new UserNotFoundException("Please provide a user's email!");
         }

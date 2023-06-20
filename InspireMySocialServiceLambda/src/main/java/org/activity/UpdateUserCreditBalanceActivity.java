@@ -35,7 +35,7 @@ public class UpdateUserCreditBalanceActivity {
     public UpdateUserCreditBalanceResult handleRequest(final UpdateUserCreditBalanceRequest
                        updateUserCreditBalanceRequest) {
         log.info("Received GetCreditRequest{}", updateUserCreditBalanceRequest);
-        System.out.println("userEmail: " + updateUserCreditBalanceRequest.getUserEmail());
+        log.info("userEmail: " + updateUserCreditBalanceRequest.getUserEmail());
         String userEmail = updateUserCreditBalanceRequest.getUserEmail();
         if (userEmail == null || userEmail.isEmpty()) {
             throw new UserNotFoundException("Please provide a user's email!");

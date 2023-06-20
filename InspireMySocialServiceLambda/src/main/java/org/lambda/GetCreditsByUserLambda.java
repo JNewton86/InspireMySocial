@@ -15,7 +15,7 @@ public class GetCreditsByUserLambda extends LambdaActivityRunner<GetCreditsByUse
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetCreditsByUserRequest> input, Context context) {
         log.info("GetCreditByUserLambda reached");
-        System.out.println("input is: " + input);
+        log.info("input is: " + input);
         return super.runActivity(
             () -> input.fromUserClaims(claims -> {
                 System.out.println("User email from claims is: "  + claims.get("email"));

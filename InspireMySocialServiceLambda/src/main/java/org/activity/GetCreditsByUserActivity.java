@@ -33,8 +33,6 @@ public class GetCreditsByUserActivity {
      */
     public GetCreditsByUserResult handleRequest(final GetCreditsByUserRequest getCreditsByUserRequest) {
         log.info("Recieved GetCreditRequest{}", getCreditsByUserRequest);
-        System.out.println("userEmail: " + getCreditsByUserRequest.getUserEmail());
-        System.out.println("name: " + getCreditsByUserRequest.getName());
         String userEmail = getCreditsByUserRequest.getUserEmail();
         if (userEmail == null || userEmail.isEmpty()) {
             throw new UserNotFoundException("Please provide a user's email!");
@@ -52,7 +50,7 @@ public class GetCreditsByUserActivity {
             newUser.setCreditBalance(20);
             newUser.setName(getCreditsByUserRequest.getName());
             User user = userDao.saveUser(newUser);
-            System.out.println("new user created and saved: " + newUser);
+           log.info("new user created and saved: " + newUser);
             UserModel userModel = new ModelConverter().toUserModel(user);
             return GetCreditsByUserResult.builder()
                     .withUserModel(userModel)

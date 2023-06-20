@@ -4,12 +4,15 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.activity.request.CreateContentRequest;
 import org.activity.result.CreateContentResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CreateContentLambda extends LambdaActivityRunner<CreateContentRequest, CreateContentResult>
         implements RequestHandler<AuthenticatedLambdaRequest<CreateContentRequest>, LambdaResponse> {
-
+    private final Logger log = LogManager.getLogger();
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateContentRequest> input, Context context) {
+        log.info("CreateContentLambda called");
         return super.runActivity(
             () -> {
                 CreateContentRequest unauthenticatedRequest = input.fromBody(CreateContentRequest.class);
