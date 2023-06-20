@@ -30,7 +30,10 @@ public class OpenAiDaoModule {
         }
     }
 
-
+    /**
+     * method to Provide for dagger a singleton of OpenAiService.
+     * @return a instance of OpenAiService that can be used by dagger for dependency injection.
+     */
     @Singleton
     @Provides
     public OpenAiService provideOpenAiService() {

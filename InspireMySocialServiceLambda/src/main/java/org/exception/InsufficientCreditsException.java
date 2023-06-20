@@ -1,12 +1,12 @@
 package org.exception;
 
-public class InsufficientCreditsException extends RuntimeException{
+public class InsufficientCreditsException extends RuntimeException {
 
 
     private static final long serialVersionUID = -4124885419726656348L;
 
     /**
-     * Exception with no message or cause.e
+     * Exception with no message or cause.
      */
     public InsufficientCreditsException() {
         super();
@@ -38,6 +38,6 @@ public class InsufficientCreditsException extends RuntimeException{
      */
     public InsufficientCreditsException(String message, Throwable cause) {
         super(message, cause);
-        }
+    }
 }
 

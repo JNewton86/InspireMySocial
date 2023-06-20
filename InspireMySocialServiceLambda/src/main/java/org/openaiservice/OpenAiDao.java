@@ -53,7 +53,7 @@ public class OpenAiDao {
         }
 
         final List<ChatMessage> messages = new ArrayList<>();
-        if(Objects.equals(createContentRequest.getContentType(), "Face Book Post")) {
+        if (Objects.equals(createContentRequest.getContentType(), "Face Book Post")) {
             System.out.println("Streaming FB chat completion...");
             final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
                     secretHolder.getFbSystemPrompt());
@@ -75,8 +75,8 @@ public class OpenAiDao {
                     .build();
             ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
             return chatCompletionResult;
-       }
-        if(Objects.equals(createContentRequest.getContentType(), "Instagram Post")) {
+        }
+        if (Objects.equals(createContentRequest.getContentType(), "Instagram Post")) {
             System.out.println("Streaming Insta chat completion...");
             final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
                     secretHolder.getInstaSystemPrompt());
@@ -85,7 +85,8 @@ public class OpenAiDao {
                     createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
                     ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
                     createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
-                    "he post length should be no more than " + createContentRequest.getWordCount() + " characters long.");
+                    "he post length should be no more than " + createContentRequest.getWordCount() +
+                    " characters long.");
             messages.add(userMessage);
             ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
                     .builder()
@@ -99,7 +100,7 @@ public class OpenAiDao {
             ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
             return chatCompletionResult;
         }
-        if(Objects.equals(createContentRequest.getContentType(), "Twitter Post")) {
+        if (Objects.equals(createContentRequest.getContentType(), "Twitter Post")) {
             System.out.println("Streaming Twitter chat completion...");
             final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
                     secretHolder.getTwitterSystemPrompt());
@@ -122,7 +123,7 @@ public class OpenAiDao {
             ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
             return chatCompletionResult;
         }
-        if(Objects.equals(createContentRequest.getContentType(), "YouTube Short Script")) {
+        if (Objects.equals(createContentRequest.getContentType(), "YouTube Short Script")) {
             System.out.println("Streaming YT Short chat completion...");
             final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
                     secretHolder.getYtShortSystemPrompt());
@@ -146,7 +147,7 @@ public class OpenAiDao {
             ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
             return chatCompletionResult;
         }
-        if(Objects.equals(createContentRequest.getContentType(), "YouTube Long Script")) {
+        if (Objects.equals(createContentRequest.getContentType(), "YouTube Long Script")) {
             System.out.println("Streaming YT Long chat completion...");
             final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
                     secretHolder.getYtLongSystemPrompt());
@@ -169,7 +170,7 @@ public class OpenAiDao {
             ChatCompletionResult chatCompletionResult = openAiService.createChatCompletion(chatCompletionRequest);
             return chatCompletionResult;
         }
-        if(Objects.equals(createContentRequest.getContentType(), "LinkedIn Post")) {
+        if (Objects.equals(createContentRequest.getContentType(), "LinkedIn Post")) {
             System.out.println("Streaming LinkedIn chat completion...");
             final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
                     secretHolder.getLinkedInSystemPrompt());
@@ -194,7 +195,6 @@ public class OpenAiDao {
         }
         return null;
     }
-
     public ImageResult createImageForContent(CreateImageRequest createImageRequest){
         System.out.println("Streaming Image completion...");
         SecretHolder secretHolder = null;

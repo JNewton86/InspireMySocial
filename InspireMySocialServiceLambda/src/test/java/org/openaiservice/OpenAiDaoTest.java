@@ -32,26 +32,6 @@ class OpenAiDaoTest {
         openAiDao = new OpenAiDao(openAiService,metricsPublisher);
     }
 
-    //TODO Integration Test that makes live call to OpenAi Disabled for time constraints when building
-//    @Test
-//    public void getContent_valid_success(){
-//
-//        OpenAiService openAiService = new OpenAiService(SecretHolder.getOpenAiApiKey(), Duration.ofSeconds(240));
-//        OpenAiDao openAiDao = new OpenAiDao(openAiService,null );
-//        CreateContentRequest createContentRequest = new CreateContentRequest("Jeff", "Face Book Post",
-//                "Aggressively Happy", "hiring managers", "hire nss grads, we are great developers", 300 );
-//        ChatCompletionResult result = openAiDao.createContent(createContentRequest);
-//        System.out.println("-".repeat(140));
-//        System.out.println("ContentID: " + result.getId());
-//        System.out.println("Model Used: " + result.getModel());
-//        System.out.println("Object: " + result.getObject());
-//        System.out.println("Created: " + result.getCreated());
-//        System.out.println("Prompt Tokens: " + result.getUsage().getPromptTokens());
-//        System.out.println("Completion Tokens: " + result.getUsage().getCompletionTokens());
-//        System.out.println("Total Tokens: " + result.getUsage().getTotalTokens());
-//        System.out.println("Message: " + result.getChoices().get(0).getMessage().getContent());
-//            }
-
 //    @Test
 //    public void getContent_validRequest_success(){
 //        // GIVEN

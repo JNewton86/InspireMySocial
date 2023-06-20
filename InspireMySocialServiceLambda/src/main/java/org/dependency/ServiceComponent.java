@@ -24,10 +24,22 @@ public interface ServiceComponent {
      */
     GetContentForUserActivity provideGetContentForUserActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return DeleteContentActivity
+     */
     DeleteContentActivity provideDeleteContentActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return GetCreditsByUserActivity
+     */
     GetCreditsByUserActivity provideGetCreditsByUserActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return UpdateUserCreditBalanceActivity
+     */
     UpdateUserCreditBalanceActivity provideUpdateUserCreditBalanceActivity();
 
     CreateImageForContentActivity provideCreateImageForContentActivity();

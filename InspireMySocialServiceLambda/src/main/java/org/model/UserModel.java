@@ -9,11 +9,16 @@ public class UserModel {
 
     private final Integer creditBalance;
 
-
+    /**
+     * Constructor for userModel.
+     * @param userId user's email address
+     * @param name name first and last as a String
+     * @param creditBalance integer for their remaining balance
+     */
     public UserModel(String userId, String name, Integer creditBalance) {
         this.userId = userId;
         this.name = name;
-       this.creditBalance = creditBalance;
+        this.creditBalance = creditBalance;
     }
 
     public String getUserId() {
@@ -31,10 +36,15 @@ public class UserModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UserModel userModel = (UserModel) o;
-        return Objects.equals(userId, userModel.userId) && Objects.equals(name, userModel.name) && Objects.equals(creditBalance, userModel.creditBalance);
+        return Objects.equals(userId, userModel.userId) && Objects.equals(name, userModel.name) &&
+                Objects.equals(creditBalance, userModel.creditBalance);
     }
 
     @Override

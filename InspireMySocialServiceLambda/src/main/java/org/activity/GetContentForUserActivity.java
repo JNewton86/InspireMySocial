@@ -19,6 +19,10 @@ public class GetContentForUserActivity {
     private final Logger log = LogManager.getLogger();
     private final ContentDao contentDao;
 
+    /**
+     * Constructor that daggers uses to injust the contentDao.
+     * @param contentDao dao class that is instantiated by dagger for accessing content table
+     */
     @Inject
     public GetContentForUserActivity(ContentDao contentDao) {
         this.contentDao = contentDao;
@@ -29,7 +33,7 @@ public class GetContentForUserActivity {
      * @param getContentForUserRequest is a request passed to the method from the Lambda for the Activity
      * @return a GetContentForUserResult which is primarily comprised of a List<ContentModel> that is returned by
      * the API to the front end client for the specified user.
-     **/
+     */
     public GetContentForUserResult handleRequest(final GetContentForUserRequest getContentForUserRequest) {
         log.info("Recieved GetContentRequest{}", getContentForUserRequest);
         String userEmail = getContentForUserRequest.getUserEmail();
@@ -37,7 +41,7 @@ public class GetContentForUserActivity {
             throw new UserNotFoundException("Please provide a user's email!");
         }
         List<Content> listOfContent = contentDao.getAllContentForUser(userEmail);
-        if(listOfContent.isEmpty()) {
+        if (listOfContent.isEmpty()) {
             return GetContentForUserResult.builder()
                     .withContentModelList(new ArrayList<>())
                     .build();
