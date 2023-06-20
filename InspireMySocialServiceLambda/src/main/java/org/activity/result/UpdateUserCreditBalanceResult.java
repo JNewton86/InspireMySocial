@@ -8,6 +8,10 @@ public class UpdateUserCreditBalanceResult {
 
     private final UserModel userModel;
 
+    /**
+     * Constructor for class.
+     * @param userModel passed in by userModel converter
+     */
     public UpdateUserCreditBalanceResult(UserModel userModel) {
         this.userModel = userModel;
     }
@@ -25,8 +29,12 @@ public class UpdateUserCreditBalanceResult {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UpdateUserCreditBalanceResult that = (UpdateUserCreditBalanceResult) o;
         return Objects.equals(userModel, that.userModel);
     }

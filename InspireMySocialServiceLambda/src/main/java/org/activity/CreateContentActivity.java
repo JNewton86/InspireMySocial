@@ -32,7 +32,7 @@ public class CreateContentActivity {
      *
      * @param contentDao a data acccess only class that access DynamoDBTable storing content
      * @param openAiDao  a data access only class that leverages a community service for accessing OpenAI's API
-     * @param userDao
+     * @param userDao a data access only class that access DynamoDBTable storing users
      */
     @Inject
     public CreateContentActivity(ContentDao contentDao, OpenAiDao openAiDao, UserDao userDao) {
@@ -48,31 +48,29 @@ public class CreateContentActivity {
      * @return returns a result object built from the content object in the below method
      */
     public CreateContentResult handleRequest(final CreateContentRequest createContentRequest) {
-        // Print lines for bug hunt
-        System.out.println("*** congrats, you made it to the handleRequest method in CreateContentActivity ***");
-        System.out.println("The CreateContentActivity request was : " + createContentRequest.toString());
-        System.out.println("request received in Create Content Activity");
-
-        // log.
+        log.info("request received in Create Content Activity");
         log.info("Receieved CreateContent Request {}", createContentRequest);
         User user = userDao.getUser(createContentRequest.getUserId());
-        if(user.getCreditBalance() == 0){
+        if (user.getCreditBalance() == 0) {
             throw new InsufficientCreditsException("Insufficient Credits Remaining");
         }
         // Call to openAiDao to create content.
         try {
+            // Call to OpenAi to generate post
             ChatCompletionResult post = openAiDao.createContent(createContentRequest);
-            // Create and instantiate the Dynamo Object
-            System.out.println("*** the open ai call returned: " + post.toString() + " ***");
+            log.info("OpenAi request returned the following :{}",post.toString());
+
+            // Create and populate the Dynamo Object with elements from post & createContentRequest
             Content newContent = new Content();
+            // Items from createContentRequest
             newContent.setUserID(createContentRequest.getUserId());
             newContent.setContentType(createContentRequest.getContentType());
-            System.out.println("****** The content ID from OpenAI Call is " + post.getId() + " *****") ;
-            newContent.setContentId(post.getId());
             newContent.setTone(createContentRequest.getTone());
             newContent.setAudience(createContentRequest.getAudience());
             newContent.setTopic(createContentRequest.getTopic());
             newContent.setWordCount(createContentRequest.getWordCount());
+            // Items from post and data entry
+            newContent.setContentId(post.getId());
             newContent.setDeleted(false);
             newContent.setAiMessage(post.getChoices().get(0).getMessage().getContent());
             long promptUsage = post.getUsage().getPromptTokens();
@@ -82,7 +80,7 @@ public class CreateContentActivity {
             Integer completionUsageInt = (int) completionUsage;
             newContent.setCompletionTokens(completionUsageInt);
             newContent.setTotalTokens(completionUsageInt + promptTokensInt);
-            System.out.println("Content object to save to Dynamo: " + newContent.toString());
+
             // Save the Content Object
             contentDao.saveContent(newContent);
 
@@ -95,7 +93,7 @@ public class CreateContentActivity {
                     .build();
 
         } catch (Exception e) {
-            System.out.println("this is line 87 of the activity" + e);
+           log.error("error thrown by CreateContentActivity " + e);
             throw e;
         }
     }

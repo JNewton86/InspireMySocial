@@ -32,8 +32,8 @@ public class ModelConverter {
     /**
      * This is a method to convert a list of data from a DynamoDB table for storing Content to a List of Models for the
      * content.
-     * @param contentList an List of the dynamo object content
-     * @return List<ContentModel> which is List of the API model for the GetContent
+     * @param contentList a List of the dynamo object content
+     * @return ContentModel is a List<ContentModel> which is List of the API model for the GetContent
      */
     public List<ContentModel> toContentModelList(List<Content> contentList) {
         List<ContentModel> contentModels = new ArrayList<>();
@@ -45,7 +45,12 @@ public class ModelConverter {
         return contentModels;
     }
 
-    public UserModel toUserModel(User user){
+    /**
+     * This is a method to convert a DynamoDb user to an API user model.
+     * @param user , which is a DynamoDBModel of a user
+     * @return returns a userModel for API
+     */
+    public UserModel toUserModel(User user) {
         return UserModel.builder()
                 .withUserId(user.getUserEmail())
                 .withName(user.getName())

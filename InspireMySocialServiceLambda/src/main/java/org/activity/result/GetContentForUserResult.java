@@ -10,7 +10,13 @@ public class GetContentForUserResult {
 
     private final List<ContentModel> contentModelList;
 
-    public GetContentForUserResult(List<ContentModel> contentModelList) {this.contentModelList = contentModelList;}
+    /**
+     * Constructor for class.
+     * @param contentModelList pass in a List of ContentModels from the GetContentForUserActivity
+     */
+    public GetContentForUserResult(List<ContentModel> contentModelList) {
+        this.contentModelList = contentModelList;
+    }
 
     @Override
     public String toString() {
@@ -18,8 +24,8 @@ public class GetContentForUserResult {
                 "contentList=" + contentModelList +
                 '}';
     }
-
-    public static Builder builder(){
+    //CHECKSTYLE:OFF:Builder
+    public static Builder builder() {
         return new Builder();
     }
 
@@ -29,9 +35,9 @@ public class GetContentForUserResult {
 
     //CHECKSTYLE:OFF:Builder
     public static class Builder{
-        private List<ContentModel>  contentModelList;
+        private List<ContentModel> contentModelList;
 
-        public Builder withContentModelList(List<ContentModel> contentModelList){
+        public Builder withContentModelList(List<ContentModel> contentModelList) {
             this.contentModelList = new ArrayList<>(contentModelList);
             return this;
         }
@@ -42,8 +48,12 @@ public class GetContentForUserResult {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         GetContentForUserResult that = (GetContentForUserResult) o;
         return Objects.equals(contentModelList, that.contentModelList);
     }

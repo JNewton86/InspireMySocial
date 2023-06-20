@@ -1,6 +1,7 @@
 package org.activity.result;
 
 import org.model.UserModel;
+
 import java.util.Objects;
 
 public class GetCreditsByUserResult {
@@ -24,8 +25,12 @@ public class GetCreditsByUserResult {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         GetCreditsByUserResult that = (GetCreditsByUserResult) o;
         return Objects.equals(userModel, that.userModel);
     }

@@ -6,22 +6,27 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonDeserialize(builder = org.activity.request.GetCreditsByUserRequest.Builder.class)
 public class GetCreditsByUserRequest {
 
-        private final String userEmail;
+    private final String userEmail;
 
-        private final String name;
+    private final String name;
 
-        public GetCreditsByUserRequest(String userEmail, String name) {
-            this.userEmail = userEmail;
-            this.name = name;
-        }
+    /**
+     * constructor for the request.
+     * @param userEmail from cognito claim
+     * @param name from cognito claim
+     */
+    public GetCreditsByUserRequest(String userEmail, String name) {
+        this.userEmail = userEmail;
+        this.name = name;
+    }
 
-        public String getUserEmail() {
-            return userEmail;
-        }
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString() {

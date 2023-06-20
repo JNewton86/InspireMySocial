@@ -6,17 +6,22 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonDeserialize(builder = DeleteContentRequest.Builder.class)
 public class DeleteContentRequest {
 
-        private String userId;
-        private String contentId;
+    private String userId;
+    private String contentId;
 
-        public DeleteContentRequest(String userEmail, String contentId) {
-            this.userId = userEmail;
-            this.contentId = contentId;
-        }
+    /**
+     * constructor.
+     * @param userEmail user's email address from Cognito Claim
+     * @param contentId contentId from API call
+     */
+    public DeleteContentRequest(String userEmail, String contentId) {
+        this.userId = userEmail;
+        this.contentId = contentId;
+    }
 
-        public String getUserId() {
-            return userId;
-        }
+    public String getUserId() {
+        return userId;
+    }
 
     public String getContentId() {
         return contentId;
