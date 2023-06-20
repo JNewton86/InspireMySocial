@@ -41,4 +41,8 @@ public interface ServiceComponent {
      * @return UpdateUserCreditBalanceActivity
      */
     UpdateUserCreditBalanceActivity provideUpdateUserCreditBalanceActivity();
+
+    CreateImageForContentActivity provideCreateImageForContentActivity();
+
+    GetImagesForContentActivity provideGetImagesForContentActivity();
 }

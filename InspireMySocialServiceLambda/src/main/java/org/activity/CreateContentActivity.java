@@ -15,6 +15,8 @@ import org.model.ContentModel;
 import org.openaiservice.OpenAiDao;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation of the CreateContentActivity for the InspireMySocial CreateContent API.
@@ -72,6 +74,8 @@ public class CreateContentActivity {
             // Items from post and data entry
             newContent.setContentId(post.getId());
             newContent.setDeleted(false);
+            List<String> images = new ArrayList<>();
+            newContent.setImages(images);
             newContent.setAiMessage(post.getChoices().get(0).getMessage().getContent());
             long promptUsage = post.getUsage().getPromptTokens();
             Integer promptTokensInt = (int) promptUsage;

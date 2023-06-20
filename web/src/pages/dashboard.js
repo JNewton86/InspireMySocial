@@ -1,6 +1,7 @@
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import InspireMySocialClient from '../api/inspireMySocialClient';
+import DataStore from '../util/DataStore';
 import { marked } from 'marked';
 
 class Dashboard extends BindingClass {
@@ -10,12 +11,13 @@ class Dashboard extends BindingClass {
     constructor() {
         super();
         this.userEmail=null;
-        this.bindClassMethods(['mount', 'fbSubmit','instaSubmit','linkedInSubmit','twitterSubmit','ytShortSubmit', 'ytLongSubmit','generatePost','generateAvailableCredits', 'deleteContent'], this);
+        this.bindClassMethods(['mount','fbSubmit','instaSubmit','linkedInSubmit','twitterSubmit','ytShortSubmit', 'ytLongSubmit','generatePost','generateAvailableCredits', 'deleteContent'], this);
+        this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
+        this.client = new InspireMySocialClient(); 
         // Create a enw datastore with an initial "empty" state.
-        // this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
         console.log("home constructor");
-        // this.dataStore.addChangeListener(this.displaySearchResults);
+        this.dataStore.addChangeListener(this.displaySearchResults);
         // console.log("searchPlaylists constructor");
     }
 
@@ -23,23 +25,55 @@ class Dashboard extends BindingClass {
     * Add the header to the page and load the InspireMySocialClient.
     */
     async mount() {
+        this.header.addHeaderToPage();
         // Wire up the form's 'submit' event and the button's 'click' event to the search method.
         const postContainer = document.getElementById('list');
-        this.header.addHeaderToPage();
-        this.client = new InspireMySocialClient();            
+        // Add event delegation for delete buttons
+        postContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('delete-button')) {
+                this.deleteContent(event);
+            } else if (event.target.classList.contains('createImageForContent-button')) {
+                this.createImageForContent(event);
+            }
+        });
+                    
         const userObject = await this.client.getIdentity();
+        console.log("userEmail is: " + userObject.email);
         const socialPosts = await this.client.getContentForUser(userObject.email);
-        //const list_items = socialPosts.forEach((post, index) => postContainer.innerHTML += this.generatePost(post.topic, post.aiMessage, index, post.contentType, post.contentId))
-        
-        //ATTEMPT AT PAGINATION
+        // PAUSE ON IMAGES FOR NOW
+        // await makeImageMap.call(this);
 
+        async function getImagesUrlMap(email, contentIds) {
+            const urlMap = {};
+            const promises = [];
+        
+            for (const contentId of contentIds) {
+                const promise = this.client.getImagesForContent(email, contentId).then(function(imageUrls) {
+                    urlMap[contentId] = imageUrls;
+                });
+                promises.push(promise);
+            }
+        
+            await Promise.all(promises);
+
+            return urlMap;
+        }
+        
+        async function makeImageMap() {
+            const contentIdList = socialPosts.map(post => post.contentId);
+            const imageUrlMap = await getImagesUrlMap.call(this, userObject.email, contentIdList);
+            console.log(imageUrlMap);
+        }
+        //PAGINATION
         // Number of items per page
         const itemsPerPage = 10;
 
-        // Array of items (example with 50 items)
-        const items = socialPosts.map((post, index) => this.generatePost(post.topic, post.aiMessage, index, post.contentType, post.contentId));;
-
-
+        // Array of items
+        const contentIdList = socialPosts.map(post => post.cont)
+        //const items = socialPosts.map((post, index) => this.generatePost(urlMap, post.topic, post.aiMessage, index, post.contentType, post.contentId));
+        const items = socialPosts.map((post, index) => this.generatePost(userObject.email, post.topic, post.aiMessage, index, post.contentType, post.contentId));;
+        console.log("items are:" + items)
+        
         // Function to display items for the given page
         function displayItems(page) {
             const startIndex = (page - 1) * itemsPerPage;
@@ -49,10 +83,11 @@ class Dashboard extends BindingClass {
             const section1ItemsHtml = section1Items
               .map(item => `<li class="list-group-item">${item}</li>`)
               .join('');
-      
+          
             document.getElementById('section1Items').innerHTML = section1ItemsHtml;
-          }
-
+            
+        }
+               
         // Function to generate pagination links
         function generatePaginationLinks(totalPages) {
         const paginationElement = document.getElementById('pagination');
@@ -133,34 +168,39 @@ class Dashboard extends BindingClass {
             });
 
             }
-
+            
             init();
-            // END PAGINATION ATTEMPT 
-
-        const deleteButtons = document.querySelectorAll('.delete-button');
-        deleteButtons.forEach((btn => btn.addEventListener('click', this.deleteContent)));
+            // END PAGINATION 
         const userModel = await this.client.getCreditsByUser();
         this.userEmail=userModel.data;
         console.log("this is the user model from mount " + JSON.stringify(userModel));
         remainingCredits.innerHTML += this.generateAvailableCredits(userModel.data.userModel.creditBalance);
+        // document.getElementById('createImageForm').addEventListener('submit', this.createImageForContent);
         document.getElementById('fbForm').addEventListener('submit', this.fbSubmit);
-        document.getElementById('fbFormSubmit').addEventListener('click', this.fbSubmit);
         document.getElementById('instaForm').addEventListener('submit', this.instaSubmit);
         document.getElementById('linkedInForm').addEventListener('submit', this.linkedInSubmit);
         document.getElementById('twitterForm').addEventListener('submit', this.twitterSubmit);
         document.getElementById('ytShortForm').addEventListener('submit', this.ytShortSubmit);
         document.getElementById('ytLongForm').addEventListener('submit', this.ytLongSubmit);
     }
+ 
+    async populateDataStore(){
+        this.dataStore.get("contentIdList");
+    }
 
-     /**
+
+
+       /**
      * Method to run when the create FaceBook Post submit button is pressed. Call the InspireMySocialClient to create the
      * content. Refreshes page when complete.
      */
     async fbSubmit(evt) {
         evt.preventDefault();
+       
         if (!evt.target.checkValidity()) {
             submit.vpreventDefault()
             submit.stopPropagation()
+            
             return false;
           }
         
@@ -199,6 +239,7 @@ class Dashboard extends BindingClass {
 
     async instaSubmit(evt) {
         evt.preventDefault();
+       
         if (!evt.target.checkValidity()) {
             submit.vpreventDefault()
             submit.stopPropagation()
@@ -243,6 +284,7 @@ class Dashboard extends BindingClass {
         if (!evt.target.checkValidity()) {
             submit.vpreventDefault()
             submit.stopPropagation()
+          
             return false;
           }
     
@@ -284,6 +326,7 @@ class Dashboard extends BindingClass {
         if (!evt.target.checkValidity()) {
             submit.vpreventDefault()
             submit.stopPropagation()
+           
             return false;
           }
     
@@ -320,11 +363,52 @@ class Dashboard extends BindingClass {
         }
     }
 
+    async createImageForContent(event){
+        event.preventDefault();
+        // const contentId = this.dataStore.get("contentId");
+        const contentId = event.target.getAttribute('data-content-id');
+      
+        if (!event.target.checkValidity()) {
+            submit.vpreventDefault()
+            submit.stopPropagation()
+            return false;
+          }
+
+        
+        console.log("Hello from create Image for content " + contentId);
+        const errorMessageDisplay = document.getElementById('error-message-createImageForContent');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');              
+        event.target.innerText = 'Creating Image...';
+        const contendIdToCreateImageFor = contentId;
+        console.log("contentId "+ contendIdToCreateImageFor);
+        const pictureSize = "1024x1024"
+        // const prompt = "Please create an image related to the topic of this post that can be used as a thumbnail image if this is a script, or am image to include in the body of the post if this is a post."
+        const prompt = "Create an appealing and informative image for a Facebook post about the article '4 Reasons You Should Learn to Code'. The image should have clear visuals representing the benefits of coding, such as a person coding on a laptop, a light bulb for ideas, and a rising graph for career growth. Please avoid using any text on the image and ensure the visuals are easy to understand."
+
+        console.log("the prompt is: " + prompt);
+        console.log("from the createImage method the email is: " + JSON.stringify(this.userEmail));
+
+        try {
+            const content = await this.client.createImageForContent(contendIdToCreateImageFor, prompt, pictureSize, (error)=> {         
+            createButton.innerText = origButtonText;
+                errorMessageDisplay.innerText = `Error: ${error.message}`;
+                errorMessageDisplay.classList.remove('hidden');
+            location.reload();
+            });
+        } catch (error) {
+            console.error('Error creating image:', error);
+        } finally {
+            location.reload();
+        }
+    }
+
     async ytShortSubmit(evt) {
         evt.preventDefault();
         if (!evt.target.checkValidity()) {
             submit.vpreventDefault()
             submit.stopPropagation()
+           
             return false;
           }
     
@@ -366,6 +450,7 @@ class Dashboard extends BindingClass {
         if (!evt.target.checkValidity()) {
             submit.vpreventDefault()
             submit.stopPropagation()
+            
             return false;
           }
     
@@ -403,7 +488,53 @@ class Dashboard extends BindingClass {
     }
   
 
-    generatePost(title, content, index, contentType, contentId) {
+    generatePost(urlMap , title, content, index, contentType, contentId) {
+            let carouselTemplate = "";
+            const specificContentId = contentId; //  contentId you are looking for
+            console.log("contentId in generate post was: "+specificContentId)
+            // Check if the specific contentId exists in the urlMap
+            if (urlMap.hasOwnProperty(specificContentId)) {
+                // Access the image URLs associated with the specific contentId
+                const urls = urlMap[specificContentId];
+                if(urls.length > 0){
+                    const carouselIndicators = imageUrls.map((url, i) => {
+                    return `<button type="button" data-bs-target="#carousel${contentId}" data-bs-slide-to="${i}"
+                            class="${i === 0 ? "active" : ""}" aria-current="${i === 0 ? "true" : "false"}"
+                            aria-label="Slide ${i + 1}"></button>`;
+                }).join('');
+                
+                const carouselItems = imageUrls.map((url, i) => {
+                    return `<div class="carousel-item ${i === 0 ? "active" : ""}">
+                        <img src="${url}" class="d-block w-100" alt="Image ${i + 1}">
+                        </div>`;
+                }).join('');
+                
+                carouselTemplate = `<div id="carousel${contentId}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                    ${carouselIndicators}
+                    </div>
+                    <div class="carousel-inner">
+                    ${carouselItems}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel${contentId}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel${contentId}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                    </button>
+                </div>;
+            </div>`;
+                // Do something with the urls or log them to console
+                console.log('URLs associated with contentId:', specificContentId, 'are:', urls);
+            } else {
+                console.log('The contentId', specificContentId, 'is not present in the imageUrlMap.');
+            }
+           
+            }
+        
+       
         return `<div class="accordion-item">
         <h2 class="accordion-header" id="heading${index}">
             <button class="accordion-button accordion-button-collapse custom-accordion-bg" type="button" data-bs-toggle="collapse"
@@ -420,12 +551,14 @@ class Dashboard extends BindingClass {
             
                 </span>
                 <div>
-                <button type="button" id="delete${contentId}" data-content-id="${contentId}" class="delete-button btn btn-outline-danger btn-sm">Delete this Post</button>
-                <p class="hidden error" id="error-message-delete"> </p>
+
+                        <button type="button" id="delete${contentId}" data-content-id="${contentId}" class="delete-button btn btn-outline-danger btn-sm">Delete this Post</button>
+                        <p class="hidden error" id="error-message-delete"> </p>
+                        <p class="hidden error" id="error-message-createImageForContent"> </p>
                 </div>
+             <div>${carouselTemplate}</div>
             </div>
-        </div>
-    </div>`;
+        </div>`
     }
 
     generateAvailableCredits(creditBalance) {
@@ -434,9 +567,11 @@ class Dashboard extends BindingClass {
     }
 
 
+    
+
     async deleteContent(event) {
         event.preventDefault();
-        const contentId= event.target.getAttribute('data-content-id');
+        const contentId = event.target.getAttribute('data-content-id');
         console.log("Hello from delete content" + contentId);
         const errorMessageDisplay = document.getElementById('error-message-delete');
         errorMessageDisplay.innerText = ``;
@@ -451,7 +586,7 @@ class Dashboard extends BindingClass {
         } catch (error) {
             console.error('Error deleting content:', error);
         } finally {
-            location.reload();
+            // location.reload();
         }
     }
 //end of class    
@@ -466,3 +601,6 @@ const main = async () => {
 };
 
 window.addEventListener('DOMContentLoaded', main);
+// stashing my button that I've disable here for now
+// <button type="button" id="createImage${contentId}" data-content-id="${contentId}"
+// class="createImageForContent-button btn btn-outline-primary me-4 btn-sm">Create Image for this Post</button>

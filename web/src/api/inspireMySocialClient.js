@@ -15,7 +15,7 @@ export default class InspireMySocialClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout','signUp','createContent', 'softDeleteContent', 'getCreditsByUser'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout','signUp','createContent', 'getImagesForContent','softDeleteContent', 'getCreditsByUser', 'createImageForContent'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -90,6 +90,42 @@ export default class InspireMySocialClient extends BindingClass {
                 }
             });
             return response;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getImagesForContent(userEmail, contentId, errorCallback) {
+        try { 
+            const token = await this.getTokenOrThrow("Only authenticated users can access credit balance.");
+            const response = await this.axiosClient.get(`content/${userEmail}/${contentId}/images`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async createImageForContent(contentId, prompt, imageSize, errorCallback) {
+        try{
+            const token = await this.getTokenOrThrow("Only authenticated users can access credit balance.");
+            const response = await this.axiosClient.post('content/image', {
+                contentId: contentId,
+                prompt: prompt,
+                imageSize: imageSize
+
+
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            
+            
+            return response.content; 
         } catch (error) {
             this.handleError(error, errorCallback)
         }

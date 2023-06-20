@@ -7,6 +7,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTyped;
 
+import java.util.List;
+
 
 /**
  * Represents a social media content returned by OpenAI in the ims_socialmediacontent dynamo table.
@@ -26,6 +28,8 @@ public class Content {
     private Integer promptTokens;
     private Integer completionTokens;
     private Integer totalTokens;
+
+    private List<String> images;
 
     @DynamoDBHashKey(attributeName = "userEmail")
     public String getUserID() {
@@ -127,6 +131,15 @@ public class Content {
         this.totalTokens = totalTokens;
     }
 
+    @DynamoDBAttribute(attributeName = "images")
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
     @Override
     public String toString() {
         return "Content{" +
@@ -142,6 +155,7 @@ public class Content {
                 ", promptTokens=" + promptTokens +
                 ", completionTokens=" + completionTokens +
                 ", totalTokens=" + totalTokens +
+                ", images=" + images +
                 '}';
     }
 }
