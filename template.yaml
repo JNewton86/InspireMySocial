@@ -369,7 +369,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /content/images
+            Path: /content/{userEmail}/{contentId}/images
             Method: get
 
   #-----------------------------------------------------

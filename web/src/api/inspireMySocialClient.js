@@ -95,12 +95,10 @@ export default class InspireMySocialClient extends BindingClass {
         }
     }
 
-    async getImagesForContent(contentId, errorCallback) {
+    async getImagesForContent(userEmail, contentId, errorCallback) {
         try { 
             const token = await this.getTokenOrThrow("Only authenticated users can access credit balance.");
-            const response = await this.axiosClient.get(`content/images`, {
-                contentId: contentId,
-            },{
+            const response = await this.axiosClient.get(`content/${userEmail}/${contentId}/images`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

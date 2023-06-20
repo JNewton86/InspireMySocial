@@ -61,6 +61,9 @@ public class GetImagesForContentActivity {
             String userEmail = getImagesForContentRequest.getUserEmail();
             String contentId = getImagesForContentRequest.getContentId();
             List<String> imageNames = contentDao.getContent(userEmail, contentId).getImages();
+            if(imageNames == null){
+                imageNames = new ArrayList<>();
+            }
             String bucketName = "ims-image-content";
             List<String> base64Images = new ArrayList<>();
             Date expiration = new java.util.Date();
@@ -79,9 +82,7 @@ public class GetImagesForContentActivity {
 
                     URL url = s3client.generatePresignedUrl(generatredPresignedUrlRequest);
                     imageUrls.add(url.toString());
-//                byte[] imageData = getImageDataFromS3(bucketName, name);
-//                String base64Image = Base64.getEncoder().encodeToString(imageData);
-//                base64Images.add(base64Image);
+
             }
             GetImagesForContentResult getImagesForContentResult = new GetImagesForContentResult(ImageModel.builder()
                     .withData(base64Images).build());

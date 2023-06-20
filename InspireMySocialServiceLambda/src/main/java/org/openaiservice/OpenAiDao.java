@@ -128,10 +128,11 @@ public class OpenAiDao {
                     secretHolder.getYtShortSystemPrompt());
             messages.add(systemMessage);
             final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
-                    createContentRequest.getContentType() + "about the keywords " + createContentRequest.getTopic() +
+                    createContentRequest.getContentType() + "and Provide a catchy saying around the topic " + createContentRequest.getTopic() +
                     ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
-                    createContentRequest.getTone() + "for the " + createContentRequest.getContentType() + ". T" +
-                    "he post length should be no more than " + createContentRequest.getWordCount() + " words long.");
+                    createContentRequest.getTone() + "for the " + createContentRequest.getContentType() +
+                    "Once you have provided the catchy saying please provide a click-worthy title, YoutubeShort video " +
+                    "description, and three hashtags related to the topic that will increase the audience");
             messages.add(userMessage);
             ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
                     .builder()

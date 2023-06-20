@@ -17,9 +17,9 @@ public class GetContentForUserLambda extends LambdaActivityRunner<GetContentForU
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetContentForUserRequest> input, Context context) {
         log.info("GetContentForUserLambda reached");
         return super.runActivity(
-                () -> input.fromPath(claims ->
+                () -> input.fromPath(path ->
                         GetContentForUserRequest.builder()
-                                .withUserEmail(claims.get("userEmail"))
+                                .withUserEmail(path.get("userEmail"))
                                 .build()),
                 (request, serviceComponent) -> serviceComponent.provideGetContentForUserActivity().handleRequest(request)
         );

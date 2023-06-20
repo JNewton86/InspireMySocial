@@ -18,13 +18,11 @@ public class GetImagesForContentLambda extends LambdaActivityRunner<GetImagesFor
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetImagesForContentRequest> input, Context context) {
         log.info("GetImagesForContentLmabda reached");
         return super.runActivity(
-                () -> {
-                    GetImagesForContentRequest unauthenticatedRequest = input.fromBody(GetImagesForContentRequest.class);
-                    return input.fromUserClaims(claims -> GetImagesForContentRequest.builder()
-                            .withUserEmail(claims.get("email"))
-                            .withContentId(unauthenticatedRequest.getContentId())
-                            .build());
-                },
+                () ->  input.fromPath( path ->
+                        GetImagesForContentRequest.builder()
+                                .withUserEmail(path.get("userEmail"))
+                                .withContentId(path.get("contentId"))
+                                .build()),
                 (request, serviceComponent) -> serviceComponent.provideGetImagesForContentActivity().handleRequest(request)
         );
     }
