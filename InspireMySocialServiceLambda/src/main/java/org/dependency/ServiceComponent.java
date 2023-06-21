@@ -5,6 +5,7 @@ import org.activity.*;
 
 import javax.inject.Singleton;
 
+
 /**
  * Dagger component for providing dependency injection in the Music Playlist Service.
  */
@@ -42,7 +43,15 @@ public interface ServiceComponent {
      */
     UpdateUserCreditBalanceActivity provideUpdateUserCreditBalanceActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return CreateImageForContentActivity
+     */
     CreateImageForContentActivity provideCreateImageForContentActivity();
 
+    /**
+     * Provides the relevant activity.
+     * @return GetImagesForContentActivity
+     */
     GetImagesForContentActivity provideGetImagesForContentActivity();
 }

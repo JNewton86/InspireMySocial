@@ -5,7 +5,6 @@ import com.theokanning.openai.completion.chat.*;
 import com.theokanning.openai.image.CreateImageRequest;
 import com.theokanning.openai.image.ImageResult;
 import org.activity.request.CreateContentRequest;
-import org.activity.request.CreateImageForContentRequest;
 import org.metrics.MetricsPublisher;
 import org.utils.UtilsOpenAiAPI;
 
@@ -129,11 +128,13 @@ public class OpenAiDao {
                     secretHolder.getYtShortSystemPrompt());
             messages.add(systemMessage);
             final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "Please write a " +
-                    createContentRequest.getContentType() + "and Provide a catchy saying around the topic " + createContentRequest.getTopic() +
-                    ". The audience of the post is " + createContentRequest.getAudience() + "Please use a tone of " +
+                    createContentRequest.getContentType() + "and Provide a catchy saying around the topic " +
+                    createContentRequest.getTopic() + ". The audience of the post is " +
+                    createContentRequest.getAudience() + "Please use a tone of " +
                     createContentRequest.getTone() + "for the " + createContentRequest.getContentType() +
-                    "Once you have provided the catchy saying please provide a click-worthy title, YoutubeShort video " +
-                    "description, and three hashtags related to the topic that will increase the audience");
+                    "Once you have provided the catchy saying please provide a click-worthy title, " +
+                    "YoutubeShort video description, and three hashtags related to the topic that will increase " +
+                    "the audience");
             messages.add(userMessage);
             ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
                     .builder()
@@ -195,7 +196,13 @@ public class OpenAiDao {
         }
         return null;
     }
-    public ImageResult createImageForContent(CreateImageRequest createImageRequest){
+
+    /**
+     * Method to create an Image using Dalle-2 OpenAI.
+     * @param createImageRequest is object constructed by the Lambda from the API call that is received
+     * @return a return object containing the image in base64JSON format
+     */
+    public ImageResult createImageForContent(CreateImageRequest createImageRequest) {
         System.out.println("Streaming Image completion...");
         SecretHolder secretHolder = null;
         try {

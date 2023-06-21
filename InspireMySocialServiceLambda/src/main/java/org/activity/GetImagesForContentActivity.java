@@ -1,14 +1,9 @@
 package org.activity;
 
 import com.amazonaws.HttpMethod;
-import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import software.amazon.awssdk.services.s3.S3Client;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.amazonaws.util.IOUtils;
 import org.activity.request.GetImagesForContentRequest;
 import org.activity.result.GetImagesForContentResult;
 import org.apache.logging.log4j.LogManager;
@@ -18,28 +13,19 @@ import org.dynamodb.UserDao;
 import org.exception.ContentNotFoundException;
 import org.model.ImageModel;
 import org.openaiservice.OpenAiDao;
-import software.amazon.awssdk.services.s3.S3ClientBuilder;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.amazonaws.HttpMethod;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 
 
 import java.net.URL;
-import java.nio.ByteBuffer;
 import java.util.*;
 
-import javax.inject.Inject;
-import java.io.FileOutputStream;
 import java.util.List;
+import javax.inject.Inject;
 
 public class GetImagesForContentActivity {
 
@@ -48,6 +34,12 @@ public class GetImagesForContentActivity {
     private final OpenAiDao openAiDao;
     private final UserDao userDao;
 
+    /**
+     * Constructor used by Dagger to instantiate using dependency injection.
+     * @param contentDao passed in by dagger, DAO object to access content DynamoDB table
+     * @param openAiDao passed in by dagger, DAO object used to make OpenAI API Call
+     * @param userDao passed in by dagger, DAO object to access user DynamoDB table
+     */
     @Inject
     public GetImagesForContentActivity(ContentDao contentDao, OpenAiDao openAiDao, UserDao userDao) {
         this.contentDao = contentDao;
@@ -55,13 +47,18 @@ public class GetImagesForContentActivity {
         this.userDao = userDao;
     }
 
-    public GetImagesForContentResult handleRequest(final GetImagesForContentRequest getImagesForContentRequest){
+    /**
+     * Method to process the request to retrieve all images for a specific content, called by the relevant Lambda.
+     * @param getImagesForContentRequest object created by the lambda from the API call that was received
+     * @return returns an object that contains a list of string that are URLs to the images stored in S3
+     */
+    public GetImagesForContentResult handleRequest(final GetImagesForContentRequest getImagesForContentRequest) {
         try {
             log.info("Recieved GetImageForContentRequest: {}", getImagesForContentRequest);
             String userEmail = getImagesForContentRequest.getUserEmail();
             String contentId = getImagesForContentRequest.getContentId();
             List<String> imageNames = contentDao.getContent(userEmail, contentId).getImages();
-            if(imageNames == null){
+            if (imageNames == null) {
                 imageNames = new ArrayList<>();
             }
             String bucketName = "ims-image-content";
@@ -80,8 +77,8 @@ public class GetImagesForContentActivity {
                                     .withMethod(HttpMethod.GET)
                                     .withExpiration(expiration);
 
-                    URL url = s3client.generatePresignedUrl(generatredPresignedUrlRequest);
-                    imageUrls.add(url.toString());
+                URL url = s3client.generatePresignedUrl(generatredPresignedUrlRequest);
+                imageUrls.add(url.toString());
 
             }
             GetImagesForContentResult getImagesForContentResult = new GetImagesForContentResult(ImageModel.builder()
@@ -89,7 +86,7 @@ public class GetImagesForContentActivity {
 
             return getImagesForContentResult;
 
-        } catch(Exception e){
+        } catch (Exception e) {
             log.error("error thrown when retrieving images from s3", e);
             throw new ContentNotFoundException();
         }
