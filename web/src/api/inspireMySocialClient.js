@@ -182,9 +182,16 @@ export default class InspireMySocialClient extends BindingClass {
     }
 
 
-    async getContentForUser(userEmail) {
+    async getContentForUser(userEmail, errorCallback) {
         try {
-            const response = await this.axiosClient.get(`content/${userEmail}`);
+            const token = await this.getTokenOrThrow("Only authenticated users can create playlists.");
+            const response = await this.axiosClient.get(`content/${userEmail}`, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                } 
+            }
+            );
             return response.data.contentList;
         } catch (error) {
             this.handleError(error, errorCallback)

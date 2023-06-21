@@ -85,7 +85,7 @@ export default class Header extends BindingClass {
     }
 
     createSignUpButton() {
-        return this.createButton('Create Account', this.client.signUp);
+        return this.createButton('Create Account', this.client.login); // Use the `client.login` method for signup as well
     }
 
     createLogoutButton(currentUser) {
