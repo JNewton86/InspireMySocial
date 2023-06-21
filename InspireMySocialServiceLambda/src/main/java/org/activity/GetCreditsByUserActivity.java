@@ -50,7 +50,7 @@ public class GetCreditsByUserActivity {
             newUser.setCreditBalance(20);
             newUser.setName(getCreditsByUserRequest.getName());
             User user = userDao.saveUser(newUser);
-           log.info("new user created and saved: " + newUser);
+            log.info("new user created and saved: " + newUser);
             UserModel userModel = new ModelConverter().toUserModel(user);
             return GetCreditsByUserResult.builder()
                     .withUserModel(userModel)

@@ -8,6 +8,10 @@ public class CreateImageForContentResult {
 
     private final ImageModel imageModel;
 
+    /**
+     * Constructor.
+     * @param imageModel object created by and returned from the CreateImageForContentActivity
+     */
     public CreateImageForContentResult(ImageModel imageModel) {
         this.imageModel = imageModel;
     }

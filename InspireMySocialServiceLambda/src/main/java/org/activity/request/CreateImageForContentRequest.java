@@ -15,7 +15,17 @@ public class CreateImageForContentRequest {
     private String imageSize;
     private String response_format;
 
-    public CreateImageForContentRequest(String userId, String contentId, String prompt, Integer numberOfImages, String imageSize, String response_format) {
+    /**
+     * Constructor for the CreateImageForContent object
+     * @param userId String user Email
+     * @param contentId String contentId
+     * @param prompt String requesting the image
+     * @param numberOfImages typically 1 at this time
+     * @param imageSize string, one of three options 256x256, 512X512, or 1048X1048
+     * @param response_format URL
+     */
+    public CreateImageForContentRequest(String userId, String contentId, String prompt, Integer numberOfImages,
+                                        String imageSize, String response_format) {
         this.userId = userId;
         this.contentId = contentId;
         this.prompt = prompt;
@@ -72,8 +82,9 @@ public class CreateImageForContentRequest {
         this.response_format = response_format;
     }
 
+    //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
-        return new Builder();}
+        return new Builder(); }
 
     @JsonPOJOBuilder
     public static class Builder {
@@ -114,8 +125,9 @@ public class CreateImageForContentRequest {
             return this;
         }
 
-        public CreateImageForContentRequest build() { return new CreateImageForContentRequest(userId, contentId, prompt, numberOfImages,
-                imageSize,response_format);
+        public CreateImageForContentRequest build() {
+            return new CreateImageForContentRequest(userId, contentId, prompt, numberOfImages,
+                    imageSize,response_format);
         }
     }
 }

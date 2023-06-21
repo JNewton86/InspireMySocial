@@ -690,31 +690,32 @@
                         </div>
                         <script>
                             function validateForm(formId, fields) {
-                                
                                 document.getElementById(formId).addEventListener("submit", function(event) {
-                                    var isValid = true;
-                        
+                                    var formIsValid = true;
+                            
                                     fields.forEach(fieldId => {
                                         var field = document.getElementById(fieldId);
-                        
-                                        if (field.value.trim() === "" || 
-                                           (field.type === "number" && (field.value < field.min || field.value > field.max))) {
+                            
+                                        if (!field.checkValidity()) {
                                             field.classList.add("is-invalid");
                                             field.classList.remove("is-valid");
+                                            formIsValid = false;
                                         } else {
                                             field.classList.remove("is-invalid");
                                             field.classList.add("is-valid");
                                         }
                                     });
-                        
-                                    event.preventDefault();
+                            
+                                    if (!formIsValid) {
+                                        event.preventDefault();
+                                    }
                                 });
-                        
+                            
                                 fields.forEach(fieldId => {
                                     document.getElementById(fieldId).addEventListener("change", function(event) {
                                         var validFeedback = event.target.parentNode.querySelector('.valid-feedback');
                                         var invalidFeedback = event.target.parentNode.querySelector('.invalid-feedback');
-                        
+                            
                                         if (event.target.checkValidity()) {
                                             event.target.classList.remove("is-invalid");
                                             event.target.classList.add("is-valid");
@@ -730,24 +731,25 @@
                                 });
                             }
                         
-                            // Call the validateForm function for the fb form
-                            validateForm("fbForm", ["fb-tone", "fb-audience", "fb-topic", "fb-wordcount"]);
+                        // Call the validateForm function for the fb form
+                        validateForm("fbForm", ["fb-tone", "fb-audience", "fb-topic", "fb-wordcount"]);
 
-                            // Call the validateForm function for the Instagram form
-                            validateForm("instaForm", ["insta-tone", "insta-audience", "insta-topic", "insta-wordcount"]);
-                        
-                            // Call the validateForm function for the LinkedIn form
-                            validateForm("linkedInForm", ["linkedin-tone", "linkedin-audience", "linkedin-topic", "linkedin-wordcount"]);
-                        
-                            // Call the validateForm function for the Twitter form
-                            validateForm("twitterForm", ["Twitter-tone", "Twitter-audience", "Twitter-topic", "Twitter-wordcount"]);
-                        
-                            // Call the validateForm function for the YouTube Long form
-                            validateForm("ytLongForm", ["YTL-tone", "YTL-audience", "YTL-topic", "YTL-wordcount"]);
+                        // Call the validateForm function for the Instagram form
+                        validateForm("instaForm", ["insta-tone", "insta-audience", "insta-topic", "insta-wordcount"]);
 
-                            // Call the validateForm function for the YouTube Short form
-                            validateForm("ytShortForm", ["YTS-tone", "YTS-audience", "YTS-topic"]);
-                        </script>
+                        // Call the validateForm function for the LinkedIn form
+                        validateForm("linkedInForm", ["linkedin-tone", "linkedin-audience", "linkedin-topic", "linkedin-wordcount"]);
+
+                        // Call the validateForm function for the Twitter form
+                        validateForm("twitterForm", ["Twitter-tone", "Twitter-audience", "Twitter-topic", "Twitter-wordcount"]);
+
+                        // Call the validateForm function for the YouTube Long form
+                        validateForm("ytLongForm", ["YTL-tone", "YTL-audience", "YTL-topic", "YTL-wordcount"]);
+
+                        // Call the validateForm function for the YouTube Short form
+                        validateForm("ytShortForm", ["YTS-tone", "YTS-audience", "YTS-topic"]);
+                            
+                        </script> 
                     </div>
                 </div>
             </div>

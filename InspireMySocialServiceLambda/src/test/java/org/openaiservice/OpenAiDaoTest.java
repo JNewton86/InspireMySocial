@@ -1,37 +1,38 @@
-package org.openaiservice;
-
-import com.theokanning.openai.Usage;
-import com.theokanning.openai.completion.chat.ChatCompletionChoice;
-import com.theokanning.openai.completion.chat.ChatCompletionRequest;
-import com.theokanning.openai.completion.chat.ChatCompletionResult;
-import com.theokanning.openai.completion.chat.ChatMessage;
-import org.activity.request.CreateContentRequest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.metrics.MetricsPublisher;
-import org.mockito.Mock;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
-
-class OpenAiDaoTest {
-    @Mock
-    private MetricsPublisher metricsPublisher;
-    @Mock
-    private OpenAiService openAiService;
-
-    private OpenAiDao openAiDao;
-    @BeforeEach
-    public void setup(){
-        initMocks(this);
-        openAiDao = new OpenAiDao(openAiService,metricsPublisher);
-    }
-
+//package org.openaiservice;
+//
+//import com.theokanning.openai.Usage;
+//import com.theokanning.openai.completion.chat.ChatCompletionChoice;
+//import com.theokanning.openai.completion.chat.ChatCompletionRequest;
+//import com.theokanning.openai.completion.chat.ChatCompletionResult;
+//import com.theokanning.openai.completion.chat.ChatMessage;
+//import org.activity.request.CreateContentRequest;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//import org.metrics.MetricsPublisher;
+//import org.mockito.Mock;
+//
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+//import static org.mockito.ArgumentMatchers.any;
+//import static org.mockito.Mockito.when;
+//import static org.mockito.MockitoAnnotations.initMocks;
+//
+//class OpenAiDaoTest {
+//    @Mock
+//    private MetricsPublisher metricsPublisher;
+//    @Mock
+//    private OpenAiService openAiService;
+//
+//    private OpenAiDao openAiDao;
+//    @BeforeEach
+//    public void setup(){
+//        initMocks(this);
+//        openAiDao = new OpenAiDao(openAiService,metricsPublisher);
+//    }
+//
 //    @Test
 //    public void getContent_validRequest_success(){
 //        // GIVEN
@@ -61,7 +62,7 @@ class OpenAiDaoTest {
 //        ChatMessage chatMessage = new ChatMessage("assistant", "This worked!");
 //        chatCompletionChoice.setMessage(chatMessage);
 //        expected.setChoices(choices);
-//        when(openAiDao.createContent(createContentRequest)).thenReturn(expected);
+//        when(openAiService.createChatCompletion(any(ChatCompletionRequest.class))).thenReturn(expected);
 //
 //        //WHEN
 //        ChatCompletionResult result = openAiDao.createContent(createContentRequest);
@@ -69,5 +70,5 @@ class OpenAiDaoTest {
 //        //THEN
 //        assertEquals(expected, result);
 //    }
-
-}
+//
+//}

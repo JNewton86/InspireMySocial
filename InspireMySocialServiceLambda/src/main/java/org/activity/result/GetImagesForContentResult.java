@@ -9,6 +9,10 @@ public class GetImagesForContentResult {
 
     private final ImageModel imageModel;
 
+    /**
+     * Constructor.
+     * @param imageModel object created by and returned from the GetImagesForContentActivity
+     */
     public GetImagesForContentResult(ImageModel imageModel) {
         this.imageModel = imageModel;
     }

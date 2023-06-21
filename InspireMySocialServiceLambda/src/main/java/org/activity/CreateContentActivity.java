@@ -14,9 +14,11 @@ import org.exception.InsufficientCreditsException;
 import org.model.ContentModel;
 import org.openaiservice.OpenAiDao;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+
+
 
 /**
  * Implementation of the CreateContentActivity for the InspireMySocial CreateContent API.
@@ -60,7 +62,7 @@ public class CreateContentActivity {
         try {
             // Call to OpenAi to generate post
             ChatCompletionResult post = openAiDao.createContent(createContentRequest);
-            log.info("OpenAi request returned the following :{}",post.toString());
+            log.info("OpenAi request returned the following :{}", post.toString());
 
             // Create and populate the Dynamo Object with elements from post & createContentRequest
             Content newContent = new Content();
@@ -97,7 +99,7 @@ public class CreateContentActivity {
                     .build();
 
         } catch (Exception e) {
-           log.error("error thrown by CreateContentActivity " + e);
+            log.error("error thrown by CreateContentActivity " + e);
             throw e;
         }
     }
